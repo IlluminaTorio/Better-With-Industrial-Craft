@@ -144,6 +144,8 @@ implements ModInitializer {
     }
 
     public void afterGameStart() {
+        IC2Recipes.verifyRecipesSerializable();
+        IC2Recipes.verifyDedicatedClientSync();
         LOGGER.info("IndustrialCraft 2 loaded. Remember: safety first!");
     }
 }

@@ -339,6 +339,7 @@ public class SingleplayerTest {
         this.round5Audit(mc, fx, fy, fz);
         this.round6Audit(mc, fx, fy, fz);
         this.round7Audit(mc, fx, fy, fz);
+        this.round8Audit(mc);
         try {
             mc.thePlayer.moveTo((double)(fx + 200), (double)(fy + 30), (double)(fz + 200), 0.0f, 0.0f);
             SingleplayerTest.log("teleported for chunk loading");
@@ -1802,6 +1803,106 @@ public class SingleplayerTest {
             return g.storage;
         }
         return -1;
+    }
+
+    
+    private void round8Audit(Minecraft mc) {
+        this.runOnMainThread(mc, () -> {
+            RecipeRegistry original = Registries.RECIPES;
+            try {
+                List<RecipeEntryBase<?, ?, ?>> all = original.getAllSerializableRecipes();
+                ArrayList<String> ic2Jsons = new ArrayList<String>();
+                ArrayList<String> ic2Keys = new ArrayList<String>();
+                int total = 0;
+                for (RecipeEntryBase<?, ?, ?> r : all) {
+                    ++total;
+                    if (!r.toString().startsWith("ic2:")) continue;
+                    ic2Jsons.add(net.minecraft.core.data.DataLoader.serializeRecipe(r));
+                    ic2Keys.add(r.toString());
+                }
+                int uuBefore = this.countRecipesIn(original, "ic2", "mass_fabricator");
+                int machineBefore = this.countRecipesIn(original, "ic2", "macerator")
+                                + this.countRecipesIn(original, "ic2", "extractor")
+                                + this.countRecipesIn(original, "ic2", "compressor")
+                                + this.countRecipesIn(original, "ic2", "canner");
+                
+                Registries.RECIPES = new RecipeRegistry();
+                
+                ic2.IC2Recipes.initNamespaces();
+                
+                int synced = 0;
+                String firstFail = null;
+                for (String json : ic2Jsons) {
+                    try {
+                        net.minecraft.core.net.packet.PacketRecipeSync packet = new net.minecraft.core.net.packet.PacketRecipeSync();
+                        packet.recipe = json;
+                        packet.maxRecipes = ic2Jsons.size();
+                        net.minecraft.core.data.DataLoader.loadRecipeFromServer(packet);
+                        ++synced;
+                    }
+                    catch (Throwable e) {
+                        if (firstFail == null) {
+                            firstFail = e.getClass().getSimpleName() + ": " + String.valueOf(e);
+                        }
+                    }
+                }
+                int uuAfter = this.countRecipesIn(Registries.RECIPES, "ic2", "mass_fabricator");
+                int machineAfter = this.countRecipesIn(Registries.RECIPES, "ic2", "macerator")
+                                + this.countRecipesIn(Registries.RECIPES, "ic2", "extractor")
+                                + this.countRecipesIn(Registries.RECIPES, "ic2", "compressor")
+                                + this.countRecipesIn(Registries.RECIPES, "ic2", "canner");
+                SingleplayerTest.log("R8 login sync: " + synced + "/" + ic2Jsons.size() + " ic2 recipes (total serializable " + total + ") "
+                                + (firstFail == null && synced == ic2Jsons.size() ? "OK" : "FAIL: " + firstFail));
+                SingleplayerTest.log("R8 mass_fabricator group: before=" + uuBefore + " after=" + uuAfter + " "
+                                + (uuAfter == uuBefore && uuBefore > 0 ? "OK" : "FAIL"));
+                SingleplayerTest.log("R8 machine groups: before=" + machineBefore + " after=" + machineAfter + " "
+                                + (machineAfter == machineBefore && machineBefore > 0 ? "OK" : "FAIL"));
+                
+                net.minecraft.core.data.registry.recipe.RecipeNamespace nsNow = Registries.RECIPES.getItem("ic2");
+                boolean shells = nsNow != null
+                                && nsNow.getItem("macerator") != null
+                                && nsNow.getItem("mass_fabricator") != null
+                                && nsNow.getItem("extractor") != null
+                                && nsNow.getItem("compressor") != null
+                                && nsNow.getItem("canner") != null
+                                && nsNow.getItem("workbench") != null
+                                && nsNow.getItem("furnace") != null
+                                && nsNow.getItem("blast_furnace") != null
+                                && nsNow.getItem("trommel") != null;
+                SingleplayerTest.log("R8 group shells after initNamespaces: " + (shells ? "OK (все 9 групп ic2 созданы)" : "FAIL"));
+            }
+            catch (Throwable e) {
+                SingleplayerTest.log("R8 login simulation failed: " + String.valueOf(e));
+            }
+            finally {
+                Registries.RECIPES = original;
+            }
+        });
+        SingleplayerTest.sleep(1500L);
+        this.runOnMainThread(mc, () -> {
+            try {
+                int uu = this.countRecipesIn(Registries.RECIPES, "ic2", "mass_fabricator");
+                boolean restored = Registries.RECIPES.getItem("ic2") != null && uu > 0;
+                SingleplayerTest.log("R8 registry restored after simulation: mass_fabricator=" + uu + " " + (restored ? "OK" : "FAIL"));
+            }
+            catch (Throwable e) {
+                SingleplayerTest.log("R8 restore check failed: " + String.valueOf(e));
+            }
+        });
+    }
+
+    private int countRecipesIn(RecipeRegistry registry, String namespace, String group) {
+        try {
+            net.minecraft.core.data.registry.recipe.RecipeNamespace ns = registry.getItem(namespace);
+            if (ns == null) {
+                return 0;
+            }
+            RecipeGroup g = ns.getItem(group);
+            return g == null ? 0 : g.getAllRecipes().size();
+        }
+        catch (Throwable e) {
+            return -1;
+        }
     }
 
     private void place(Minecraft mc, int x, int y, int z, String key, Block<?> b) {

@@ -46,7 +46,7 @@ dependencies {
         compileOnly(files("libs/btwaila-1.3.1.jar"))
 
         // Signal Industries / Catalyst: Energy converters (optional, compile only)
-        // Транзитивные зависимости отключены: catalyst тянет неверные координаты legacy-lwjgl3
+        // Transitive dependencies disabled: catalyst pulls wrong legacy-lwjgl3 coordinates
         compileOnly("sunsetsatellite:catalyst-core:3.0.1") { isTransitive = false }
         compileOnly("sunsetsatellite:catalyst-energy:3.0.0") { isTransitive = false }
         compileOnly(files("libs/catalyst-fluids-3.0.1.jar"))

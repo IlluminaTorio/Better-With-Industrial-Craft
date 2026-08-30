@@ -9,15 +9,22 @@ import ic2.item.ItemCablePlaceable;
 import ic2.tileentity.TileEntityCompressor;
 import ic2.tileentity.TileEntityExtractor;
 import ic2.tileentity.TileEntityMacerator;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.crafting.LookupFuelFurnace;
+import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.HasJsonAdapter;
 import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
+import net.minecraft.core.data.registry.recipe.RecipeRegistry;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.IItemConvertible;
@@ -25,18 +32,25 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemBucket;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
+import net.minecraft.core.net.packet.PacketRecipeSync;
 import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.util.helper.DyeColor;
+import turniplabs.halplibe.event.defs.CommonEvents;
 import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShaped;
+import turniplabs.halplibe.util.RecipeEntrypoint;
 
 public class IC2Recipes {
     public static void initNamespaces() {
         RecipeBuilder.initNameSpace((String)IC2.MOD_ID);
+        if (Registries.RECIPE_TYPES.getItem("ic2:machine") == null) {
+            Registries.RECIPE_TYPES.register("ic2:machine", ic2.recipe.RecipeEntryIC2Machine.class);
+        }
         RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"macerator", (RecipeSymbol)new RecipeSymbol(IC2Blocks.macerator.getDefaultStack()));
         RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"extractor", (RecipeSymbol)new RecipeSymbol(IC2Blocks.extractor.getDefaultStack()));
         RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"compressor", (RecipeSymbol)new RecipeSymbol(IC2Blocks.compressor.getDefaultStack()));
         RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"canner", (RecipeSymbol)new RecipeSymbol(IC2Blocks.canner.getDefaultStack()));
+        RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"mass_fabricator", (RecipeSymbol)new RecipeSymbol(IC2Blocks.massFabricator.getDefaultStack()));
     }
 
     public static void onRecipesReady() {
@@ -60,6 +74,98 @@ public class IC2Recipes {
         ic2.si.SIConverters.registerRecipes();
         
         ic2.recipe.CrossModEquivalence.applyIfSignalIndustries();
+    }
+
+    
+    public static void verifyDedicatedClientSync() {
+        RecipeRegistry original = Registries.RECIPES;
+        try {
+            List<RecipeEntryBase<?, ?, ?>> recipes = original.getAllSerializableRecipes();
+            ArrayList<String> jsons = new ArrayList<String>();
+            ArrayList<String> keys = new ArrayList<String>();
+            for (RecipeEntryBase<?, ?, ?> recipe : recipes) {
+                jsons.add(DataLoader.serializeRecipe(recipe));
+                keys.add(recipe.toString());
+            }
+            HashMap<String, Integer> expected = new HashMap<String, Integer>();
+            HashSet<String> expectedSeen = new HashSet<String>();
+            for (String key : keys) {
+                if (!expectedSeen.add(key)) continue;
+                String group = key.contains("/") ? key.substring(0, key.indexOf(47)) : key;
+                expected.merge(group, 1, Integer::sum);
+            }
+            Registries.RECIPES = new RecipeRegistry();
+            try {
+                FabricLoader.getInstance().getEntrypoints("recipesReady", RecipeEntrypoint.class).forEach(RecipeEntrypoint::initNamespaces);
+                CommonEvents.RECIPES_NAMESPACE_INIT.emit(Runnable::run);
+            }
+            catch (Throwable e) {
+                IC2.LOGGER.error("IC2 login check: recipe namespace init failed", (Throwable)e);
+            }
+            int synced = 0;
+            ArrayList<String> failures = new ArrayList<String>();
+            for (int i = 0; i < jsons.size(); ++i) {
+                try {
+                    PacketRecipeSync packet = new PacketRecipeSync();
+                    packet.recipe = jsons.get(i);
+                    packet.maxRecipes = jsons.size();
+                    DataLoader.loadRecipeFromServer(packet);
+                    ++synced;
+                }
+                catch (Throwable e) {
+                    if (failures.size() >= 10) continue;
+                    failures.add(keys.get(i) + " -> " + String.valueOf(e));
+                }
+            }
+            HashMap<String, Integer> actual = new HashMap<String, Integer>();
+            HashSet<String> seen = new HashSet<String>();
+            for (RecipeEntryBase<?, ?, ?> recipe : Registries.RECIPES.getAllSerializableRecipes()) {
+                String key = recipe.toString();
+                if (!seen.add(key)) continue;
+                String group = key.contains("/") ? key.substring(0, key.indexOf(47)) : key;
+                actual.merge(group, 1, Integer::sum);
+            }
+            ArrayList<String> mismatched = new ArrayList<String>();
+            for (Map.Entry<String, Integer> e : expected.entrySet()) {
+                int got = actual.getOrDefault(e.getKey(), 0);
+                if (got == e.getValue()) continue;
+                mismatched.add(e.getKey() + " expected=" + e.getValue() + " got=" + got);
+            }
+            if (failures.isEmpty() && mismatched.isEmpty()) {
+                IC2.LOGGER.info("IC2 dedicated-client recipe sync check: {} recipes OK in {} groups", (Object)synced, (Object)expected.size());
+            }
+            else {
+                for (String f : failures) {
+                    IC2.LOGGER.error("IC2 login sync FAILED: {}", (Object)f);
+                }
+                for (String m : mismatched) {
+                    IC2.LOGGER.error("IC2 login sync group mismatch: {}", (Object)m);
+                }
+                IC2.LOGGER.error("IC2 dedicated-client recipe sync check FAILED (clients would crash on login!)");
+            }
+        }
+        catch (Throwable e) {
+            IC2.LOGGER.error("IC2 dedicated-client recipe sync check FAILED (clients would crash on login!)", (Throwable)e);
+        }
+        finally {
+            Registries.RECIPES = original;
+        }
+    }
+
+    
+    public static void verifyRecipesSerializable() {
+        int checked = 0;
+        try {
+            for (RecipeEntryBase<?, ?, ?> recipe : Registries.RECIPES.getAllSerializableRecipes()) {
+                if (!(recipe instanceof ic2.recipe.RecipeEntryIC2Machine)) continue;
+                net.minecraft.core.data.DataLoader.serializeRecipe(recipe);
+                ++checked;
+            }
+            IC2.LOGGER.info("IC2 machine recipes serialization check: {} OK", (Object)checked);
+        }
+        catch (Exception e) {
+            IC2.LOGGER.error("IC2 recipe serialization check FAILED (joining a server would disconnect players)", (Throwable)e);
+        }
     }
 
     private static void registerItemGroups() {

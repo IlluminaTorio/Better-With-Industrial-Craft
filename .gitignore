@@ -11,10 +11,10 @@ build/
 .project
 bin/
 
-# Запуски игры (миры, логи)
+# Game runs (worlds, logs)
 run/
 
-# Системное
+# System
 *.log
 .DS_Store
 Thumbs.db
