@@ -1,0 +1,667 @@
+# IndustrialCraft 2 (BTA Edition) — Русская локализация
+# Названия и описания портированы из IC2 v1.00
+
+tile.ic2.ore.copper.name=Медная руда
+tile.ic2.ore.copper.desc=Руда, содержащая медь. Измельчите её в дробителе для двойного выхода или переплавьте в слитки.
+
+tile.ic2.ore.tin.name=Оловянная руда
+tile.ic2.ore.tin.desc=Руда, содержащая олово. Незаменимый компонент электроники и сплавов.
+
+tile.ic2.ore.uranium.name=Урановая руда
+tile.ic2.ore.uranium.desc=Сильно радиоактивная руда. Сожмите её в рафинированный уран для топлива реактора.
+
+tile.ic2.storage.copper.name=Медный блок
+tile.ic2.storage.copper.desc=Блок цельной меди. Компактное хранение 9 слитков.
+
+tile.ic2.storage.tin.name=Оловянный блок
+tile.ic2.storage.tin.desc=Блок цельного олова. Компактное хранение 9 слитков.
+
+tile.ic2.storage.bronze.name=Бронзовый блок
+tile.ic2.storage.bronze.desc=Блок цельной бронзы. Компактное хранение 9 слитков.
+
+tile.ic2.storage.uranium.name=Урановый блок
+tile.ic2.storage.uranium.desc=Блок рафинированного урана. Компактное хранение 9 слитков.
+
+tile.ic2.machine.name=Корпус машины
+tile.ic2.machine.desc=Базовый корпус для всех промышленных машин.
+
+tile.ic2.machine.advanced.name=Улучшенный корпус машины
+tile.ic2.machine.advanced.desc=Усиленный корпус для продвинутых машин.
+
+tile.ic2.machine.iron_furnace.name=Железная печь
+tile.ic2.machine.iron_furnace.desc=Печь, построенная из железа. На 25% быстрее каменной и намного долговечнее.
+
+tile.ic2.machine.electric_furnace.name=Электрическая печь
+tile.ic2.machine.electric_furnace.desc=Печь, работающая от электричества. Эффективная плавка без топлива.
+
+tile.ic2.machine.macerator.name=Дробитель
+tile.ic2.machine.macerator.desc=Измельчает руду в пыль, давая две единицы с каждой руды. Сердце удвоения руды.
+
+tile.ic2.machine.extractor.name=Экстрактор
+tile.ic2.machine.extractor.desc=Извлекает резину из липкой смолы, саженцев и каучукового дерева.
+
+tile.ic2.machine.compressor.name=Компрессор
+tile.ic2.machine.compressor.desc=Сжимает материалы под огромным давлением: сплавы, угольные куски и многое другое.
+
+tile.ic2.machine.canner.name=Консервная машина
+tile.ic2.machine.canner.desc=Консервирует еду в жестяные банки и заполняет канистры топливом.
+
+tile.ic2.machine.recycler.name=Утилизатор
+tile.ic2.machine.recycler.desc=Перерабатывает почти любой предмет в хлам. Иногда не выдаёт ничего.
+
+tile.ic2.machine.electrolyzer.name=Электролизёр
+tile.ic2.machine.electrolyzer.desc=Разлагает водные капсулы на электролизованную воду для систем охлаждения.
+
+tile.ic2.machine.induction_furnace.name=Индукционная печь
+tile.ic2.machine.induction_furnace.desc=Улучшенная электрическая печь с двумя слотами плавки и ускорением при разогреве.
+
+tile.ic2.machine.mass_fabricator.name=Производитель материи
+tile.ic2.machine.mass_fabricator.desc=Превращает колоссальные объёмы энергии в UU-материю. Подавайте хлам для повышения эффективности.
+
+tile.ic2.machine.terraformer.name=Терраформер
+tile.ic2.machine.terraformer.desc=Преобразует ландшафт с помощью чертежей терраформера.
+
+tile.ic2.machine.miner.name=Бурильщик
+tile.ic2.machine.miner.desc=Автоматически добывает руду с помощью буровых труб и OD- или OV-сканера.
+
+tile.ic2.machine.pump.name=Насос
+tile.ic2.machine.pump.desc=Выкачивает жидкости и заполняет капсулы из окружения.
+
+tile.ic2.machine.magnetizer.name=Магнетизер
+tile.ic2.machine.magnetizer.desc=Намагничивает железные ограды, чтобы подбрасывать игроков в металлической обуви вверх.
+
+tile.ic2.generator.generator.name=Генератор
+tile.ic2.generator.generator.desc=Сжигает топливо, вырабатывая EU. Отправная точка промышленной энергетики.
+
+tile.ic2.generator.geothermal.name=Геотермальный генератор
+tile.ic2.generator.geothermal.desc=Вырабатывает EU из лавовых капсул. Стабильная и эффективная энергия.
+
+tile.ic2.generator.water_mill.name=Водяная мельница
+tile.ic2.generator.water_mill.desc=Вырабатывает немного EU из соседней воды.
+
+tile.ic2.generator.solar_panel.name=Солнечная панель
+tile.ic2.generator.solar_panel.desc=Вырабатывает EU от солнечного света. Работает только днём.
+
+tile.ic2.generator.wind_mill.name=Ветряная мельница
+tile.ic2.generator.wind_mill.desc=Вырабатывает EU от ветра. Мощность зависит от высоты и погоды.
+
+tile.ic2.reactor.nuclear.name=Ядерный реактор
+tile.ic2.reactor.nuclear.desc=Ядерный реактор, вырабатывающий огромное количество EU из урановых капсул. Обращаться с особой осторожностью!
+
+tile.ic2.reactor.chamber.name=Камера реактора
+tile.ic2.reactor.chamber.desc=Добавляет дополнительный столбец в ядерный реактор и улучшает охлаждение.
+
+tile.ic2.energy.batbox.name=Батбокс
+tile.ic2.energy.batbox.desc=Базовый накопитель энергии: 40 000 EU, 1-й уровень (32 EU/t).
+
+tile.ic2.energy.mfe.name=MFE-накопитель
+tile.ic2.energy.mfe.desc=Средний накопитель энергии: 600 000 EU, 2-й уровень (128 EU/t).
+
+tile.ic2.energy.mfsu.name=MFSU-накопитель
+tile.ic2.energy.mfsu.desc=Высший накопитель энергии: 10 000 000 EU, 3-й уровень (512 EU/t).
+
+tile.ic2.energy.transformer_lv.name=LV-трансформатор
+tile.ic2.energy.transformer_lv.desc=Преобразует 32 EU/t (низкое) в 128 EU/t (среднее) и обратно.
+
+tile.ic2.energy.transformer_mv.name=MV-трансформатор
+tile.ic2.energy.transformer_mv.desc=Преобразует 128 EU/t (среднее) в 512 EU/t (высокое) и обратно.
+
+tile.ic2.energy.transformer_hv.name=HV-трансформатор
+tile.ic2.energy.transformer_hv.desc=Преобразует 512 EU/t (высокое) в 2048 EU/t (экстремальное) и обратно.
+
+tile.ic2.cable.name=Кабель
+tile.ic2.cable.desc=Передаёт энергию. Существуют разные уровни для разных напряжений.
+
+tile.ic2.luminator.name=Люминатор
+tile.ic2.luminator.desc=Электрический источник света, питающийся от энергосети.
+
+tile.ic2.personal.safe.name=Личный сейф
+tile.ic2.personal.safe.desc=Надёжное хранилище, доступное только его владельцу.
+
+tile.ic2.personal.trade_o_mat.name=Торговый автомат
+tile.ic2.personal.trade_o_mat.desc=Автоматическая торговая машина: предлагайте предметы, получайте оплату.
+
+tile.ic2.machine.teleporter.name=Телепорт
+tile.ic2.machine.teleporter.desc=Телепортирует игроков по миру с помощью парных передатчиков частоты.
+
+tile.ic2.machine.tesla_coil.name=Катушка Теслы
+tile.ic2.machine.tesla_coil.desc=Разряжает запасённое электричество во враждебных мобов.
+
+tile.ic2.reinforced.stone.name=Армированный камень
+tile.ic2.reinforced.stone.desc=Чрезвычайно взрывостойкий строительный материал.
+
+tile.ic2.reinforced.glass.name=Армированное стекло
+tile.ic2.reinforced.glass.desc=Взрывостойкое стекло для безопасной защиты реактора.
+
+tile.ic2.door.reinforced.bottom.name=Армированная дверь
+tile.ic2.door.reinforced.bottom.desc=Тяжёлая взрывостойкая дверь.
+
+tile.ic2.door.reinforced.top.name=Армированная дверь
+tile.ic2.door.reinforced.top.desc=Тяжёлая взрывостойкая дверь.
+
+tile.ic2.fence.iron.name=Железная ограда
+tile.ic2.fence.iron.desc=Прочная железная ограда. Может быть намагничена магнетизером.
+
+tile.ic2.rubber.sheet.name=Резиновый лист
+tile.ic2.rubber.sheet.desc=Упругий лист, полностью гасящий урон от падения.
+
+tile.ic2.resin.name=Блок смолы
+tile.ic2.resin.desc=Блок затвердевшей липкой смолы.
+
+tile.ic2.rubber.wood.name=Каучуковое бревно
+tile.ic2.rubber.wood.desc=Ствол каучукового дерева. Постучите краником, чтобы собрать липкую смолу. Даёт 4 доски.
+
+tile.ic2.rubber.leaves.name=Листва каучукового дерева
+tile.ic2.rubber.leaves.desc=Листья каучукового дерева.
+
+tile.ic2.rubber.sapling.name=Саженец каучукового дерева
+tile.ic2.rubber.sapling.desc=Посадите его, чтобы вырастить новое каучуковое дерево.
+
+tile.ic2.mining.pipe.name=Буровая труба
+tile.ic2.mining.pipe.desc=Используется бурильщиком для бурения вглубь земли.
+
+tile.ic2.mining.tip.name=Буровая коронка
+tile.ic2.mining.tip.desc=Буровая головка бурильщика.
+
+tile.ic2.tnt.industrial.name=Промышленный ТНТ
+tile.ic2.tnt.industrial.desc=Более мощная и управляемая версия ТНТ.
+
+tile.ic2.tnt.nuke.name=Ядерная бомба
+tile.ic2.tnt.nuke.desc=Самый разрушительный блок из когда-либо созданных. Вы предупреждены.
+
+tile.ic2.tnt.dynamite.name=Динамит
+tile.ic2.tnt.dynamite.desc=Метательная взрывчатка с коротким фитилём.
+
+tile.ic2.tnt.dynamite_remote.name=Динамит с детонатором
+tile.ic2.tnt.dynamite_remote.desc=Динамит, который можно подорвать с безопасного расстояния.
+
+item.ic2.dust.coal.name=Угольная пыль
+item.ic2.dust.coal.desc=Уголь, размолотый в тонкий порошок. Используется для топливных капсул и углеволокна.
+
+item.ic2.dust.iron.name=Железная пыль
+item.ic2.dust.iron.desc=Железо, размолотое в пыль. Переплавьте или смешайте сплавы.
+
+item.ic2.dust.gold.name=Золотая пыль
+item.ic2.dust.gold.desc=Золото, размолотое в пыль. Отличный проводник.
+
+item.ic2.dust.copper.name=Медная пыль
+item.ic2.dust.copper.desc=Медь, размолотая в пыль. Переплавьте в медные слитки.
+
+item.ic2.dust.tin.name=Оловянная пыль
+item.ic2.dust.tin.desc=Олово, размолотое в пыль. Переплавьте в оловянные слитки.
+
+item.ic2.dust.bronze.name=Бронзовая пыль
+item.ic2.dust.bronze.desc=Смесь оловянной и медной пыли. Переплавьте в бронзу.
+
+item.ic2.dust.iron.small.name=Малая кучка железной пыли
+item.ic2.dust.iron.small.desc=Неполная кучка железной пыли. Складывайте 9 штук в полную.
+item.ic2.dust.gold.small.name=Малая кучка золотой пыли
+item.ic2.dust.gold.small.desc=Неполная кучка золотой пыли. Складывайте 9 штук в полную.
+item.ic2.dust.copper.small.name=Малая кучка медной пыли
+item.ic2.dust.copper.small.desc=Неполная кучка медной пыли. Складывайте 9 штук в полную.
+item.ic2.dust.tin.small.name=Малая кучка оловянной пыли
+item.ic2.dust.tin.small.desc=Неполная кучка оловянной пыли. Складывайте 9 штук в полную.
+item.ic2.dust.bronze.small.name=Малая кучка бронзовой пыли
+item.ic2.dust.bronze.small.desc=Неполная кучка бронзовой пыли. Складывайте 9 штук в полную.
+item.ic2.dust.steel.small.name=Малая кучка стальной пыли
+item.ic2.dust.steel.small.desc=Неполная кучка стальной пыли. Складывайте 9 штук в полную.
+
+item.ic2.ingot.refined_iron.name=Слиток очищенной стали
+item.ic2.ingot.refined_iron.desc=Металлический слиток очищенного железа — основа всей индустриальной техники.
+
+item.ic2.ingot.copper.name=Медный слиток
+item.ic2.ingot.copper.desc=Металлический слиток меди — для кабелей и бронзы.
+
+item.ic2.ingot.tin.name=Оловянный слиток
+item.ic2.ingot.tin.desc=Металлический слиток олова — для электроники и слаботочных кабелей.
+
+item.ic2.ingot.bronze.name=Бронзовый слиток
+item.ic2.ingot.bronze.desc=Медь и олово, сплавленные в прочный сплав.
+
+item.ic2.ingot.mixed_metal.name=Слиток смешанного металла
+item.ic2.ingot.mixed_metal.desc=Сожмите его, чтобы получить улучшенный сплав.
+
+item.ic2.ingot.uranium.name=Слиток обогащённого урана
+item.ic2.ingot.uranium.desc=Очищенный уран для ядерных реакторов.
+
+item.ic2.ore.uranium.name=Уран
+item.ic2.ore.uranium.desc=Уран, полученный из урановой руды.
+
+item.ic2.battery.re.name=RE-аккумулятор
+item.ic2.battery.re.desc=Перезаряжаемая батарея, хранящая 10 000 EU. 1-й уровень.
+
+item.ic2.battery.crystal.name=Энергокристалл
+item.ic2.battery.crystal.desc=Перезаряжаемый кристалл высокой ёмкости: 100 000 EU. 2-й уровень.
+
+item.ic2.battery.lapotron.name=Лапотрон-кристалл
+item.ic2.battery.lapotron.desc=Высший энергокристалл: 1 000 000 EU. 3-й уровень.
+
+item.ic2.battery.single_use.name=Одноразовая батарея
+item.ic2.battery.single_use.desc=Дешёвая батарея, не подлежащая перезарядке. 1 000 EU каждая.
+
+item.ic2.cell.empty.name=Пустая капсула
+item.ic2.cell.empty.desc=Универсальный контейнер для жидкостей.
+
+item.ic2.cell.lava.name=Лавовая капсула
+item.ic2.cell.lava.desc=Капсула с лавой. Отличное геотермальное топливо.
+
+item.ic2.cell.coalfuel.name=Угольная топливная капсула
+item.ic2.cell.coalfuel.desc=Капсула со сжатым угольным топливом. Горит жарко и долго.
+
+item.ic2.cell.biofuel.name=Капсула биотоплива
+item.ic2.cell.biofuel.desc=Биотопливо, сжатое в ячейку. Используйте его в консервной машине, чтобы заправлять топливные канистры.
+
+item.ic2.cell.water.name=Водяная капсула
+item.ic2.cell.water.desc=Капсула, заполненная водой.
+
+item.ic2.cell.uranium.name=Урановая капсула
+item.ic2.cell.uranium.desc=Топливо для ядерного реактора. Делится на изотопы.
+
+item.ic2.cell.coolant.name=Охлаждающая капсула
+item.ic2.cell.coolant.desc=Капсула охлаждающей жидкости для охлаждения ядерных реакторов.
+
+item.ic2.cell.depleted_isotope.name=Капсула с истощённым изотопом
+item.ic2.cell.depleted_isotope.desc=Израсходованная капсула с изотопом. Переобогатите её в реакторе.
+
+item.ic2.cell.reenriched_uranium.name=Капсула с переобогащённым ураном
+item.ic2.cell.reenriched_uranium.desc=Уран, переобогащённый из истощённого изотопа.
+
+item.ic2.cell.near_depleted_uranium.name=Почти истощённая урановая капсула
+item.ic2.cell.near_depleted_uranium.desc=Почти выработанная урановая капсула. Смешайте с угольной пылью для переработки.
+
+item.ic2.cell.electrolyzed_water.name=Капсула с электролизованной водой
+item.ic2.cell.electrolyzed_water.desc=Вода, разложенная электролизом. Используется в производстве хладагента.
+
+item.ic2.tool.drill.name=Бур
+item.ic2.tool.drill.desc=Перезаряжаемый бур, добывающий породу как железная кирка. Улучшается до алмазного.
+
+item.ic2.tool.drill.diamond.name=Алмазный бур
+item.ic2.tool.drill.diamond.desc=Бур с промышленными алмазами. Добывает как алмазные инструменты.
+
+item.ic2.tool.chainsaw.name=Цепная пила
+item.ic2.tool.chainsaw.desc=Перезаряжаемая цепная пила. Валит деревья за секунды и вдобавок оружие.
+
+item.ic2.tool.mining_laser.name=Горный лазер
+item.ic2.tool.mining_laser.desc=Стреляет режущими лазерными лучами сквозь породу и мобов.
+
+item.ic2.tool.nano_saber.name=Наносабля (включена)
+item.ic2.tool.nano_saber.desc=Клинок гудит энергией. ПКМ — выключить.
+item.ic2.tool.nano_saber.off.name=Наносабля
+item.ic2.tool.nano_saber.off.desc=Энергетический клинок. ПКМ — включить.
+
+item.ic2.tool.wrench.name=Гаечный ключ
+item.ic2.tool.wrench.desc=Разбирает машины без потерь. Также снимает кабели и обшивку.
+
+item.ic2.tool.wrench.electric.name=Электрический гаечный ключ
+item.ic2.tool.wrench.electric.desc=Перезаряжаемый ключ, который никогда не ломается.
+
+item.ic2.tool.eu_reader.name=EU-метр
+item.ic2.tool.eu_reader.desc=Измеряет энергию, проходящую через кабели и машины.
+
+item.ic2.tool.painter.name=Кисть
+item.ic2.tool.painter.desc=Окрашивает кабели и блоки в любой из 16 цветов.
+
+item.ic2.tool.insulation_cutter.name=Съёмник изоляции
+item.ic2.tool.insulation_cutter.desc=Снимает изоляцию с кабелей.
+
+item.ic2.tool.treetap.name=Краник для смолы
+item.ic2.tool.treetap.desc=Краник для сбора липкой смолы с каучукового дерева. Самый первый инструмент IC2.
+
+item.ic2.scanner.od.name=OD-сканер
+item.ic2.scanner.od.desc=Сканирует руды в радиусе. Требуется для бурильщика.
+
+item.ic2.scanner.ov.name=OV-сканер
+item.ic2.scanner.ov.desc=Улучшенный сканер руды с расширенным радиусом.
+
+item.ic2.frequency_transmitter.name=Передатчик частоты
+item.ic2.frequency_transmitter.desc=Связывает телепорты, запоминая их координаты.
+
+item.ic2.fuel_can.empty.name=Канистра (пустая)
+item.ic2.fuel_can.empty.desc=Жестяная канистра для жидкого топлива. Заполните её в консервной машине.
+
+item.ic2.fuel_can.filled.name=Канистра (заполненная)
+item.ic2.fuel_can.filled.desc=Канистра с топливом, готовая питать генераторы и реактивные ранцы.
+
+item.ic2.fuel.hydrated_coal_dust.name=Увлажнённая угольная пыль
+item.ic2.fuel.hydrated_coal_dust.desc=Угольная пыль, смешанная с водой. Сожмите её для получения топлива.
+
+item.ic2.fuel.hydrated_coal.name=Сжатый увлажнённый уголь
+item.ic2.fuel.hydrated_coal.desc=Увлажнённый уголь, сжатый в твёрдый кусок.
+
+item.ic2.fuel.plantball.name=Растительный шар
+item.ic2.fuel.plantball.desc=Спрессованная растительная масса. Шаг к биотопливу.
+
+item.ic2.fuel.compressed_plants.name=Спрессованные растения
+item.ic2.fuel.compressed_plants.desc=Плотно спрессованная растительная масса для капсул биотоплива.
+
+item.ic2.tin_can.name=Жестяная банка
+item.ic2.tin_can.desc=Пустая банка для консервов.
+
+item.ic2.tin_can.filled.name=Консервы
+item.ic2.tin_can.filled.desc=Консервы, которые никогда не портятся. Ешьте на ходу!
+
+item.ic2.dynamite.name=Динамит
+item.ic2.dynamite.desc=Метательная взрывчатка с коротким фитилём.
+
+item.ic2.dynamite.sticky.name=Липкий динамит
+item.ic2.dynamite.sticky.desc=Динамит, покрытый смолой. Прилипает к стенам.
+
+item.ic2.dynamite_o_mote.name=Динамит-о-мот
+item.ic2.dynamite_o_mote.desc=Крошечная крупинка взрывчатки для любопытных инженеров.
+
+item.ic2.sticky_resin.name=Липкая смола
+item.ic2.sticky_resin.desc=Сырая смола, добытая из каучуковых деревьев. Переплавьте или экстрагируйте в резину.
+
+item.ic2.rubber.name=Резина
+item.ic2.rubber.desc=Вулканизированная резина. Изолирует кабели и защищает снаряжение от воды.
+
+item.ic2.armor.rubber_boots.name=Резиновые сапоги
+item.ic2.armor.rubber_boots.desc=Изолированные сапоги, защищающие от ударов током.
+
+item.ic2.armor.jetpack.name=Реактивный ранец
+item.ic2.armor.jetpack.desc=Реактивный ранец на топливе. Летайте со стилем!
+
+item.ic2.armor.jetpack.electric.name=Электрический реактивный ранец
+item.ic2.armor.jetpack.electric.desc=Перезаряжаемый ранец, работающий от энергокристаллов.
+
+item.ic2.armor.batpack.name=Батарейный ранец
+item.ic2.armor.batpack.desc=Носимый батарейный блок, заряжающий ваши электрические инструменты.
+
+item.ic2.armor.composite_vest.name=Композитный жилет
+item.ic2.armor.composite_vest.desc=Усиленный жилет, обеспечивающий серьёзную защиту.
+
+item.ic2.armor.nano.helmet.name=Шлем нанокостюма
+item.ic2.armor.nano.helmet.desc=Высокотехнологичная броня на энергокристаллах.
+
+item.ic2.armor.nano.bodyarmor.name=Кираса нанокостюма
+item.ic2.armor.nano.bodyarmor.desc=Высокотехнологичная броня на энергокристаллах.
+
+item.ic2.armor.nano.leggings.name=Штаны нанокостюма
+item.ic2.armor.nano.leggings.desc=Высокотехнологичная броня на энергокристаллах.
+
+item.ic2.armor.nano.boots.name=Ботинки нанокостюма
+item.ic2.armor.nano.boots.desc=Высокотехнологичная броня на энергокристаллах.
+
+item.ic2.armor.quantum.helmet.name=Шлем квантового костюма
+item.ic2.armor.quantum.helmet.desc=Вершина инженерной мысли. Абсолютная защита.
+
+item.ic2.armor.quantum.bodyarmor.name=Кираса квантового костюма
+item.ic2.armor.quantum.bodyarmor.desc=Вершина инженерной мысли. Абсолютная защита.
+
+item.ic2.armor.quantum.leggings.name=Штаны квантового костюма
+item.ic2.armor.quantum.leggings.desc=Вершина инженерной мысли. Абсолютная защита.
+
+item.ic2.armor.quantum.boots.name=Ботинки квантового костюма
+item.ic2.armor.quantum.boots.desc=Вершина инженерной мысли. Абсолютная защита.
+
+item.ic2.tool.bronze.pickaxe.name=Бронзовая кирка
+item.ic2.tool.bronze.pickaxe.desc=Прочная кирка из бронзы. Столь же быстрая, как железная, но долговечнее.
+
+item.ic2.tool.bronze.axe.name=Бронзовый топор
+item.ic2.tool.bronze.axe.desc=Бронзовый топор, быстро рубящий дерево.
+
+item.ic2.tool.bronze.sword.name=Бронзовый меч
+item.ic2.tool.bronze.sword.desc=Отлично сбалансированный бронзовый клинок.
+
+item.ic2.tool.bronze.shovel.name=Бронзовая лопата
+item.ic2.tool.bronze.shovel.desc=Бронзовая лопата для копания.
+
+item.ic2.tool.bronze.hoe.name=Бронзовая мотыга
+item.ic2.tool.bronze.hoe.desc=Бронзовая мотыга для рыхления почвы.
+
+item.ic2.armor.bronze.helmet.name=Бронзовый шлем
+item.ic2.armor.bronze.helmet.desc=Надёжная бронзовая защита головы.
+
+item.ic2.armor.bronze.chestplate.name=Бронзовая кираса
+item.ic2.armor.bronze.chestplate.desc=Надёжная бронзовая защита корпуса.
+
+item.ic2.armor.bronze.leggings.name=Бронзовые штаны
+item.ic2.armor.bronze.leggings.desc=Надёжная бронзовая защита ног.
+
+item.ic2.armor.bronze.boots.name=Бронзовые ботинки
+item.ic2.armor.bronze.boots.desc=Надёжная бронзовая защита стоп.
+
+item.ic2.circuit.name=Электронная схема
+item.ic2.circuit.desc=Мозг каждой промышленной машины.
+
+item.ic2.circuit.advanced.name=Улучшенная схема
+item.ic2.circuit.advanced.desc=Усиленная схема для машин высшего уровня.
+
+item.ic2.scrap.name=Хлам
+item.ic2.scrap.desc=Отходы переработки. Ускоряет производителя материи.
+
+item.ic2.uu_matter.name=UU-материя
+item.ic2.uu_matter.desc=Жидкая материя, созданная из чистой энергии. Крафтится почти во что угодно.
+
+item.ic2.advanced_alloy.name=Улучшенный сплав
+item.ic2.advanced_alloy.desc=Сжатая сплавная пластина для усиленных материалов.
+
+item.ic2.industrial_credit.name=Промышленный кредит
+item.ic2.industrial_credit.desc=Официальная валюта промышленности.
+
+item.ic2.reactor.plating.name=Обшивка реактора
+item.ic2.reactor.plating.desc=Усиляет камеру реактора против жара.
+
+item.ic2.reactor.heat_disperser.name=Теплорассеиватель
+item.ic2.reactor.heat_disperser.desc=Распределяет тепло между компонентами реактора.
+
+item.ic2.carbon.raw_fibre.name=Сырое углеволокно
+item.ic2.carbon.raw_fibre.desc=Углеволокно, спрядённое из угольной пыли.
+
+item.ic2.carbon.raw_mesh.name=Сырая углеродная сетка
+item.ic2.carbon.raw_mesh.desc=Сплетённое углеволокно. Сожмите в углеродные пластины.
+
+item.ic2.carbon.plate.name=Углеродная пластина
+item.ic2.carbon.plate.desc=Лёгкая сверхпрочная пластина для нанокостюма.
+
+item.ic2.iridium_plate.name=Иридиевая пластина
+item.ic2.iridium_plate.desc=Экзотический материал для квантового снаряжения.
+
+item.ic2.industrial_diamond.name=Промышленный алмаз
+item.ic2.industrial_diamond.desc=Алмаз, изготовленный из угля. Так же хорош, как настоящий.
+
+item.ic2.coal_ball.name=Угольный шар
+item.ic2.coal_ball.desc=Спрессованный уголь с примесью кремня. Шаг к промышленным алмазам.
+
+item.ic2.coal_ball.compressed.name=Сжатый угольный шар
+item.ic2.coal_ball.compressed.desc=Угольный шар, сжатый под высоким давлением.
+
+item.ic2.coal_chunk.name=Угольный кусок
+item.ic2.coal_chunk.desc=Последняя стадия перед промышленным алмазом.
+
+item.ic2.scrap_box.name=Коробка хлама
+item.ic2.scrap_box.desc=Откройте её ради случайной добычи. Азарт для инженеров!
+
+item.ic2.tfbp.name=Чертёж терраформера (пустой)
+item.ic2.tfbp.desc=Пустой чертёж для терраформера.
+
+item.ic2.tfbp.cultivation.name=Чертёж культивации
+item.ic2.tfbp.cultivation.desc=Сажает саженцы и выращивает растительность.
+
+item.ic2.tfbp.irrigation.name=Чертёж орошения
+item.ic2.tfbp.irrigation.desc=Увлажняет местность, создавая воду и посевы.
+
+item.ic2.tfbp.chilling.name=Чертёж заморозки
+item.ic2.tfbp.chilling.desc=Замораживает местность в снег и лёд.
+
+item.ic2.tfbp.desertification.name=Чертёж опустынивания
+item.ic2.tfbp.desertification.desc=Превращает землю в бесплодную пустыню.
+
+item.ic2.tfbp.flatification.name=Чертёж выравнивания
+item.ic2.tfbp.flatification.desc=Полностью выравнивает местность.
+
+item.ic2.door.reinforced.name=Армированная дверь
+item.ic2.door.reinforced.desc=Тяжёлая взрывостойкая дверь.
+
+item.ic2.cable_copper.name=Медный кабель
+item.ic2.cable_copper.desc=Изолированный медный кабель: потери 0.2 EU на блок, до 32 EU/t.
+
+item.ic2.cable_copper_uninsulated.name=Неизолированный медный кабель
+item.ic2.cable_copper_uninsulated.desc=Голый медный кабель: потери 0.3 EU на блок, до 32 EU/t. Бьёт током при касании!
+
+item.ic2.cable_gold.name=Золотой кабель
+item.ic2.cable_gold.desc=Золотой кабель: потери 0.5 EU на блок, до 128 EU/t.
+
+item.ic2.cable_gold_insulated.name=Изолированный золотой кабель
+item.ic2.cable_gold_insulated.desc=Золотой кабель в резиновой изоляции: потери 0.45 EU, до 128 EU/t.
+
+item.ic2.cable_gold_insulated_2x.name=Золотой кабель 2x изоляции
+item.ic2.cable_gold_insulated_2x.desc=Двойная изоляция золотого кабеля: потери 0.4 EU, до 128 EU/t.
+
+item.ic2.cable_hv.name=Кабель ВН
+item.ic2.cable_hv.desc=Кабель высокого напряжения: потери 1.0 EU на блок, до 2048 EU/t.
+
+item.ic2.cable_hv_insulated.name=Изолированный кабель ВН
+item.ic2.cable_hv_insulated.desc=Изолированный кабель ВН: потери 0.95 EU на блок, до 2048 EU/t.
+
+item.ic2.cable_hv_insulated_2x.name=Кабель ВН 2x изоляции
+item.ic2.cable_hv_insulated_2x.desc=Двойная изоляция кабеля ВН: потери 0.9 EU на блок, до 2048 EU/t.
+
+item.ic2.cable_hv_insulated_4x.name=Кабель ВН 4x изоляции
+item.ic2.cable_hv_insulated_4x.desc=Четырёхслойная изоляция кабеля ВН: потери 0.8 EU на блок, до 2048 EU/t, безопасен на ощупь.
+
+item.ic2.cable_glass_fibre.name=Стекловолоконный кабель
+item.ic2.cable_glass_fibre.desc=Кабель со сверхнизкими потерями: 0.025 EU на блок, до 512 EU/t. Очень дорогой.
+
+item.ic2.cable_tin.name=Кабель сверхнизкого тока
+item.ic2.cable_tin.desc=Оловянный кабель с потерями 0.001 EU на блок. Пропускает лишь до 3 EU/t.
+
+item.ic2.tool.painter.black.name=Чёрная кисть
+item.ic2.tool.painter.black.desc=Окрашивает кабели и блоки в чёрный цвет.
+
+item.ic2.tool.painter.red.name=Красная кисть
+item.ic2.tool.painter.red.desc=Окрашивает кабели и блоки в красный цвет.
+
+item.ic2.tool.painter.green.name=Зелёная кисть
+item.ic2.tool.painter.green.desc=Окрашивает кабели и блоки в зелёный цвет.
+
+item.ic2.tool.painter.brown.name=Коричневая кисть
+item.ic2.tool.painter.brown.desc=Окрашивает кабели и блоки в коричневый цвет.
+
+item.ic2.tool.painter.blue.name=Синяя кисть
+item.ic2.tool.painter.blue.desc=Окрашивает кабели и блоки в синий цвет.
+
+item.ic2.tool.painter.purple.name=Фиолетовая кисть
+item.ic2.tool.painter.purple.desc=Окрашивает кабели и блоки в фиолетовый цвет.
+
+item.ic2.tool.painter.cyan.name=Бирюзовая кисть
+item.ic2.tool.painter.cyan.desc=Окрашивает кабели и блоки в бирюзовый цвет.
+
+item.ic2.tool.painter.light_gray.name=Светло-серая кисть
+item.ic2.tool.painter.light_gray.desc=Окрашивает кабели и блоки в светло-серый цвет.
+
+item.ic2.tool.painter.gray.name=Серая кисть
+item.ic2.tool.painter.gray.desc=Окрашивает кабели и блоки в серый цвет.
+
+item.ic2.tool.painter.pink.name=Розовая кисть
+item.ic2.tool.painter.pink.desc=Окрашивает кабели и блоки в розовый цвет.
+
+item.ic2.tool.painter.lime.name=Лаймовая кисть
+item.ic2.tool.painter.lime.desc=Окрашивает кабели и блоки в лаймовый цвет.
+
+item.ic2.tool.painter.yellow.name=Жёлтая кисть
+item.ic2.tool.painter.yellow.desc=Окрашивает кабели и блоки в жёлтый цвет.
+
+item.ic2.tool.painter.light_blue.name=Голубая кисть
+item.ic2.tool.painter.light_blue.desc=Окрашивает кабели и блоки в голубой цвет.
+
+item.ic2.tool.painter.magenta.name=Пурпурная кисть
+item.ic2.tool.painter.magenta.desc=Окрашивает кабели и блоки в пурпурный цвет.
+
+item.ic2.tool.painter.orange.name=Оранжевая кисть
+item.ic2.tool.painter.orange.desc=Окрашивает кабели и блоки в оранжевый цвет.
+
+item.ic2.tool.painter.white.name=Белая кисть
+item.ic2.tool.painter.white.desc=Окрашивает кабели и блоки в белый цвет.
+
+gui.ic2.iron_furnace=Железная печь
+
+item.ic2.cell.hydrated_coal.name=Угольная капсула
+item.ic2.cell.hydrated_coal.desc=Капсула с увлажнённым углём. Экстрагируйте её в угольную топливную капсулу.
+
+item.ic2.cell.biomass.name=Биокапсула
+item.ic2.cell.biomass.desc=Капсула со спрессованной растительной массой. Экстрагируйте её в капсулу биотоплива.
+
+# ==== Руды под породы BTA (фикс #8) ====
+tile.ic2.ore.copper.basalt.name=Медная руда в базальте
+tile.ic2.ore.copper.basalt.desc=Медная руда в базальте. Даёт сырую медь.
+tile.ic2.ore.copper.limestone.name=Медная руда в известняке
+tile.ic2.ore.copper.limestone.desc=Медная руда в известняке. Даёт сырую медь.
+tile.ic2.ore.copper.granite.name=Медная руда в граните
+tile.ic2.ore.copper.granite.desc=Медная руда в граните. Даёт сырую медь.
+tile.ic2.ore.copper.permafrost.name=Медная руда в вечной мерзлоте
+tile.ic2.ore.copper.permafrost.desc=Медная руда в мерзлоте. Даёт сырую медь.
+tile.ic2.ore.tin.basalt.name=Оловянная руда в базальте
+tile.ic2.ore.tin.basalt.desc=Оловянная руда в базальте. Даёт сырое олово.
+tile.ic2.ore.tin.limestone.name=Оловянная руда в известняке
+tile.ic2.ore.tin.limestone.desc=Оловянная руда в известняке. Даёт сырое олово.
+tile.ic2.ore.tin.granite.name=Оловянная руда в граните
+tile.ic2.ore.tin.granite.desc=Оловянная руда в граните. Даёт сырое олово.
+tile.ic2.ore.tin.permafrost.name=Оловянная руда в вечной мерзлоте
+tile.ic2.ore.tin.permafrost.desc=Оловянная руда в мерзлоте. Даёт сырое олово.
+tile.ic2.ore.uranium.basalt.name=Урановая руда в базальте
+tile.ic2.ore.uranium.basalt.desc=Урановая руда в базальте. Даёт сырой уран.
+tile.ic2.ore.uranium.limestone.name=Урановая руда в известняке
+tile.ic2.ore.uranium.limestone.desc=Урановая руда в известняке. Даёт сырой уран.
+tile.ic2.ore.uranium.granite.name=Урановая руда в граните
+tile.ic2.ore.uranium.granite.desc=Урановая руда в граните. Даёт сырой уран.
+tile.ic2.ore.uranium.permafrost.name=Урановая руда в вечной мерзлоте
+tile.ic2.ore.uranium.permafrost.desc=Урановая руда в мерзлоте. Даёт сырой уран.
+
+# ==== Raw-предметы (фикс #9) ====
+item.ic2.ore.raw.copper.name=Сырая медь
+item.ic2.ore.raw.copper.desc=Сырая медь из медной руды. Переплавьте или измельчите.
+item.ic2.ore.raw.tin.name=Сырое олово
+item.ic2.ore.raw.tin.desc=Сырое олово из оловянной руды. Переплавьте или измельчите.
+
+# ==== Стальная пыль (фикс #19) ====
+item.ic2.dust.steel.name=Стальная пыль
+item.ic2.dust.steel.desc=Горка перемолотой стали. Переплавьте её в стальной слиток.
+
+# ==== Бронзовые блоки (фикс #28) ====
+tile.ic2.brick.bronze.name=Бронзовые кирпичи
+tile.ic2.brick.bronze.desc=Блок бронзовых кирпичей. Прочный и декоративный.
+item.ic2.door.bronze.name=Бронзовая дверь
+item.ic2.door.bronze.desc=Крепкая дверь из литой бронзы.
+
+# ==== Конвертеры Signal Industries (фикс #21) ====
+tile.ic2.machine.converter_eu_to_catalyst.name=Конвертер EU в энергию Signal
+tile.ic2.machine.converter_eu_to_catalyst.desc=Преобразует EU из IC2 в сигналовую жидкость Signal Industries. 64 EU за 1 мБ. Берёт энергию только когда она нужна на стороне Signal.
+tile.ic2.machine.converter_catalyst_to_eu.name=Конвертер энергии Signal в EU
+tile.ic2.machine.converter_catalyst_to_eu.desc=Преобразует сигналовую жидкость Signal Industries в EU. 1 мБ даёт 64 EU. Потребляет жидкость только когда нужна энергия на стороне IC2.
+
+# ==== GUI-строки (фикс #18) ====
+gui.ic2.power_level=Уровень заряда:
+gui.ic2.output=Отдача:
+gui.ic2.progress=Прогресс:
+gui.ic2.amplifier=Усилитель:
+gui.ic2.miner_stuck=Застрял:
+gui.ic2.trades_performed=Сделок:
+gui.ic2.want=Хочет:
+gui.ic2.offer=Отдаёт:
+container.inventory.name=Инвентарь
+
+# --- Сырые руды (стиль BTA) ---
+item.ic2.ore.raw.copper.name=Медная руда
+item.ic2.ore.raw.copper.desc=Необработанная медь. Переплавьте или измельчите.
+item.ic2.ore.raw.tin.name=Оловянная руда
+item.ic2.ore.raw.tin.desc=Необработанное олово. Переплавьте или измельчите.
+item.ic2.dust.steel.name=Стальная пыль
+item.ic2.dust.steel.desc=Горка перемолотой стали. Переплавьте её в стальной слиток.
+item.ic2.door.bronze.name=Бронзовая дверь
+item.ic2.door.bronze.desc=Прочная дверь из бронзы.
+tile.ic2.door.bronze.bottom.name=Бронзовая дверь
+tile.ic2.door.bronze.bottom.desc=Прочная дверь из бронзы.
+tile.ic2.door.bronze.top.name=Бронзовая дверь
+tile.ic2.door.bronze.top.desc=Прочная дверь из бронзы.
+
+
+# --- round 3 additions ---
+item.ic2.armor.bronze.wolf.name=Бронзовая волчья броня
+item.ic2.armor.bronze.wolf.desc=Прочный бронзовый доспех для вашего волка.
+tile.ic2.brick.copper.name=Медные кирпичи
+tile.ic2.brick.copper.desc=Блок медных кирпичей. Прочный и блестящий.
+tile.ic2.machine.converter_eu_to_energy.name=Конвертер EU в энергию Catalyst
+tile.ic2.machine.converter_eu_to_energy.desc=Преобразует EU из IC2 в универсальную энергию Catalyst (1 EU = 10 E). Питает машины Catalyst напрямую. Берёт энергию только когда она нужна сети Catalyst.
+tile.ic2.machine.converter_energy_to_eu.name=Конвертер энергии Catalyst в EU
+tile.ic2.machine.converter_energy_to_eu.desc=Преобразует универсальную энергию Catalyst в EU (10 E = 1 EU). Потребляет энергию только когда она нужна на стороне IC2.

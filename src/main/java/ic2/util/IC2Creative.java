@@ -1,0 +1,212 @@
+
+
+package ic2.util;
+
+import ic2.IC2Blocks;
+import ic2.IC2Items;
+import ic2.item.ItemCablePlaceable;
+import ic2.si.SIConverters;
+import net.minecraft.core.item.IItemConvertible;
+import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryCategory;
+import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryPlacement;
+import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryRegistry;
+
+public class IC2Creative {
+    public static void init() {
+        IC2Creative.register(IC2Blocks.oreCopper, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreTin, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreUranium, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreCopperBasalt, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreCopperLimestone, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreCopperGranite, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreCopperPermafrost, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreTinBasalt, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreTinLimestone, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreTinGranite, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreTinPermafrost, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreUraniumBasalt, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreUraniumLimestone, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreUraniumGranite, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.oreUraniumPermafrost, CreativeInventoryCategory.ORE);
+        IC2Creative.register(IC2Blocks.rubberWood, CreativeInventoryCategory.LOGS);
+        IC2Creative.register(IC2Blocks.rubberLeaves, CreativeInventoryCategory.ORGANIC);
+        IC2Creative.register(IC2Blocks.rubberSapling, CreativeInventoryCategory.ORGANIC);
+        IC2Creative.register(IC2Blocks.resinBlock, CreativeInventoryCategory.DROPS);
+        IC2Creative.register(IC2Blocks.copperBlock, CreativeInventoryCategory.STORAGE);
+        IC2Creative.register(IC2Blocks.tinBlock, CreativeInventoryCategory.STORAGE);
+        IC2Creative.register(IC2Blocks.bronzeBlock, CreativeInventoryCategory.STORAGE);
+        IC2Creative.register(IC2Blocks.uraniumBlock, CreativeInventoryCategory.STORAGE);
+        IC2Creative.register(IC2Blocks.bronzeBrick, CreativeInventoryCategory.STORAGE);
+        IC2Creative.register(IC2Blocks.copperBrick, CreativeInventoryCategory.STORAGE);
+        IC2Creative.register(IC2Items.ingotCopper, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.ingotTin, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.ingotBronze, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.ingotRefinedIron, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.ingotMixedMetal, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.ingotUran, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.uraniumItem, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustCoal, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustIron, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustGold, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustCopper, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustTin, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustBronze, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustSteel, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustIronSmall, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustGoldSmall, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustCopperSmall, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustTinSmall, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustBronzeSmall, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.dustSteelSmall, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.rawCopper, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.rawTin, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Items.stickyResin, CreativeInventoryCategory.DROPS);
+        IC2Creative.register(IC2Items.rubber, CreativeInventoryCategory.ORE_PRODUCTS);
+        IC2Creative.register(IC2Blocks.machineBlock, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.advancedMachineBlock, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.ironFurnace, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.electricFurnace, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.macerator, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.extractor, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.compressor, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.canner, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.recycler, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.electrolyzer, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.inductionFurnace, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.massFabricator, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.terraformer, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.miner, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.pump, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.magnetizer, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.generator, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.geothermalGenerator, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.waterMill, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.solarPanel, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.windMill, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.nuclearReactor, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.reactorChamber, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.batBox, CreativeInventoryCategory.REDSTONE);
+        IC2Creative.register(IC2Blocks.mfe, CreativeInventoryCategory.REDSTONE);
+        IC2Creative.register(IC2Blocks.mfsu, CreativeInventoryCategory.REDSTONE);
+        IC2Creative.register(IC2Blocks.transformerLV, CreativeInventoryCategory.REDSTONE);
+        IC2Creative.register(IC2Blocks.transformerMV, CreativeInventoryCategory.REDSTONE);
+        IC2Creative.register(IC2Blocks.transformerHV, CreativeInventoryCategory.REDSTONE);
+        IC2Creative.register(IC2Blocks.luminator, CreativeInventoryCategory.PLACEABLES);
+        IC2Creative.register(IC2Blocks.personalSafe, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.tradeOMat, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.teleporter, CreativeInventoryCategory.WORKBENCHES);
+        IC2Creative.register(IC2Blocks.teslaCoil, CreativeInventoryCategory.REDSTONE);
+        IC2Creative.register(IC2Blocks.reinforcedStone, CreativeInventoryCategory.STONE);
+        IC2Creative.register(IC2Blocks.reinforcedGlass, CreativeInventoryCategory.PLACEABLES);
+        IC2Creative.register(IC2Blocks.ironFence, CreativeInventoryCategory.PLACEABLES);
+        IC2Creative.register(IC2Blocks.rubberSheet, CreativeInventoryCategory.PLACEABLES);
+        IC2Creative.register(IC2Items.reinforcedDoorItem, CreativeInventoryCategory.PLACEABLES);
+        IC2Creative.register(IC2Items.bronzeDoorItem, CreativeInventoryCategory.PLACEABLES);
+        if (SIConverters.isCatalystInstalled()) {
+            IC2Creative.register(IC2Blocks.converterEuToCatalyst, CreativeInventoryCategory.REDSTONE);
+            IC2Creative.register(IC2Blocks.converterCatalystToEu, CreativeInventoryCategory.REDSTONE);
+        }
+        if (IC2Blocks.converterEuToEnergy != null) {
+            IC2Creative.register(IC2Blocks.converterEuToEnergy, CreativeInventoryCategory.REDSTONE);
+            IC2Creative.register(IC2Blocks.converterEnergyToEu, CreativeInventoryCategory.REDSTONE);
+        }
+        IC2Creative.register(IC2Blocks.industrialTnt, CreativeInventoryCategory.REDSTONE);
+        IC2Creative.register(IC2Blocks.nuke, CreativeInventoryCategory.REDSTONE);
+        IC2Creative.register(IC2Items.batteryRE, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.batteryCrystal, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.batteryLamaCrystal, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.singleUseBattery, CreativeInventoryCategory.TOOLS);
+        for (ItemCablePlaceable cable : IC2Items.cableItems) {
+            IC2Creative.register((Object)cable, CreativeInventoryCategory.REDSTONE);
+        }
+        IC2Creative.register(IC2Items.miningDrill, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.diamondDrill, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.chainsaw, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.toolMiningLaser, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.nanoSaber, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.nanoSaberOff, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.cellBiomass, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.wrench, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.electricWrench, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.euReader, CreativeInventoryCategory.MISC_TOOLS);
+        IC2Creative.register((Object)IC2Items.treetap, CreativeInventoryCategory.MISC_TOOLS);
+        IC2Creative.register(IC2Items.painter, CreativeInventoryCategory.MISC_TOOLS);
+        IC2Creative.register(IC2Items.insulationCutter, CreativeInventoryCategory.MISC_TOOLS);
+        IC2Creative.register(IC2Items.odScanner, CreativeInventoryCategory.MISC_TOOLS);
+        IC2Creative.register(IC2Items.ovScanner, CreativeInventoryCategory.MISC_TOOLS);
+        IC2Creative.register(IC2Items.frequencyTransmitter, CreativeInventoryCategory.MISC_TOOLS);
+        IC2Creative.register(IC2Items.bronzeHelmet, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.bronzeChestplate, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.bronzeLeggings, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.bronzeBoots, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.bronzeWolfArmor, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.rubberBoots, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.compositeVest, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.jetpack, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.electricJetpack, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.batpack, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.nanoHelmet, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.nanoBodyarmor, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.nanoLeggings, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.nanoBoots, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.quantumHelmet, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.quantumBodyarmor, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.quantumLeggings, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.quantumBoots, CreativeInventoryCategory.ARMOR);
+        IC2Creative.register(IC2Items.bronzePickaxe, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.bronzeAxe, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.bronzeSword, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.bronzeShovel, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.bronzeHoe, CreativeInventoryCategory.TOOLS);
+        IC2Creative.register(IC2Items.circuit, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.circuitAdvanced, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.advancedAlloy, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.scrap, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.uuMatter, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.scrapBox, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.industrialCredit, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.reactorPlating, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.heatDisperser, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.rawCarbonFibre, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.rawCarbonMesh, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.carbonPlate, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.iridiumPlate, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.industrialDiamond, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.coalBall, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.compressedCoalBall, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.coalChunk, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellEmpty, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellLava, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellCoalfuel, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellBiofuel, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellWater, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellUran, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellCoolant, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellDepletedIsotope, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellReEnrichedUranium, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellNearDepletedUranium, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.cellElectrolyzedWater, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.fuelCanEmpty, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.fuelCanFilled, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.hydratedCoalDust, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.hydratedCoal, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.plantball, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.compressedPlants, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.tinCan, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.filledTinCan, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.tfbpEmpty, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.tfbpCultivation, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.tfbpIrrigation, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.tfbpChilling, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.tfbpDesertification, CreativeInventoryCategory.MISCELLANEOUS);
+        IC2Creative.register(IC2Items.tfbpFlatification, CreativeInventoryCategory.MISCELLANEOUS);
+    }
+
+    private static void register(Object obj, CreativeInventoryCategory category) {
+        if (obj == null) {
+            return;
+        }
+        CreativeInventoryRegistry.INSTANCE.register((IItemConvertible)obj, (CreativeInventoryPlacement)new CreativeInventoryPlacement.Category(category));
+    }
+}
+

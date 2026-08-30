@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/door/bottom_right",
+  "textures": {
+    "bottom": "ic2:block/bronze_door_lower"
+  }
+}

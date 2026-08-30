@@ -1,0 +1,667 @@
+# IndustrialCraft 2 (BTA Edition) — English localization
+# Names and descriptions ported from IC2 v1.00
+
+tile.ic2.ore.copper.name=Copper Ore
+tile.ic2.ore.copper.desc=An ore containing copper. Macerate it for double yield or smelt it into ingots.
+
+tile.ic2.ore.tin.name=Tin Ore
+tile.ic2.ore.tin.desc=An ore containing tin. An essential component of electronics and alloys.
+
+tile.ic2.ore.uranium.name=Uranium Ore
+tile.ic2.ore.uranium.desc=A highly radioactive ore. Compress it into refined uranium for reactor fuel.
+
+tile.ic2.storage.copper.name=Copper Block
+tile.ic2.storage.copper.desc=A block of solid copper. Compact storage of 9 ingots.
+
+tile.ic2.storage.tin.name=Tin Block
+tile.ic2.storage.tin.desc=A block of solid tin. Compact storage of 9 ingots.
+
+tile.ic2.storage.bronze.name=Bronze Block
+tile.ic2.storage.bronze.desc=A block of solid bronze. Compact storage of 9 ingots.
+
+tile.ic2.storage.uranium.name=Uranium Block
+tile.ic2.storage.uranium.desc=A block of solid refined uranium. Compact storage of 9 ingots.
+
+tile.ic2.machine.name=Machine
+tile.ic2.machine.desc=The basic casing for all industrial machines.
+
+tile.ic2.machine.advanced.name=Advanced Machine
+tile.ic2.machine.advanced.desc=A reinforced casing used in advanced machinery.
+
+tile.ic2.machine.iron_furnace.name=Iron Furnace
+tile.ic2.machine.iron_furnace.desc=A furnace built from iron. 25% faster than its stone counterpart and much more durable.
+
+tile.ic2.machine.electric_furnace.name=Electric Furnace
+tile.ic2.machine.electric_furnace.desc=A furnace powered by electricity. Efficient smelting without fuel.
+
+tile.ic2.machine.macerator.name=Macerator
+tile.ic2.machine.macerator.desc=Grinds ores into dust, yielding two units per ore. The heart of ore doubling.
+
+tile.ic2.machine.extractor.name=Extractor
+tile.ic2.machine.extractor.desc=Extracts rubber from sticky resin, saplings and rubber wood.
+
+tile.ic2.machine.compressor.name=Compressor
+tile.ic2.machine.compressor.desc=Compresses materials under extreme pressure: alloys, coal chunks and more.
+
+tile.ic2.machine.canner.name=Canning Machine
+tile.ic2.machine.canner.desc=Cans food into tin cans and fills fuel cans.
+
+tile.ic2.machine.recycler.name=Recycler
+tile.ic2.machine.recycler.desc=Recycles almost any item into scrap. Occasionally produces nothing at all.
+
+tile.ic2.machine.electrolyzer.name=Electrolyzer
+tile.ic2.machine.electrolyzer.desc=Separates water cells into electrolyzed water for cooling systems.
+
+tile.ic2.machine.induction_furnace.name=Induction Furnace
+tile.ic2.machine.induction_furnace.desc=An advanced electric furnace with two smelting slots and heat-up acceleration.
+
+tile.ic2.machine.mass_fabricator.name=Mass Fabricator
+tile.ic2.machine.mass_fabricator.desc=Converts enormous amounts of energy into UU-Matter. Feed it scrap to improve efficiency.
+
+tile.ic2.machine.terraformer.name=Terraformer
+tile.ic2.machine.terraformer.desc=Transforms the landscape using Terraformer Blueprints.
+
+tile.ic2.machine.miner.name=Miner
+tile.ic2.machine.miner.desc=Automatically mines ores using mining pipes and an OD or OV Scanner.
+
+tile.ic2.machine.pump.name=Pump
+tile.ic2.machine.pump.desc=Pumps up liquids and fills cells from the environment.
+
+tile.ic2.machine.magnetizer.name=Magnetizer
+tile.ic2.machine.magnetizer.desc=Magnetizes iron fences to propel players wearing metal boots upward.
+
+tile.ic2.generator.generator.name=Generator
+tile.ic2.generator.generator.desc=Burns fuel to produce EU. The starting point of industrial power.
+
+tile.ic2.generator.geothermal.name=Geothermal Generator
+tile.ic2.generator.geothermal.desc=Generates EU from lava cells. Stable and efficient power.
+
+tile.ic2.generator.water_mill.name=Water Mill
+tile.ic2.generator.water_mill.desc=Generates a small amount of EU from adjacent water.
+
+tile.ic2.generator.solar_panel.name=Solar Panel
+tile.ic2.generator.solar_panel.desc=Generates EU from sunlight. Only works during the day.
+
+tile.ic2.generator.wind_mill.name=Wind Mill
+tile.ic2.generator.wind_mill.desc=Generates EU from wind. Output depends on altitude and weather.
+
+tile.ic2.reactor.nuclear.name=Nuclear Reactor
+tile.ic2.reactor.nuclear.desc=A nuclear reactor producing massive EU from uranium cells. Handle with extreme care!
+
+tile.ic2.reactor.chamber.name=Reactor Chamber
+tile.ic2.reactor.chamber.desc=Adds an additional column to a nuclear reactor and improves cooling.
+
+tile.ic2.energy.batbox.name=BatBox
+tile.ic2.energy.batbox.desc=A basic energy storage unit: 40,000 EU, tier 1 (32 EU/t).
+
+tile.ic2.energy.mfe.name=MFE Unit
+tile.ic2.energy.mfe.desc=A medium energy storage unit: 600,000 EU, tier 2 (128 EU/t).
+
+tile.ic2.energy.mfsu.name=MFSU Unit
+tile.ic2.energy.mfsu.desc=An ultimate energy storage unit: 10,000,000 EU, tier 3 (512 EU/t).
+
+tile.ic2.energy.transformer_lv.name=LV Transformer
+tile.ic2.energy.transformer_lv.desc=Converts between 32 EU/t (low) and 128 EU/t (medium).
+
+tile.ic2.energy.transformer_mv.name=MV Transformer
+tile.ic2.energy.transformer_mv.desc=Converts between 128 EU/t (medium) and 512 EU/t (high).
+
+tile.ic2.energy.transformer_hv.name=HV Transformer
+tile.ic2.energy.transformer_hv.desc=Converts between 512 EU/t (high) and 2048 EU/t (extreme).
+
+tile.ic2.cable.name=Cable
+tile.ic2.cable.desc=Transmits energy. Different tiers exist for different voltages.
+
+tile.ic2.luminator.name=Luminator
+tile.ic2.luminator.desc=An electric light source powered by the energy net.
+
+tile.ic2.personal.safe.name=Personal Safe
+tile.ic2.personal.safe.desc=A secure storage only accessible by its owner.
+
+tile.ic2.personal.trade_o_mat.name=Trade-O-Mat
+tile.ic2.personal.trade_o_mat.desc=An automatic trading machine: offer items, receive payment.
+
+tile.ic2.machine.teleporter.name=Teleporter
+tile.ic2.machine.teleporter.desc=Teleports players across the world using paired frequency transmitters.
+
+tile.ic2.machine.tesla_coil.name=Tesla Coil
+tile.ic2.machine.tesla_coil.desc=Zaps hostile mobs with stored electricity.
+
+tile.ic2.reinforced.stone.name=Reinforced Stone
+tile.ic2.reinforced.stone.desc=An extremely blast-resistant construction material.
+
+tile.ic2.reinforced.glass.name=Reinforced Glass
+tile.ic2.reinforced.glass.desc=Blast-resistant glass for safe reactor containment.
+
+tile.ic2.door.reinforced.bottom.name=Reinforced Door
+tile.ic2.door.reinforced.bottom.desc=A heavy-duty blast-resistant door.
+
+tile.ic2.door.reinforced.top.name=Reinforced Door
+tile.ic2.door.reinforced.top.desc=A heavy-duty blast-resistant door.
+
+tile.ic2.fence.iron.name=Iron Fence
+tile.ic2.fence.iron.desc=A solid iron fence. Can be magnetized by a magnetizer.
+
+tile.ic2.rubber.sheet.name=Rubber Sheet
+tile.ic2.rubber.sheet.desc=A bouncy sheet that negates fall damage.
+
+tile.ic2.resin.name=Resin Block
+tile.ic2.resin.desc=A block of solidified sticky resin.
+
+tile.ic2.rubber.wood.name=Rubber Wood Log
+tile.ic2.rubber.wood.desc=The trunk of a rubber tree. Tap it with a treetap to collect sticky resin. Crafts into 4 planks.
+
+tile.ic2.rubber.leaves.name=Rubber Leaves
+tile.ic2.rubber.leaves.desc=The leaves of a rubber tree.
+
+tile.ic2.rubber.sapling.name=Rubber Tree Sapling
+tile.ic2.rubber.sapling.desc=Plant it to grow a new rubber tree.
+
+tile.ic2.mining.pipe.name=Mining Pipe
+tile.ic2.mining.pipe.desc=Used by the miner to drill down into the ground.
+
+tile.ic2.mining.tip.name=Mining Tip
+tile.ic2.mining.tip.desc=The drilling head of the miner.
+
+tile.ic2.tnt.industrial.name=Industrial TNT
+tile.ic2.tnt.industrial.desc=A more powerful and controllable version of TNT.
+
+tile.ic2.tnt.nuke.name=Nuke
+tile.ic2.tnt.nuke.desc=The most destructive block ever created. You have been warned.
+
+tile.ic2.tnt.dynamite.name=Dynamite
+tile.ic2.tnt.dynamite.desc=Throwable explosives. Light the fuse and run!
+
+tile.ic2.tnt.dynamite_remote.name=Remote Dynamite
+tile.ic2.tnt.dynamite_remote.desc=Dynamite that can be detonated from a safe distance.
+
+item.ic2.dust.coal.name=Coal Dust
+item.ic2.dust.coal.desc=Coal ground into a fine powder. Used for fuel cells and carbon fibres.
+
+item.ic2.dust.iron.name=Iron Dust
+item.ic2.dust.iron.desc=Iron ground into dust. Smelt it or mix alloys.
+
+item.ic2.dust.gold.name=Gold Dust
+item.ic2.dust.gold.desc=Gold ground into dust. An excellent conductor.
+
+item.ic2.dust.copper.name=Copper Dust
+item.ic2.dust.copper.desc=Copper ground into dust. Smelt into copper ingots.
+
+item.ic2.dust.tin.name=Tin Dust
+item.ic2.dust.tin.desc=Tin ground into dust. Smelt into tin ingots.
+
+item.ic2.dust.bronze.name=Bronze Dust
+item.ic2.dust.bronze.desc=A mixture of tin and copper dusts. Smelt into bronze.
+
+item.ic2.dust.iron.small.name=Small Pile of Iron Dust
+item.ic2.dust.iron.small.desc=A partial pile of iron dust left over from grinding. Combine 9 into a full pile.
+item.ic2.dust.gold.small.name=Small Pile of Gold Dust
+item.ic2.dust.gold.small.desc=A partial pile of gold dust. Combine 9 into a full pile.
+item.ic2.dust.copper.small.name=Small Pile of Copper Dust
+item.ic2.dust.copper.small.desc=A partial pile of copper dust. Combine 9 into a full pile.
+item.ic2.dust.tin.small.name=Small Pile of Tin Dust
+item.ic2.dust.tin.small.desc=A partial pile of tin dust. Combine 9 into a full pile.
+item.ic2.dust.bronze.small.name=Small Pile of Bronze Dust
+item.ic2.dust.bronze.small.desc=A partial pile of bronze dust. Combine 9 into a full pile.
+item.ic2.dust.steel.small.name=Small Pile of Steel Dust
+item.ic2.dust.steel.small.desc=A partial pile of steel dust. Combine 9 into a full pile.
+
+item.ic2.ingot.refined_iron.name=Refined Iron Ingot
+item.ic2.ingot.refined_iron.desc=A metal bar of refined iron. The base of all industrial machinery.
+
+item.ic2.ingot.copper.name=Copper Ingot
+item.ic2.ingot.copper.desc=A metal bar of copper used to make cables and bronze.
+
+item.ic2.ingot.tin.name=Tin Ingot
+item.ic2.ingot.tin.desc=A metal bar of tin. Used in electronics and ultra-low-current cables.
+
+item.ic2.ingot.bronze.name=Bronze Ingot
+item.ic2.ingot.bronze.desc=Copper and tin fused into a strong alloy.
+
+item.ic2.ingot.mixed_metal.name=Mixed Metal Ingot
+item.ic2.ingot.mixed_metal.desc=Compress it to create advanced alloy.
+
+item.ic2.ingot.uranium.name=Refined Uranium Ingot
+item.ic2.ingot.uranium.desc=Uranium refined for use in nuclear reactors.
+
+item.ic2.ore.uranium.name=Uranium
+item.ic2.ore.uranium.desc=Uranium obtained from uranium ore.
+
+item.ic2.battery.re.name=RE-Battery
+item.ic2.battery.re.desc=A rechargeable battery storing 10,000 EU. Tier 1.
+
+item.ic2.battery.crystal.name=Energy Crystal
+item.ic2.battery.crystal.desc=A high-capacity rechargeable crystal storing 100,000 EU. Tier 2.
+
+item.ic2.battery.lapotron.name=Lapotron Crystal
+item.ic2.battery.lapotron.desc=An ultimate energy crystal storing 1,000,000 EU. Tier 3.
+
+item.ic2.battery.single_use.name=Single-Use Battery
+item.ic2.battery.single_use.desc=A cheap battery that cannot be recharged. 1,000 EU each.
+
+item.ic2.cell.empty.name=Empty Cell
+item.ic2.cell.empty.desc=A universal container for liquids.
+
+item.ic2.cell.lava.name=Lava Cell
+item.ic2.cell.lava.desc=A cell filled with lava. Excellent geothermal fuel.
+
+item.ic2.cell.coalfuel.name=Coalfuel Cell
+item.ic2.cell.coalfuel.desc=A cell of compressed coal fuel. Burns hot and long.
+
+item.ic2.cell.biofuel.name=Biofuel Cell
+item.ic2.cell.biofuel.desc=Biofuel compressed into a cell. Use it in the canning machine to fill fuel cans.
+
+item.ic2.cell.water.name=Water Cell
+item.ic2.cell.water.desc=A cell filled with water.
+
+item.ic2.cell.uranium.name=Uranium Cell
+item.ic2.cell.uranium.desc=Fuel for the nuclear reactor. Fissions into isotopes.
+
+item.ic2.cell.coolant.name=Coolant Cell
+item.ic2.cell.coolant.desc=A coolant cell used to cool nuclear reactors.
+
+item.ic2.cell.depleted_isotope.name=Depleted Isotope Cell
+item.ic2.cell.depleted_isotope.desc=A spent isotope cell. Re-enrich it in a reactor.
+
+item.ic2.cell.reenriched_uranium.name=Re-Enriched Uranium Cell
+item.ic2.cell.reenriched_uranium.desc=Uranium re-enriched from a depleted isotope.
+
+item.ic2.cell.near_depleted_uranium.name=Near-Depleted Uranium Cell
+item.ic2.cell.near_depleted_uranium.desc=A uranium cell almost used up. Combine with coal dust to recycle.
+
+item.ic2.cell.electrolyzed_water.name=Electrolyzed Water Cell
+item.ic2.cell.electrolyzed_water.desc=Water split by electrolysis. Used in coolant production.
+
+item.ic2.tool.drill.name=Mining Drill
+item.ic2.tool.drill.desc=A rechargeable drill mining stone like iron. Upgradeable to diamond.
+
+item.ic2.tool.drill.diamond.name=Diamond Drill
+item.ic2.tool.drill.diamond.desc=A drill tipped with industrial diamonds. Mines like diamond tools.
+
+item.ic2.tool.chainsaw.name=Chainsaw
+item.ic2.tool.chainsaw.desc=A rechargeable chainsaw. Fells trees in seconds and doubles as a weapon.
+
+item.ic2.tool.mining_laser.name=Mining Laser
+item.ic2.tool.mining_laser.desc=Fires cutting laser beams through rock and mobs alike.
+
+item.ic2.tool.nano_saber.name=Nanosaber (Active)
+item.ic2.tool.nano_saber.desc=The blade hums with energy. Right-click to deactivate it.
+item.ic2.tool.nano_saber.off.name=Nanosaber
+item.ic2.tool.nano_saber.off.desc=A powered blade. Right-click to activate it.
+
+item.ic2.tool.wrench.name=Wrench
+item.ic2.tool.wrench.desc=Dismantles machines without losses. Also removes cables and covers.
+
+item.ic2.tool.wrench.electric.name=Electric Wrench
+item.ic2.tool.wrench.electric.desc=A rechargeable wrench that never breaks.
+
+item.ic2.tool.eu_reader.name=EU-Meter
+item.ic2.tool.eu_reader.desc=Measures energy conducted through cables and machines.
+
+item.ic2.tool.painter.name=Painter
+item.ic2.tool.painter.desc=Paints cables and blocks in any of 16 colors.
+
+item.ic2.tool.insulation_cutter.name=Insulation Cutter
+item.ic2.tool.insulation_cutter.desc=Removes insulation from cables.
+
+item.ic2.tool.treetap.name=Treetap
+item.ic2.tool.treetap.desc=Tap rubber wood to extract sticky resin. The very first IC2 tool.
+
+item.ic2.scanner.od.name=OD Scanner
+item.ic2.scanner.od.desc=Scans for ores in a radius. Required by the miner.
+
+item.ic2.scanner.ov.name=OV Scanner
+item.ic2.scanner.ov.desc=An advanced ore scanner with extended range.
+
+item.ic2.frequency_transmitter.name=Frequency Transmitter
+item.ic2.frequency_transmitter.desc=Pairs teleporters by storing their coordinates.
+
+item.ic2.fuel_can.empty.name=Fuel Can (Empty)
+item.ic2.fuel_can.empty.desc=A tin can for liquid fuel. Fill it in a canning machine.
+
+item.ic2.fuel_can.filled.name=Fuel Can (Filled)
+item.ic2.fuel_can.filled.desc=A fuel can ready to power generators and jetpacks.
+
+item.ic2.fuel.hydrated_coal_dust.name=Hydrated Coal Dust
+item.ic2.fuel.hydrated_coal_dust.desc=Coal dust mixed with water. Compress it for fuel.
+
+item.ic2.fuel.hydrated_coal.name=Compressed Hydrated Coal
+item.ic2.fuel.hydrated_coal.desc=Hydrated coal compressed into a solid lump.
+
+item.ic2.fuel.plantball.name=Plantball
+item.ic2.fuel.plantball.desc=Compressed plant matter. A step towards biofuel.
+
+item.ic2.fuel.compressed_plants.name=Compressed Plants
+item.ic2.fuel.compressed_plants.desc=Densely compressed plant matter for biofuel cells.
+
+item.ic2.tin_can.name=Tin Can
+item.ic2.tin_can.desc=An empty can for canned food.
+
+item.ic2.tin_can.filled.name=Filled Tin Can
+item.ic2.tin_can.filled.desc=Canned food that never spoils. Eat on the go!
+
+item.ic2.dynamite.name=Dynamite
+item.ic2.dynamite.desc=Throwable explosive with a short fuse.
+
+item.ic2.dynamite.sticky.name=Sticky Dynamite
+item.ic2.dynamite.sticky.desc=Dynamite coated in resin. Sticks to walls.
+
+item.ic2.dynamite_o_mote.name=Dynamite-O-Mote
+item.ic2.dynamite_o_mote.desc=A tiny speck of explosive for curious engineers.
+
+item.ic2.sticky_resin.name=Sticky Resin
+item.ic2.sticky_resin.desc=Raw resin extracted from rubber trees. Smelt or extract into rubber.
+
+item.ic2.rubber.name=Rubber
+item.ic2.rubber.desc=Vulcanized rubber. Insulates cables and waterproofs gear.
+
+item.ic2.armor.rubber_boots.name=Rubber Boots
+item.ic2.armor.rubber_boots.desc=Insulated boots that protect against electric shocks.
+
+item.ic2.armor.jetpack.name=Jetpack
+item.ic2.armor.jetpack.desc=A fuel-powered jetpack. Fly with style!
+
+item.ic2.armor.jetpack.electric.name=Electric Jetpack
+item.ic2.armor.jetpack.electric.desc=A rechargeable jetpack powered by energy crystals.
+
+item.ic2.armor.batpack.name=BatPack
+item.ic2.armor.batpack.desc=A wearable battery pack that charges your electric tools.
+
+item.ic2.armor.composite_vest.name=Composite Vest
+item.ic2.armor.composite_vest.desc=A reinforced vest offering serious protection.
+
+item.ic2.armor.nano.helmet.name=Nanosuit Helmet
+item.ic2.armor.nano.helmet.desc=High-tech armor powered by energy crystals.
+
+item.ic2.armor.nano.bodyarmor.name=Nanosuit Bodyarmor
+item.ic2.armor.nano.bodyarmor.desc=High-tech armor powered by energy crystals.
+
+item.ic2.armor.nano.leggings.name=Nanosuit Leggings
+item.ic2.armor.nano.leggings.desc=High-tech armor powered by energy crystals.
+
+item.ic2.armor.nano.boots.name=Nanosuit Boots
+item.ic2.armor.nano.boots.desc=High-tech armor powered by energy crystals.
+
+item.ic2.armor.quantum.helmet.name=QuantumSuit Helmet
+item.ic2.armor.quantum.helmet.desc=The pinnacle of engineering. Ultimate protection.
+
+item.ic2.armor.quantum.bodyarmor.name=QuantumSuit Bodyarmor
+item.ic2.armor.quantum.bodyarmor.desc=The pinnacle of engineering. Ultimate protection.
+
+item.ic2.armor.quantum.leggings.name=QuantumSuit Leggings
+item.ic2.armor.quantum.leggings.desc=The pinnacle of engineering. Ultimate protection.
+
+item.ic2.armor.quantum.boots.name=QuantumSuit Boots
+item.ic2.armor.quantum.boots.desc=The pinnacle of engineering. Ultimate protection.
+
+item.ic2.tool.bronze.pickaxe.name=Bronze Pickaxe
+item.ic2.tool.bronze.pickaxe.desc=A durable pickaxe made of bronze. As fast as iron, lasts longer.
+
+item.ic2.tool.bronze.axe.name=Bronze Axe
+item.ic2.tool.bronze.axe.desc=A bronze axe chopping wood quickly.
+
+item.ic2.tool.bronze.sword.name=Bronze Sword
+item.ic2.tool.bronze.sword.desc=A well-balanced bronze blade.
+
+item.ic2.tool.bronze.shovel.name=Bronze Shovel
+item.ic2.tool.bronze.shovel.desc=A bronze shovel for digging.
+
+item.ic2.tool.bronze.hoe.name=Bronze Hoe
+item.ic2.tool.bronze.hoe.desc=A bronze hoe for tilling soil.
+
+item.ic2.armor.bronze.helmet.name=Bronze Helmet
+item.ic2.armor.bronze.helmet.desc=Sturdy bronze head protection.
+
+item.ic2.armor.bronze.chestplate.name=Bronze Chestplate
+item.ic2.armor.bronze.chestplate.desc=Sturdy bronze torso protection.
+
+item.ic2.armor.bronze.leggings.name=Bronze Leggings
+item.ic2.armor.bronze.leggings.desc=Sturdy bronze leg protection.
+
+item.ic2.armor.bronze.boots.name=Bronze Boots
+item.ic2.armor.bronze.boots.desc=Sturdy bronze foot protection.
+
+item.ic2.circuit.name=Electronic Circuit
+item.ic2.circuit.desc=The brain of every industrial machine.
+
+item.ic2.circuit.advanced.name=Advanced Circuit
+item.ic2.circuit.advanced.desc=An enhanced circuit for top-tier machines.
+
+item.ic2.scrap.name=Scrap
+item.ic2.scrap.desc=Leftovers from recycling. Boosts the mass fabricator.
+
+item.ic2.uu_matter.name=UU-Matter
+item.ic2.uu_matter.desc=Liquid matter created from pure energy. Crafts into almost anything.
+
+item.ic2.advanced_alloy.name=Advanced Alloy
+item.ic2.advanced_alloy.desc=A compressed alloy plate for reinforced materials.
+
+item.ic2.industrial_credit.name=Industrial Credit
+item.ic2.industrial_credit.desc=The official currency of industry.
+
+item.ic2.reactor.plating.name=Reactor Plating
+item.ic2.reactor.plating.desc=Reinforces the reactor chamber against heat.
+
+item.ic2.reactor.heat_disperser.name=Heat Disperser
+item.ic2.reactor.heat_disperser.desc=Spreads heat between reactor components.
+
+item.ic2.carbon.raw_fibre.name=Raw Carbon Fibre
+item.ic2.carbon.raw_fibre.desc=Carbon fibres spun from coal dust.
+
+item.ic2.carbon.raw_mesh.name=Raw Carbon Mesh
+item.ic2.carbon.raw_mesh.desc=Woven carbon fibres. Compress into carbon plates.
+
+item.ic2.carbon.plate.name=Carbon Plate
+item.ic2.carbon.plate.desc=A lightweight ultra-strong plate for nanosuits.
+
+item.ic2.iridium_plate.name=Iridium Plate
+item.ic2.iridium_plate.desc=An exotic material for quantum equipment.
+
+item.ic2.industrial_diamond.name=Industrial Diamond
+item.ic2.industrial_diamond.desc=A diamond manufactured from coal. As good as the real thing.
+
+item.ic2.coal_ball.name=Coal Ball
+item.ic2.coal_ball.desc=Compressed coal mixed with flint. A step towards industrial diamonds.
+
+item.ic2.coal_ball.compressed.name=Compressed Coal Ball
+item.ic2.coal_ball.compressed.desc=A coal ball compressed under high pressure.
+
+item.ic2.coal_chunk.name=Coal Chunk
+item.ic2.coal_chunk.desc=The final stage before an industrial diamond.
+
+item.ic2.scrap_box.name=Scrap Box
+item.ic2.scrap_box.desc=Open it for random loot. Gambling for engineers!
+
+item.ic2.tfbp.name=Terraformer Blueprint (Empty)
+item.ic2.tfbp.desc=An empty blueprint for the terraformer.
+
+item.ic2.tfbp.cultivation.name=Cultivation TFBP
+item.ic2.tfbp.cultivation.desc=Plants saplings and grows vegetation.
+
+item.ic2.tfbp.irrigation.name=Irrigation TFBP
+item.ic2.tfbp.irrigation.desc=Hydrates the terrain, creating water and crops.
+
+item.ic2.tfbp.chilling.name=Chilling TFBP
+item.ic2.tfbp.chilling.desc=Freezes the terrain into snow and ice.
+
+item.ic2.tfbp.desertification.name=Desertification TFBP
+item.ic2.tfbp.desertification.desc=Turns the land into a barren desert.
+
+item.ic2.tfbp.flatification.name=Flatification TFBP
+item.ic2.tfbp.flatification.desc=Flattens the terrain completely.
+
+item.ic2.door.reinforced.name=Reinforced Door
+item.ic2.door.reinforced.desc=A heavy-duty blast-resistant door.
+
+item.ic2.cable_copper.name=Copper Cable
+item.ic2.cable_copper.desc=Insulated copper cable: 0.2 EU loss per block, up to 32 EU/t.
+
+item.ic2.cable_copper_uninsulated.name=Uninsulated Copper Cable
+item.ic2.cable_copper_uninsulated.desc=Bare copper cable: 0.3 EU loss per block, up to 32 EU/t. Shocks entities on contact!
+
+item.ic2.cable_gold.name=Gold Cable
+item.ic2.cable_gold.desc=Gold cable: 0.5 EU loss per block, up to 128 EU/t.
+
+item.ic2.cable_gold_insulated.name=Insulated Gold Cable
+item.ic2.cable_gold_insulated.desc=Rubber-insulated gold cable: 0.45 EU loss, up to 128 EU/t.
+
+item.ic2.cable_gold_insulated_2x.name=2xIns. Gold Cable
+item.ic2.cable_gold_insulated_2x.desc=Double-insulated gold cable: 0.4 EU loss, up to 128 EU/t.
+
+item.ic2.cable_hv.name=HV Cable
+item.ic2.cable_hv.desc=High voltage cable: 1.0 EU loss per block, up to 2048 EU/t.
+
+item.ic2.cable_hv_insulated.name=Insulated HV Cable
+item.ic2.cable_hv_insulated.desc=Insulated HV cable: 0.95 EU loss per block, up to 2048 EU/t.
+
+item.ic2.cable_hv_insulated_2x.name=2xIns. HV Cable
+item.ic2.cable_hv_insulated_2x.desc=Double-insulated HV cable: 0.9 EU loss per block, up to 2048 EU/t.
+
+item.ic2.cable_hv_insulated_4x.name=4xIns. HV Cable
+item.ic2.cable_hv_insulated_4x.desc=Quadruple-insulated HV cable: 0.8 EU loss per block, up to 2048 EU/t, safe to touch.
+
+item.ic2.cable_glass_fibre.name=Glass Fibre Cable
+item.ic2.cable_glass_fibre.desc=Ultra-low loss cable: 0.025 EU per block, up to 512 EU/t. Very expensive.
+
+item.ic2.cable_tin.name=Ultra-Low-Current Cable
+item.ic2.cable_tin.desc=Tin cable with 0.001 EU loss per block. Carries only up to 3 EU/t.
+
+item.ic2.tool.painter.black.name=Black Painter
+item.ic2.tool.painter.black.desc=Paints cables and blocks black.
+
+item.ic2.tool.painter.red.name=Red Painter
+item.ic2.tool.painter.red.desc=Paints cables and blocks red.
+
+item.ic2.tool.painter.green.name=Green Painter
+item.ic2.tool.painter.green.desc=Paints cables and blocks green.
+
+item.ic2.tool.painter.brown.name=Brown Painter
+item.ic2.tool.painter.brown.desc=Paints cables and blocks brown.
+
+item.ic2.tool.painter.blue.name=Blue Painter
+item.ic2.tool.painter.blue.desc=Paints cables and blocks blue.
+
+item.ic2.tool.painter.purple.name=Purple Painter
+item.ic2.tool.painter.purple.desc=Paints cables and blocks purple.
+
+item.ic2.tool.painter.cyan.name=Cyan Painter
+item.ic2.tool.painter.cyan.desc=Paints cables and blocks cyan.
+
+item.ic2.tool.painter.light_gray.name=Light Gray Painter
+item.ic2.tool.painter.light_gray.desc=Paints cables and blocks light gray.
+
+item.ic2.tool.painter.gray.name=Gray Painter
+item.ic2.tool.painter.gray.desc=Paints cables and blocks gray.
+
+item.ic2.tool.painter.pink.name=Pink Painter
+item.ic2.tool.painter.pink.desc=Paints cables and blocks pink.
+
+item.ic2.tool.painter.lime.name=Lime Painter
+item.ic2.tool.painter.lime.desc=Paints cables and blocks lime.
+
+item.ic2.tool.painter.yellow.name=Yellow Painter
+item.ic2.tool.painter.yellow.desc=Paints cables and blocks yellow.
+
+item.ic2.tool.painter.light_blue.name=Light Blue Painter
+item.ic2.tool.painter.light_blue.desc=Paints cables and blocks light blue.
+
+item.ic2.tool.painter.magenta.name=Magenta Painter
+item.ic2.tool.painter.magenta.desc=Paints cables and blocks magenta.
+
+item.ic2.tool.painter.orange.name=Orange Painter
+item.ic2.tool.painter.orange.desc=Paints cables and blocks orange.
+
+item.ic2.tool.painter.white.name=White Painter
+item.ic2.tool.painter.white.desc=Paints cables and blocks white.
+
+gui.ic2.iron_furnace=Iron Furnace
+
+item.ic2.cell.hydrated_coal.name=H. Coal Cell
+item.ic2.cell.hydrated_coal.desc=A cell of hydrated coal. Extract it into a coalfuel cell.
+
+item.ic2.cell.biomass.name=Bio Cell
+item.ic2.cell.biomass.desc=A cell of compressed plant matter. Extract it into a biofuel cell.
+
+# ==== Руды под породы BTA (фикс #8) ====
+tile.ic2.ore.copper.basalt.name=Basalt Copper Ore
+tile.ic2.ore.copper.basalt.desc=Copper ore embedded in basalt. Drops raw copper.
+tile.ic2.ore.copper.limestone.name=Limestone Copper Ore
+tile.ic2.ore.copper.limestone.desc=Copper ore embedded in limestone. Drops raw copper.
+tile.ic2.ore.copper.granite.name=Granite Copper Ore
+tile.ic2.ore.copper.granite.desc=Copper ore embedded in granite. Drops raw copper.
+tile.ic2.ore.copper.permafrost.name=Permafrost Copper Ore
+tile.ic2.ore.copper.permafrost.desc=Copper ore embedded in permafrost. Drops raw copper.
+tile.ic2.ore.tin.basalt.name=Basalt Tin Ore
+tile.ic2.ore.tin.basalt.desc=Tin ore embedded in basalt. Drops raw tin.
+tile.ic2.ore.tin.limestone.name=Limestone Tin Ore
+tile.ic2.ore.tin.limestone.desc=Tin ore embedded in limestone. Drops raw tin.
+tile.ic2.ore.tin.granite.name=Granite Tin Ore
+tile.ic2.ore.tin.granite.desc=Tin ore embedded in granite. Drops raw tin.
+tile.ic2.ore.tin.permafrost.name=Permafrost Tin Ore
+tile.ic2.ore.tin.permafrost.desc=Tin ore embedded in permafrost. Drops raw tin.
+tile.ic2.ore.uranium.basalt.name=Basalt Uranium Ore
+tile.ic2.ore.uranium.basalt.desc=Uranium ore embedded in basalt. Drops raw uranium.
+tile.ic2.ore.uranium.limestone.name=Limestone Uranium Ore
+tile.ic2.ore.uranium.limestone.desc=Uranium ore embedded in limestone. Drops raw uranium.
+tile.ic2.ore.uranium.granite.name=Granite Uranium Ore
+tile.ic2.ore.uranium.granite.desc=Uranium ore embedded in granite. Drops raw uranium.
+tile.ic2.ore.uranium.permafrost.name=Permafrost Uranium Ore
+tile.ic2.ore.uranium.permafrost.desc=Uranium ore embedded in permafrost. Drops raw uranium.
+
+# ==== Raw-предметы (фикс #9) ====
+item.ic2.ore.raw.copper.name=Raw Copper
+item.ic2.ore.raw.copper.desc=Raw copper dropped from copper ore. Smelt or macerate it.
+item.ic2.ore.raw.tin.name=Raw Tin
+item.ic2.ore.raw.tin.desc=Raw tin dropped from tin ore. Smelt or macerate it.
+
+# ==== Стальная пыль (фикс #19) ====
+item.ic2.dust.steel.name=Steel Dust
+item.ic2.dust.steel.desc=A pile of ground steel. Smelt it into a steel ingot.
+
+# ==== Бронзовые блоки (фикс #28) ====
+tile.ic2.brick.bronze.name=Bronze Bricks
+tile.ic2.brick.bronze.desc=A block of bronze bricks. Sturdy and decorative.
+item.ic2.door.bronze.name=Bronze Door
+item.ic2.door.bronze.desc=A strong door made of solid bronze.
+
+# ==== Конвертеры Signal Industries (фикс #21) ====
+tile.ic2.machine.converter_eu_to_catalyst.name=EU to Signal Energy Converter
+tile.ic2.machine.converter_eu_to_catalyst.desc=Converts IC2 EU into Signal Industries signal fluid. 64 EU per 1 mB. Only draws power when the signal side needs it.
+tile.ic2.machine.converter_catalyst_to_eu.name=Signal Energy to EU Converter
+tile.ic2.machine.converter_catalyst_to_eu.desc=Converts Signal Industries signal fluid into IC2 EU. 1 mB gives 64 EU. Only draws fluid when the EU side needs it.
+
+# ==== GUI-строки (фикс #18) ====
+gui.ic2.power_level=Power Level:
+gui.ic2.output=Out:
+gui.ic2.progress=Progress:
+gui.ic2.amplifier=Amplifier:
+gui.ic2.miner_stuck=Stuck:
+gui.ic2.trades_performed=Trades performed:
+gui.ic2.want=Want:
+gui.ic2.offer=Offer:
+container.inventory.name=Inventory
+
+# --- Raw ore items (BTA-style) ---
+item.ic2.ore.raw.copper.name=Raw Copper
+item.ic2.ore.raw.copper.desc=Unrefined copper. Smelt or macerate for ingots and dust.
+item.ic2.ore.raw.tin.name=Raw Tin
+item.ic2.ore.raw.tin.desc=Unrefined tin. Smelt or macerate for ingots and dust.
+item.ic2.dust.steel.name=Steel Dust
+item.ic2.dust.steel.desc=A pile of ground steel. Smelt it into a steel ingot.
+item.ic2.door.bronze.name=Bronze Door
+item.ic2.door.bronze.desc=A sturdy door made of bronze.
+tile.ic2.door.bronze.bottom.name=Bronze Door
+tile.ic2.door.bronze.bottom.desc=A sturdy door made of bronze.
+tile.ic2.door.bronze.top.name=Bronze Door
+tile.ic2.door.bronze.top.desc=A sturdy door made of bronze.
+
+
+# --- round 3 additions ---
+item.ic2.armor.bronze.wolf.name=Bronze Wolf Armor
+item.ic2.armor.bronze.wolf.desc=A sturdy suit of bronze armor for your wolf.
+tile.ic2.brick.copper.name=Copper Bricks
+tile.ic2.brick.copper.desc=A block of copper bricks. Sturdy and shiny.
+tile.ic2.machine.converter_eu_to_energy.name=EU to Catalyst Energy Converter
+tile.ic2.machine.converter_eu_to_energy.desc=Converts IC2 EU into universal Catalyst energy (1 EU = 10 E). Powers Catalyst machines directly. Only draws power when the Catalyst network needs it.
+tile.ic2.machine.converter_energy_to_eu.name=Catalyst Energy to EU Converter
+tile.ic2.machine.converter_energy_to_eu.desc=Converts universal Catalyst energy into IC2 EU (10 E = 1 EU). Only draws energy when the EU side needs it.

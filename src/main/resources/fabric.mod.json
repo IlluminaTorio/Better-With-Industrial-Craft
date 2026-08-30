@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "ic2",
+  "version": "${version}",
+  "name": "Better With Industrial Craft",
+  "description": "IndustrialCraft 2 v1.00, faithfully ported from Minecraft Beta 1.7.3 to Better Than Adventure 8.0.1.",
+  "authors": [
+    "Alblaka (original IC2)",
+    "IlluminaTor"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+  "icon": "icon.png",
+  "license": "IC2 License",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ic2.IC2"
+    ],
+    "client": [
+      "ic2.client.IC2Client"
+    ],
+    "gatherTMBPlugins": [
+      "ic2.tmb.IC2TMBPlugin"
+    ],
+    "btwaila": [
+      "ic2.client.btwaila.BTWailaIC2Plugin"
+    ]
+  },
+  "mixins": [
+    "ic2.mixins.json",
+    "ic2-catalyst.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabricloader}",
+    "minecraft": "*",
+    "java": ">=${java}",
+    "halplibe": ">=${halplibe}"
+  },
+  "suggests": {
+    "modmenu": ">=${modmenu}",
+    "tmb": ">=2.2.0",
+    "btwaila": "*"
+  }
+}

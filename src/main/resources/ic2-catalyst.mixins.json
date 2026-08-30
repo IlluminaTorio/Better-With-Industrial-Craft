@@ -1,0 +1,13 @@
+{
+        "required": true,
+        "minVersion": "0.8",
+        "package": "ic2.mixin.catalyst",
+        "plugin": "ic2.mixin.IC2MixinPlugin",
+        "compatibilityLevel": "JAVA_${java}",
+        "mixins": [
+                "FluidPipeWaterMillMixin"
+        ],
+        "injectors": {
+                "defaultRequire": 0
+        }
+}
