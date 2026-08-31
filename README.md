@@ -2,8 +2,6 @@
 
 A faithful port of IndustrialCraft² v1.00 (Minecraft Beta 1.7.3) to Better Than Adventure 8.0.1.
 
-> "IndustrialCraft 2 loaded. Remember: safety first!"
-
 ## Ported from the original
 
 - **Ores and world generation**: copper, tin and uranium ore veins plus rubber trees in forest and swamp biomes, with the exact spawn rates of the original v1.00 (configurable via `WorldGen.*`).
