@@ -3,13 +3,18 @@
 package ic2.tileentity;
 
 import com.mojang.nbt.tags.CompoundTag;
+import ic2.IC2;
 import ic2.IC2Blocks;
+import ic2.energy.Direction;
+import ic2.energy.EnergyNet;
+import ic2.energy.IEnergySink;
 import ic2.tileentity.TileEntityElectricBlock;
 import ic2.tileentity.TileEntityIC2Machine;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.WeakHashMap;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
@@ -22,11 +27,18 @@ import org.joml.primitives.AABBd;
 import org.joml.primitives.AABBdc;
 
 public class TileEntityTeleporter
-extends TileEntityIC2Machine {
+extends TileEntityIC2Machine
+implements IEnergySink {
     public static final List<TileEntityTeleporter> TELEPORTERS = new ArrayList<TileEntityTeleporter>();
+    public static final int MAX_BUFFER = 1000000;
+    public static final int MAX_INPUT = 512;
+    public static final int COOLDOWN_TICKS = 60;
+    private static final WeakHashMap<Mob, Integer> TELEPORT_COOLDOWN = new WeakHashMap<Mob, Integer>();
     public int targetFreq = -1;
     public int ownFreq = new Random().nextInt(32000);
     public boolean registered = false;
+    public int euBuffer = 0;
+    private int cooldown = 0;
 
     public TileEntityTeleporter() {
         super(0);
@@ -37,6 +49,7 @@ extends TileEntityIC2Machine {
         super.readAdditionalData(tag);
         this.targetFreq = tag.getInteger("targetFreq");
         this.ownFreq = tag.getInteger("ownFreq");
+        this.euBuffer = tag.getInteger("euBuffer");
     }
 
     @Override
@@ -44,17 +57,27 @@ extends TileEntityIC2Machine {
         super.writeAdditionalData(tag);
         tag.putInt("targetFreq", this.targetFreq);
         tag.putInt("ownFreq", this.ownFreq);
+        tag.putInt("euBuffer", this.euBuffer);
     }
 
     public boolean setFrequency(ItemStack trans, Player player) {
         int freq = trans.getMetadata();
         if (freq == 0 || freq == this.ownFreq || freq == this.targetFreq) {
+            if (player != null && freq != 0) {
+                player.sendMessage(TextFormatting.Base.GRAY, "Teleporter already using this frequency.");
+            }
             return false;
         }
         this.targetFreq = freq;
+        TileEntityTeleporter target = TileEntityTeleporter.find(this.targetFreq, this.worldObj);
         if (player != null) {
-            player.sendMessage(TextFormatting.Base.GRAY, "Teleporter target frequency set to: " + this.targetFreq);
+            if (target != null) {
+                player.sendMessage(TextFormatting.Base.LIME, "Teleporter linked to " + target.tilePos.x() + ", " + target.tilePos.y() + ", " + target.tilePos.z() + ".");
+            } else {
+                player.sendMessage(TextFormatting.Base.GRAY, "Teleporter target frequency set to " + this.targetFreq + " (no teleporter found yet).");
+            }
         }
+        this.setChanged();
         return true;
     }
 
@@ -86,16 +109,16 @@ extends TileEntityIC2Machine {
         }
         if (!this.registered) {
             if (!TileEntityTeleporter.register(this)) {
-                IC2Blocks.explodeMachineAt(this.worldObj, this.tilePos.x(), this.tilePos.y(), this.tilePos.z());
-            } else {
-                this.registered = true;
+                IC2.LOGGER.warn("Teleporter at {} could not register frequency {}, rerolling.", (Object)this.tilePos, (Object)this.ownFreq);
+                this.ownFreq = new Random().nextInt(32000);
+                return;
             }
-            return;
+            this.registered = true;
         }
-        if (this.targetFreq == -1 || !this.redstoned()) {
-            return;
+        if (this.cooldown > 0) {
+            --this.cooldown;
         }
-        int[] coords = TileEntityTeleporter.getCoords(this.targetFreq);
+        int[] coords = TileEntityTeleporter.getCoords(this.targetFreq, this.worldObj);
         if (coords == null) {
             return;
         }
@@ -103,31 +126,57 @@ extends TileEntityIC2Machine {
         int y = this.tilePos.y();
         int z = this.tilePos.z();
         AABBd box = new AABBd((double)(x - 1), (double)y, (double)(z - 1), (double)(x + 2), (double)(y + 2), (double)(z + 2));
-        List list = this.worldObj.getEntitiesWithinAABB(Mob.class, (AABBdc)box);
-        Mob user = null;
-        Iterator iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Mob m;
-            user = m = (Mob)iterator.next();
+        List<Mob> candidates = new ArrayList<Mob>(this.worldObj.getEntitiesWithinAABB(Mob.class, (AABBdc)box));
+        for (Mob mob : candidates) {
+            if (mob == null || !mob.isAlive() || this.isOnCooldown(mob)) continue;
+            this.cooldown = 10;
+            this.teleport(mob, new int[]{x, y, z}, coords);
         }
-        if (user == null) {
-            return;
-        }
-        this.teleport(user, new int[]{x, y, z}, coords);
+    }
+
+    private boolean isOnCooldown(Mob mob) {
+        Integer until = TELEPORT_COOLDOWN.get(mob);
+        return until != null && this.worldObj.getWorldTime() < until;
+    }
+
+    private void setCooldown(Mob mob, int ticks) {
+        TELEPORT_COOLDOWN.put(mob, (int)(this.worldObj.getWorldTime() + (long)ticks));
     }
 
     public void teleport(Mob user, int[] thisCoords, int[] targetCoords) {
         int[] tele = new int[]{targetCoords[0] - thisCoords[0], targetCoords[1] - thisCoords[1], targetCoords[2] - thisCoords[2]};
         double distance = Math.sqrt(Math.abs(tele[0]) * Math.abs(tele[0]) + Math.abs(tele[1]) * Math.abs(tele[1]) + Math.abs(tele[2]) * Math.abs(tele[2]));
-        int weight = this.getWeightOf(user);
-        if ((double)weight * distance > (double)this.getAvailableEnergy()) {
+        if (distance < 1.0) {
             return;
         }
-        this.consumeEnergy((int)((double)weight * distance));
+        int weight = this.getWeightOf(user);
+        int cost = (int)((double)weight * distance);
+        if (cost > this.euBuffer + this.getAvailableEnergy()) {
+            if (this.cooldown <= 0 && user instanceof Player) {
+                ((Player)user).sendMessage(TextFormatting.Base.RED, "Teleporter needs " + cost + " EU (stored " + (this.euBuffer + this.getAvailableEnergy()) + ").");
+                this.cooldown = 40;
+            }
+            return;
+        }
+        int needed = cost > this.euBuffer ? cost - this.euBuffer : 0;
+        this.euBuffer = Math.max(0, this.euBuffer - cost);
+        if (needed > 0) {
+            this.consumeEnergy(needed);
+        }
+        this.setCooldown(user, COOLDOWN_TICKS);
         this.worldObj.playSoundEffect(null, SoundCategory.WORLD_SOUNDS, user.x, user.y, user.z, "portal.portal", 1.0f, 1.0f);
-        user.setPos(user.x + (double)tele[0], user.y + (double)tele[1], user.z + (double)tele[2]);
+        double tx = user.x + (double)tele[0];
+        double ty = user.y + (double)tele[1];
+        double tz = user.z + (double)tele[2];
+        if (user instanceof net.minecraft.server.entity.player.PlayerServer) {
+            ((net.minecraft.server.entity.player.PlayerServer)user).teleport(tx, ty, tz, user.yRot, user.xRot);
+        } else if (user instanceof Player) {
+            user.setPos(tx, ty, tz);
+        } else {
+            user.setPos(tx, ty, tz);
+        }
         user.fallDistance = 0.0f;
-        this.worldObj.playSoundEffect(null, SoundCategory.WORLD_SOUNDS, user.x, user.y, user.z, "portal.portal", 1.0f, 1.0f);
+        this.worldObj.playSoundEffect(null, SoundCategory.WORLD_SOUNDS, tx, ty, tz, "portal.portal", 1.0f, 1.0f);
         this.setChanged();
     }
 
@@ -223,12 +272,39 @@ extends TileEntityIC2Machine {
         return true;
     }
 
-    public static int[] getCoords(int freq) {
+    public static TileEntityTeleporter find(int freq, net.minecraft.core.world.World world) {
         for (TileEntityTeleporter t : TELEPORTERS) {
             if (t.ownFreq != freq) continue;
-            return new int[]{t.tilePos.x(), t.tilePos.y(), t.tilePos.z()};
+            if (world != null && t.worldObj != world) continue;
+            return t;
         }
         return null;
+    }
+
+    public static int[] getCoords(int freq, net.minecraft.core.world.World world) {
+        TileEntityTeleporter t = TileEntityTeleporter.find(freq, world);
+        return t == null ? null : new int[]{t.tilePos.x(), t.tilePos.y(), t.tilePos.z()};
+    }
+
+    @Override
+    public boolean demandsEnergy() {
+        return this.euBuffer < MAX_BUFFER;
+    }
+
+    @Override
+    public int injectEnergy(Direction direction, int amount) {
+        if (!ic2.IC2Config.voltageSystemOff() && amount > MAX_INPUT) {
+            amount = MAX_INPUT;
+        }
+        int space = MAX_BUFFER - this.euBuffer;
+        int accepted = Math.min(space, amount);
+        this.euBuffer += accepted;
+        return amount - accepted;
+    }
+
+    @Override
+    public boolean acceptsEnergyFrom(TileEntity emitter, Direction direction) {
+        return true;
     }
 
     public boolean redstoned() {
@@ -240,4 +316,3 @@ extends TileEntityIC2Machine {
         return "Teleporter";
     }
 }
-

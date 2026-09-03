@@ -66,20 +66,32 @@ extends MenuAbstract {
         return this.tileEntity.stillValid(player);
     }
 
-    public IntList getMoveSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
-        int machineSlots = this.tileEntity.getContainerSize();
-        if (slot.index >= 0 && slot.index < machineSlots) {
-            return this.getSlots(0, machineSlots, false);
+        public IntList getMoveSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
+        if (slot.index >= 0 && slot.index < this.tileEntity.getContainerSize()) {
+            return this.getSlots(0, this.tileEntity.getContainerSize(), false);
+        } else if (slot.index >= this.tileEntity.getContainerSize() && slot.index < this.tileEntity.getContainerSize() + 27) {
+            return this.getSlots(this.tileEntity.getContainerSize(), 27, false);
+        } else {
+            return slot.index >= this.tileEntity.getContainerSize() + 27 && slot.index < this.tileEntity.getContainerSize() + 36
+                ? this.getSlots(this.tileEntity.getContainerSize() + 27, 9, false)
+                : null;
         }
-        return this.getSlots(machineSlots, 36, false);
     }
 
-    public IntList getTargetSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
-        int machineSlots = this.tileEntity.getContainerSize();
-        if (slot.index >= machineSlots && slot.index < machineSlots + 36) {
-            return this.getSlots(0, machineSlots, false);
+
+            public IntList getTargetSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
+        if (slot.index < this.tileEntity.getContainerSize() || slot.index >= this.tileEntity.getContainerSize() + 36) {
+            return slot.index >= 0 && slot.index < this.tileEntity.getContainerSize()
+                ? this.getSlots(this.tileEntity.getContainerSize(), 36, false)
+                : null;
+        } else if (action != InventoryAction.MOVE_ALL) {
+            return this.getSlots(0, this.tileEntity.getContainerSize(), false);
+        } else {
+            return slot.index < this.tileEntity.getContainerSize() + 27
+                ? this.getSlots(this.tileEntity.getContainerSize() + 27, 9, false)
+                : this.getSlots(this.tileEntity.getContainerSize(), 27, false);
         }
-        return null;
     }
+
 }
 

@@ -29,7 +29,7 @@ public class EnergyNet {
     private final World world;
     private final Map<IEnergySource, List<EnergyPath>> energySourceToEnergyPathMap = new HashMap<IEnergySource, List<EnergyPath>>();
 
-    
+
     public static EnergyNet getForWorld(World world) {
         if (world == null) {
             return null;
@@ -123,8 +123,8 @@ public class EnergyNet {
             int energyLoss;
             energySink = (IEnergySink)energyPath.target;
             int energyProvided = (int)Math.floor((double)amount / totalInvLoss / energyPath.loss);
-            
-            
+
+
             if (!ic2.IC2Config.cableOverloadBurn() && energyPath.minConductorBreakdownEnergy != Integer.MAX_VALUE) {
                 int cableCapacity = energyPath.minConductorBreakdownEnergy - 1;
                 if (energyProvided > cableCapacity) {
@@ -136,8 +136,8 @@ public class EnergyNet {
             energyConsumed += energyProvided - energyReturned;
             int energyInjected = energyProvided - energyLoss - energyReturned;
             energyPath.totalEnergyConducted += (long)energyInjected;
-            
-            
+
+
             if (ic2.IC2Config.voltageSystemOff() || !ic2.IC2Config.cableOverloadBurn()) {
                 continue;
             }

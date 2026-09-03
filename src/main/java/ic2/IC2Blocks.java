@@ -10,6 +10,7 @@ import ic2.block.BlockLogicDynamite;
 import ic2.block.BlockLogicIC2Explosive;
 import ic2.block.BlockLogicIC2Machine;
 import ic2.block.BlockLogicIC2Ore;
+import ic2.block.BlockLogicIridiumStone;
 import ic2.block.BlockLogicIronFence;
 import ic2.block.BlockLogicLuminator;
 import ic2.block.BlockLogicRubLeaves;
@@ -52,11 +53,25 @@ import ic2.tileentity.TileEntityTransformerLV;
 import ic2.tileentity.TileEntityTransformerMV;
 import ic2.tileentity.TileEntityWaterGenerator;
 import ic2.tileentity.TileEntityWindGenerator;
+import ic2.tileentity.TileEntitySlagGenerator;
+import ic2.tileentity.TileEntityThermalGenerator;
+import ic2.tileentity.TileEntityTurbineSolar;
+import ic2.tileentity.TileEntityOceanCurrentGenerator;
+import ic2.tileentity.TileEntityWaveGenerator;
+import ic2.tileentity.TileEntityWoodGasser;
+import ic2.tileentity.TileEntityWoodGasserElec;
+import ic2.tileentity.TileEntitySlowGrinder;
+import ic2.tileentity.TileEntityRareEarthExtractor;
+import ic2.tileentity.TileEntityPlasmafier;
+import ic2.tileentity.TileEntityPESU;
+import ic2.tileentity.TileEntityTransformerIV;
+import ic2.tileentity.TileEntityIridiumStone;
 import java.util.function.Supplier;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicDoor;
 import net.minecraft.core.block.BlockLogicGlass;
+import net.minecraft.core.block.BlockLogicMesh;
 import net.minecraft.core.block.BlockLogicTransparent;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
@@ -152,6 +167,22 @@ public class IC2Blocks {
     public static Block<?> nuke;
     public static Block<?> dynamite;
     public static Block<?> dynamiteRemote;
+    public static Block<?> slagGenerator;
+    public static Block<?> thermalGenerator;
+    public static Block<?> turbineSolar;
+    public static Block<?> oceanGenerator;
+    public static Block<?> waveGenerator;
+    public static Block<?> woodGasser;
+    public static Block<?> woodGasserElec;
+    public static Block<?> slowGrinder;
+    public static Block<?> rareEarthExtractor;
+    public static Block<?> plasmafier;
+    public static Block<?> pesu;
+    public static Block<?> transformerIV;
+    public static Block<?> iridiumStone;
+    public static Block<?> meshSteel;
+    public static Block<?> meshSteelCrude;
+    public static Block<?> quartzGlass;
 
     public static void init() {
         String modId = IC2.MOD_ID;
@@ -190,7 +221,7 @@ public class IC2Blocks {
         electrolyzer = IC2Blocks.machine("electrolyzer", "machine.electrolyzer", IC2Config.block("electrolyzer"), 5, TileEntityElectrolyzer::new, 2.0f);
         inductionFurnace = IC2Blocks.machine("induction_furnace", "machine.induction_furnace", IC2Config.block("induction_furnace"), 6, TileEntityInduction::new, 2.0f);
         massFabricator = IC2Blocks.machine("mass_fabricator", "machine.mass_fabricator", IC2Config.block("mass_fabricator"), 7, TileEntityMatter::new, 2.0f);
-        terraformer = IC2Blocks.machine("terraformer", "machine.terraformer", IC2Config.block("terraformer"), -1, TileEntityTerraformer::new, 2.0f);
+        terraformer = IC2Blocks.machine("terraformer", "machine.terraformer", IC2Config.block("terraformer"), 13, TileEntityTerraformer::new, 2.0f);
         miner = IC2Blocks.machine("miner", "machine.miner", IC2Config.block("miner"), 9, TileEntityMiner::new, 2.0f);
         pump = IC2Blocks.machine("pump", "machine.pump", IC2Config.block("pump"), 10, TileEntityPump::new, 2.0f);
         magnetizer = IC2Blocks.machine("magnetizer", "machine.magnetizer", IC2Config.block("magnetizer"), -1, TileEntityMagnetizer::new, 2.0f);
@@ -244,6 +275,22 @@ public class IC2Blocks {
         dynamite = new BlockBuilder(modId).setHardness(0.0f).setBlockSound(BlockSounds.GRASS).build("tnt.dynamite", "dynamite", IC2Config.block("dynamite"), b -> new BlockLogicDynamite(b));
         dynamiteRemote = new BlockBuilder(modId).setHardness(0.0f).setBlockSound(BlockSounds.GRASS).build("tnt.dynamite_remote", "dynamite_remote", IC2Config.block("dynamite_remote"), b -> new BlockLogicDynamite(b));
         SIConverters.registerBlocks(IC2Config.block("converter_eu_to_catalyst"), IC2Config.block("converter_catalyst_to_eu"));
+        slagGenerator = IC2Blocks.machine("slag_generator", "generator.slag", IC2Config.block("slag_generator"), 14, TileEntitySlagGenerator::new, 2.0f);
+        thermalGenerator = IC2Blocks.machine("thermal_generator", "generator.thermal", IC2Config.block("thermal_generator"), 15, TileEntityThermalGenerator::new, 2.0f);
+        turbineSolar = IC2Blocks.machine("turbine_solar", "generator.turbine_solar", IC2Config.block("turbine_solar"), 16, TileEntityTurbineSolar::new, 2.0f);
+        oceanGenerator = IC2Blocks.machine("ocean_generator", "generator.ocean", IC2Config.block("ocean_generator"), -1, TileEntityOceanCurrentGenerator::new, 2.0f);
+        waveGenerator = IC2Blocks.machine("wave_generator", "generator.wave", IC2Config.block("wave_generator"), -1, TileEntityWaveGenerator::new, 2.0f);
+        woodGasser = IC2Blocks.machine("wood_gasser", "machine.wood_gasser", IC2Config.block("wood_gasser"), 18, TileEntityWoodGasser::new, 2.0f);
+        woodGasserElec = IC2Blocks.machine("wood_gasser_elec", "machine.wood_gasser_elec", IC2Config.block("wood_gasser_elec"), 19, TileEntityWoodGasserElec::new, 2.0f);
+        slowGrinder = IC2Blocks.machine("slow_grinder", "machine.slow_grinder", IC2Config.block("slow_grinder"), 17, TileEntitySlowGrinder::new, 2.0f);
+        rareEarthExtractor = IC2Blocks.machine("rare_earth_extractor", "machine.rare_earth_extractor", IC2Config.block("rare_earth_extractor"), 21, TileEntityRareEarthExtractor::new, 2.0f);
+        plasmafier = IC2Blocks.machine("plasmafier", "machine.plasmafier", IC2Config.block("plasmafier"), 22, TileEntityPlasmafier::new, 2.0f);
+        pesu = IC2Blocks.machine("pesu", "energy.pesu", IC2Config.block("pesu"), 3, TileEntityPESU::new, 2.0f);
+        transformerIV = IC2Blocks.machine("transformer_iv", "energy.transformer_iv", IC2Config.block("transformer_iv"), 3, TileEntityTransformerIV::new, 1.5f);
+        iridiumStone = new BlockBuilder(modId).setHardness(80.0f).setResistance(150.0f).setBlockSound(BlockSounds.METAL).addTags(new Tag[]{BlockTags.MINEABLE_BY_PICKAXE}).setTileEntity(TileEntityIridiumStone::new).build("machine.iridium_stone", "iridium_stone", IC2Config.block("iridium_stone"), BlockLogicIridiumStone::new);
+        meshSteel = new BlockBuilder(modId).setHardness(5.0f).setResistance(2000.0f).setBlockSound(BlockSounds.STONE).addTags(new Tag[]{BlockTags.MINEABLE_BY_PICKAXE}).build("mesh.steel", "mesh_steel", IC2Config.block("mesh_steel"), BlockLogicMesh::new);
+        meshSteelCrude = new BlockBuilder(modId).setHardness(5.0f).setResistance(2000.0f).setBlockSound(BlockSounds.STONE).addTags(new Tag[]{BlockTags.MINEABLE_BY_PICKAXE}).build("mesh.steel.crude", "mesh_steel_crude", IC2Config.block("mesh_steel_crude"), BlockLogicMesh::new);
+        quartzGlass = new BlockBuilder(modId).setHardness(0.3f).setResistance(0.3f).setUseInternalLight().setBlockSound(BlockSounds.GLASS).addTags(new Tag[]{BlockTags.MINEABLE_BY_PICKAXE}).build("glass.quartz", "glass_quartz", IC2Config.block("glass_quartz"), b -> new BlockLogicGlass(b, Materials.GLASS));
     }
 
     private static Block<?> metalBlock(String name, String translationKey, String texName, float hardness) {

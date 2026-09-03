@@ -24,7 +24,7 @@ public final class SIConvertersImpl {
         IC2.LOGGER.info("Signal Industries energy converters registered (signalindustries found)");
     }
 
-    
+
     public static void registerEnergy(int euToEnergyId, int energyToEuId) {
         TileEntityDispatcher.addMapping(TileEntityEUToCatalystEnergy.class, (NamespaceID)IC2.id("converter_eu_to_energy"));
         TileEntityDispatcher.addMapping(TileEntityCatalystEnergyToEU.class, (NamespaceID)IC2.id("converter_energy_to_eu"));

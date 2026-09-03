@@ -5,7 +5,9 @@ import ic2.client.btwaila.tooltip.IC2ElecMachineTooltip;
 import ic2.client.btwaila.tooltip.IC2EnergyBlockTooltip;
 import ic2.client.btwaila.tooltip.IC2GeneratorTooltip;
 import ic2.client.btwaila.tooltip.IC2IronFurnaceTooltip;
+import ic2.client.btwaila.tooltip.IC2CustomGeneratorTooltip;
 import ic2.client.btwaila.tooltip.IC2MachineTooltip;
+import ic2.client.btwaila.tooltip.IC2ReactorChamberTooltip;
 import ic2.client.btwaila.tooltip.IC2ReactorTooltip;
 import org.slf4j.Logger;
 import toufoumaster.btwaila.entryplugins.waila.BTWailaCustomTooltipPlugin;
@@ -19,8 +21,10 @@ public class BTWailaIC2Plugin implements BTWailaCustomTooltipPlugin {
                 tooltipRegistry.register(new IC2MachineTooltip());
                 tooltipRegistry.register(new IC2ElecMachineTooltip());
                 tooltipRegistry.register(new IC2GeneratorTooltip());
+                tooltipRegistry.register(new IC2CustomGeneratorTooltip());
                 tooltipRegistry.register(new IC2EnergyBlockTooltip());
                 tooltipRegistry.register(new IC2ReactorTooltip());
+        tooltipRegistry.register(new IC2ReactorChamberTooltip());
                 tooltipRegistry.register(new IC2IronFurnaceTooltip());
         }
 }

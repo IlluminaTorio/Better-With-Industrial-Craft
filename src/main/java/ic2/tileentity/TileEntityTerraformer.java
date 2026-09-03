@@ -3,7 +3,6 @@
 package ic2.tileentity;
 
 import com.mojang.nbt.tags.CompoundTag;
-import ic2.IC2Blocks;
 import ic2.energy.Direction;
 import ic2.item.ITerraformingBP;
 import ic2.item.ItemTFBP;
@@ -94,8 +93,7 @@ extends TileEntityElecMachine {
     @Override
     public int injectEnergy(Direction directionFrom, int amount) {
         if (amount > 512 && !ic2.IC2Config.voltageSystemOff()) {
-            IC2Blocks.explodeMachineAt(this.worldObj, this.tilePos.x(), this.tilePos.y(), this.tilePos.z());
-            return 0;
+            amount = 512;
         }
         this.energy += amount;
         int re = 0;

@@ -3,7 +3,7 @@
   "id": "ic2",
   "version": "${version}",
   "name": "Better With Industrial Craft",
-  "description": "IndustrialCraft 2 v1.00, faithfully ported from Minecraft Beta 1.7.3 to Better Than Adventure 8.0.1.",
+  "description": "IndustrialCraft 2 v1.00 with the Advanced Generators addon (f4113n) fully integrated, ported from Minecraft Beta 1.7.3 to Better Than Adventure 8.0.1.",
   "authors": [
     "Alblaka (original IC2)",
     "IlluminaTor"

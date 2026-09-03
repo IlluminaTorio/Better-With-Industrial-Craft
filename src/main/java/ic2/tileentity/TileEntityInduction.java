@@ -177,5 +177,10 @@ extends TileEntityElecMachine {
     public String getGuiTitleKey() {
         return "tile.ic2.machine.induction_furnace.name";
     }
+
+    @Override
+    public int[] getQuickGrabSlots() {
+        return new int[]{2, 4};
+    }
 }
 

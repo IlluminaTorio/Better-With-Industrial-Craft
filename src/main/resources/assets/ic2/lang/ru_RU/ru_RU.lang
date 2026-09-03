@@ -122,7 +122,7 @@ tile.ic2.personal.trade_o_mat.name=Торговый автомат
 tile.ic2.personal.trade_o_mat.desc=Автоматическая торговая машина: предлагайте предметы, получайте оплату.
 
 tile.ic2.machine.teleporter.name=Телепорт
-tile.ic2.machine.teleporter.desc=Телепортирует игроков по миру с помощью парных передатчиков частоты.
+tile.ic2.machine.teleporter.desc=Парный телепорт. ПКМ передатчиком частоты по телепорту записывает его частоту в передатчик, затем ПКМ по другому телепорту задаёт цель. Телепортирует стоящих на нём игроков и существ, расходуя EU по расстоянию и весу груза. Питается от внутреннего буфера (кабели) или соседних хранилищ энергии.
 
 tile.ic2.machine.tesla_coil.name=Катушка Теслы
 tile.ic2.machine.tesla_coil.desc=Разряжает запасённое электричество во враждебных мобов.
@@ -132,6 +132,15 @@ tile.ic2.reinforced.stone.desc=Чрезвычайно взрывостойкий
 
 tile.ic2.reinforced.glass.name=Армированное стекло
 tile.ic2.reinforced.glass.desc=Взрывостойкое стекло для безопасной защиты реактора.
+
+tile.ic2.mesh.steel.name=Стальная решётка
+tile.ic2.mesh.steel.desc=Прочная взрывостойкая стальная решётка. Предметы падают сквозь зазоры. Отличный промышленный пол.
+
+tile.ic2.mesh.steel.crude.name=Решётка из черновой стали
+tile.ic2.mesh.steel.crude.desc=Грубая решётка из черновой стали. Предметы падают сквозь зазоры.
+
+tile.ic2.glass.quartz.name=Кварцевое стекло
+tile.ic2.glass.quartz.desc=Идеально чистое стекло из кварца. Вид настоящей лаборатории.
 
 tile.ic2.door.reinforced.bottom.name=Армированная дверь
 tile.ic2.door.reinforced.bottom.desc=Тяжёлая взрывостойкая дверь.
@@ -205,6 +214,15 @@ item.ic2.dust.bronze.small.name=Малая кучка бронзовой пыл�
 item.ic2.dust.bronze.small.desc=Неполная кучка бронзовой пыли. Складывайте 9 штук в полную.
 item.ic2.dust.steel.small.name=Малая кучка стальной пыли
 item.ic2.dust.steel.small.desc=Неполная кучка стальной пыли. Складывайте 9 штук в полную.
+
+item.ic2.dust.silver.name=Серебряная пыль
+item.ic2.dust.silver.desc=Серебро, смолотое в пыль. Переплавьте в слиток или смешайте сплав.
+
+item.ic2.dust.lead.name=Свинцовая пыль
+item.ic2.dust.lead.desc=Свинец, смолотый в пыль. Переплавьте в слиток. Тяжёлая штука.
+
+item.ic2.dust.uranium.name=Урановая пыль
+item.ic2.dust.uranium.desc=Смолотая урановая руда. Переплавьте в рафинированный уран. Обращайтесь осторожно.
 
 item.ic2.ingot.refined_iron.name=Слиток очищенной стали
 item.ic2.ingot.refined_iron.desc=Металлический слиток очищенного железа — основа всей индустриальной техники.
@@ -314,7 +332,7 @@ item.ic2.scanner.ov.name=OV-сканер
 item.ic2.scanner.ov.desc=Улучшенный сканер руды с расширенным радиусом.
 
 item.ic2.frequency_transmitter.name=Передатчик частоты
-item.ic2.frequency_transmitter.desc=Связывает телепорты, запоминая их координаты.
+item.ic2.frequency_transmitter.desc=ЛКМ по телепорту — запомнить частоту, затем ПКМ по другому телепорту — связать его с первым.
 
 item.ic2.fuel_can.empty.name=Канистра (пустая)
 item.ic2.fuel_can.empty.desc=Жестяная канистра для жидкого топлива. Заполните её в консервной машине.
@@ -525,6 +543,8 @@ item.ic2.cable_glass_fibre.desc=Кабель со сверхнизкими по�
 
 item.ic2.cable_tin.name=Кабель сверхнизкого тока
 item.ic2.cable_tin.desc=Оловянный кабель с потерями 0.001 EU на блок. Пропускает лишь до 3 EU/t.
+item.ic2.cable_plasma.name=Плазменный кабель
+item.ic2.cable_plasma.desc=Сверхпроводящий плазменный канал: потери 0.1 EU на блок, до 4096 EU/t.
 
 item.ic2.tool.painter.black.name=Чёрная кисть
 item.ic2.tool.painter.black.desc=Окрашивает кабели и блоки в чёрный цвет.
@@ -665,3 +685,61 @@ tile.ic2.machine.converter_eu_to_energy.name=Конвертер EU в энерг
 tile.ic2.machine.converter_eu_to_energy.desc=Преобразует EU из IC2 в универсальную энергию Catalyst (1 EU = 10 E). Питает машины Catalyst напрямую. Берёт энергию только когда она нужна сети Catalyst.
 tile.ic2.machine.converter_energy_to_eu.name=Конвертер энергии Catalyst в EU
 tile.ic2.machine.converter_energy_to_eu.desc=Преобразует универсальную энергию Catalyst в EU (10 E = 1 EU). Потребляет энергию только когда она нужна на стороне IC2.
+
+tile.ic2.generator.slag.name=Шлаковый генератор
+tile.ic2.generator.slag.desc=Сжигает мусор и лом, получая энергию и изредка свежий скрап. Лучший друг переработчика.
+tile.ic2.generator.thermal.name=Термальный генератор
+tile.ic2.generator.thermal.desc=Продвинутая геотермальная установка. Сжигает лаву с высокой отдачей и потихоньку собирает фоновое тепло. Закопайте для пассивной генерации.
+tile.ic2.generator.turbine_solar.name=Турбинная солнечная панель
+tile.ic2.generator.turbine_solar.desc=Солнце кипятит воду и крутит турбину. Подавайте воду — и она стабильно превращает тепло в EU.
+tile.ic2.generator.ocean.name=Генератор океанических течений
+tile.ic2.generator.ocean.desc=Собирает энергию глубоководных течений. Утопите его в открытой стоячей воде для лучшего результата.
+tile.ic2.generator.wave.name=Волновой генератор
+tile.ic2.generator.wave.desc=Работает от длины волн перед собой. Направьте вдоль длинного участка стоячей воды; гроза подзаряжает его.
+tile.ic2.machine.wood_gasser.name=Древесный газогенератор
+tile.ic2.machine.wood_gasser.desc=Сжигает топливо, обугливая древесину в древесный уголь и дистиллируя древогаз в капсулы.
+tile.ic2.machine.wood_gasser_elec.name=Электрический газогенератор
+tile.ic2.machine.wood_gasser_elec.desc=Газогенератор с электрообогревом. Обугливает древесину и заполняет капсулы древогазом.
+tile.ic2.machine.slow_grinder.name=Медленная дробилка
+tile.ic2.machine.slow_grinder.desc=Неторопливый переработчик с большим буфером. Переключайте скорость: быстрее — дороже и меньше скрапа.
+tile.ic2.machine.rare_earth_extractor.name=Экстрактор редкоземельных металлов
+tile.ic2.machine.rare_earth_extractor.desc=Концентрирует следы редкоземельных элементов из обычного щебня. Кормите его булыжником, гравием, глиной или обсидианом.
+tile.ic2.machine.plasmafier.name=Плазмофикатор
+tile.ic2.machine.plasmafier.desc=Сгущает UU-материю в сырую плазму и разливает её по капсулам.
+tile.ic2.energy.pesu.name=Плазменный накопитель энергии
+tile.ic2.energy.pesu.desc=Конечный конденсатор EU на плазменных технологиях. Хранит колоссальные объёмы энергии.
+tile.ic2.energy.transformer_iv.name=IV-трансформатор
+tile.ic2.energy.transformer_iv.desc=Высокопроизводительный трансформатор 512-2048 EV с четырёхкратной скоростью преобразования HV-трансформатора.
+tile.ic2.machine.iridium_stone.name=Иридиевый камень
+tile.ic2.machine.iridium_stone.desc=Чрезвычайно прочный персональный блок. Сломать его может только владелец.
+item.ic2.turbine.name=Турбина
+item.ic2.turbine.desc=Компактное рабочее колесо для продвинутых генераторов.
+item.ic2.wood_gas_cell.name=Капсула древогаза
+item.ic2.wood_gas_cell.desc=Капсула горючего древогаза. Экстрагируется в капсулу биотоплива.
+item.ic2.rare_earth_dust.name=Редкоземельная пыль
+item.ic2.rare_earth_dust.desc=Щепоть ценных редкоземельных элементов.
+item.ic2.rare_earth_chuck.name=Редкоземельный брикет
+item.ic2.rare_earth_chuck.desc=Спрессованная редкоземельная пыль. Сожмите в магнит.
+item.ic2.magnet.dead.name=Разряженный магнит
+item.ic2.magnet.dead.desc=Инертный магнит. Зарядите его в электролизёре рядом с MFE.
+item.ic2.magnet.name=Магнит
+item.ic2.magnet.desc=Заряженный магнит высокой мощности. Основа плазменных технологий.
+item.ic2.plasma_cell.name=Капсула плазмы
+item.ic2.plasma_cell.desc=Капсула палящей плазмы, продукт плазмофикатора.
+item.ic2.plasma_core.name=Плазменное ядро
+item.ic2.plasma_core.desc=Магнитно-удерживаемое плазменное ядро. Сердце плазменных кабелей.
+item.ic2.pesd.name=Плазменный накопитель энергии (PESD)
+item.ic2.pesd.desc=Передовой переносной аккумулятор на 50 миллионов EU. Заряжается только от PESU.
+gui.ic2.ambient_heat=Фон. тепло:
+gui.ic2.eu_tick=EU/тик:
+gui.ic2.heat=Нагрев:
+
+gui.ic2.energy_level=Энергетический уровень
+item.ic2.armor.jetpack.nano.name=Нано-джетпак
+item.ic2.armor.jetpack.nano.desc=Нано-нагрудник со встроенным энерго-джетпаком. Летает как джетпак, защищает как нанокостюм. Соберите с электрическим джетпаком для режима зависания.
+item.ic2.armor.jetpack.electric.nano.name=Электро нано-джетпак
+item.ic2.armor.jetpack.electric.nano.desc=Нано-нагрудник со встроенным электро-джетпаком. Поддерживает режим зависания (клавиша H). Шкала прочности показывает заряд EU.
+item.ic2.armor.jetpack.quantum.name=Квантовый джетпак
+item.ic2.armor.jetpack.quantum.desc=Квантовый нагрудник со встроенным энерго-джетпаком. Летает как джетпак, защищает как квант-костюм, иммунитет к огню. Соберите с электрическим джетпаком для режима зависания.
+item.ic2.armor.jetpack.electric.quantum.name=Электро квантовый джетпак
+item.ic2.armor.jetpack.electric.quantum.desc=Квантовый нагрудник со встроенным электро-джетпаком. Режим зависания (клавиша H) и полный иммунитет к огню. Шкала прочности показывает заряд EU.

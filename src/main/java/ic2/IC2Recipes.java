@@ -7,6 +7,8 @@ import ic2.IC2Blocks;
 import ic2.IC2Items;
 import ic2.item.ItemCablePlaceable;
 import ic2.tileentity.TileEntityCompressor;
+import ic2.tileentity.TileEntityWoodGasser;
+import ic2.tileentity.TileEntityRareEarthExtractor;
 import ic2.tileentity.TileEntityExtractor;
 import ic2.tileentity.TileEntityMacerator;
 import java.util.ArrayList;
@@ -41,6 +43,10 @@ import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShaped;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
 public class IC2Recipes {
+    public static ItemStack anyCharge(Item item) {
+        return new ItemStack(item, 1, -1);
+    }
+
     public static void initNamespaces() {
         RecipeBuilder.initNameSpace((String)IC2.MOD_ID);
         if (Registries.RECIPE_TYPES.getItem("ic2:machine") == null) {
@@ -51,14 +57,21 @@ public class IC2Recipes {
         RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"compressor", (RecipeSymbol)new RecipeSymbol(IC2Blocks.compressor.getDefaultStack()));
         RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"canner", (RecipeSymbol)new RecipeSymbol(IC2Blocks.canner.getDefaultStack()));
         RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"mass_fabricator", (RecipeSymbol)new RecipeSymbol(IC2Blocks.massFabricator.getDefaultStack()));
+        RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"wood_gasser", (RecipeSymbol)new RecipeSymbol(IC2Blocks.woodGasser.getDefaultStack()));
+        RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"plasmafier", (RecipeSymbol)new RecipeSymbol(IC2Blocks.plasmafier.getDefaultStack()));
+        RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"rare_earth_extractor", (RecipeSymbol)new RecipeSymbol(IC2Blocks.rareEarthExtractor.getDefaultStack()));
+        RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"slow_grinder", (RecipeSymbol)new RecipeSymbol(IC2Blocks.slowGrinder.getDefaultStack()));
+        RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"electrolyzer", (RecipeSymbol)new RecipeSymbol(IC2Blocks.electrolyzer.getDefaultStack()));
     }
 
     public static void onRecipesReady() {
         IC2Recipes.initMachineRecipes();
+        ic2.compat.CrossModCompat.applyAll();
         IC2Recipes.registerSmelting();
         IC2Recipes.registerBasics();
         IC2Recipes.registerCables();
         IC2Recipes.registerComponents();
+        IC2Recipes.registerAdvGenerators();
         IC2Recipes.registerMachines();
         IC2Recipes.registerGenerators();
         IC2Recipes.registerEnergy();
@@ -66,17 +79,18 @@ public class IC2Recipes {
         IC2Recipes.registerArmor();
         IC2Recipes.registerMisc();
         IC2Recipes.registerSteelAlternatives();
+        IC2Recipes.registerBonusBlocks();
         IC2Recipes.registerMachineRecipeGroups();
         IC2Recipes.registerTrommelInjections();
         IC2Recipes.registerBlastFurnace();
         IC2Recipes.registerItemGroups();
-        
+
         ic2.si.SIConverters.registerRecipes();
-        
+
         ic2.recipe.CrossModEquivalence.applyIfSignalIndustries();
     }
 
-    
+
     public static void verifyDedicatedClientSync() {
         RecipeRegistry original = Registries.RECIPES;
         try {
@@ -152,7 +166,7 @@ public class IC2Recipes {
         }
     }
 
-    
+
     public static void verifyRecipesSerializable() {
         int checked = 0;
         try {
@@ -166,6 +180,12 @@ public class IC2Recipes {
         catch (Exception e) {
             IC2.LOGGER.error("IC2 recipe serialization check FAILED (joining a server would disconnect players)", (Throwable)e);
         }
+    }
+
+    private static void registerBonusBlocks() {
+        RecipeBuilder.Shaped(IC2.MOD_ID).setShape(new String[]{"XXX", "X X", "XXX"}).addInput('X', (IItemConvertible)Items.INGOT_STEEL).create("mesh_steel", new ItemStack(IC2Blocks.meshSteel, 8));
+        RecipeBuilder.Shaped(IC2.MOD_ID).setShape(new String[]{"XXX", "X X", "XXX"}).addInput('X', (IItemConvertible)Items.INGOT_STEEL_CRUDE).create("mesh_steel_crude", new ItemStack(IC2Blocks.meshSteelCrude, 8));
+        RecipeBuilder.Shaped(IC2.MOD_ID).setShape(new String[]{"GQ", "QG"}).addInput('G', (IItemConvertible)Blocks.GLASS).addInput('Q', (IItemConvertible)Items.QUARTZ).create("glass_quartz", new ItemStack(IC2Blocks.quartzGlass, 4));
     }
 
     private static void registerItemGroups() {
@@ -216,7 +236,7 @@ public class IC2Recipes {
         canner.register("canner_tin_can", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(IC2Items.tinCan.getDefaultStack()), IC2Items.filledTinCan.getDefaultStack()));
         canner.register("canner_fuel_can", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(IC2Items.cellCoalfuel.getDefaultStack()), IC2Items.fuelCanFilled.getDefaultStack()));
         canner.register("canner_fuel_can_bio", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(IC2Items.cellBiofuel.getDefaultStack()), IC2Items.fuelCanFilled.getDefaultStack()));
-        
+
         RecipeGroup massFab = RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"mass_fabricator", (RecipeSymbol)new RecipeSymbol(IC2Blocks.massFabricator.getDefaultStack()));
         int u = 0;
         for (Object[] r : UU_RECIPES) {
@@ -240,6 +260,7 @@ public class IC2Recipes {
         IC2Recipes.shared("raw_tin", IC2Items.rawTin, IC2Items.ingotTin.getDefaultStack());
         IC2Recipes.shared("raw_copper", IC2Items.rawCopper, IC2Items.ingotCopper.getDefaultStack());
         IC2Recipes.shared("uranium_refine", IC2Items.uraniumItem, IC2Items.ingotUran.getDefaultStack());
+        IC2Recipes.shared("uranium_dust_ingot", IC2Items.dustUranium, IC2Items.ingotUran.getDefaultStack());
         IC2Recipes.furnace("steel_ingot", IC2Items.dustSteel, Items.INGOT_STEEL.getDefaultStack());
         IC2Recipes.furnace("iron_ingot", IC2Items.dustIron, Items.INGOT_IRON.getDefaultStack());
         IC2Recipes.furnace("gold_ingot", IC2Items.dustGold, Items.INGOT_GOLD.getDefaultStack());
@@ -248,13 +269,14 @@ public class IC2Recipes {
         IC2Recipes.furnace("bronze_ingot", IC2Items.dustBronze, IC2Items.ingotBronze.getDefaultStack());
         IC2Recipes.furnace("coal_dust", IC2Items.hydratedCoalDust, IC2Items.dustCoal.getDefaultStack());
         IC2Recipes.furnace("charcoal", IC2Blocks.rubberWood, new ItemStack(Items.COAL, 1, 1));
+        IC2Recipes.furnace("rubber_from_resin", IC2Items.stickyResin, IC2Items.rubber.getDefaultStack());
     }
 
     private static void furnace(String id, Object input, ItemStack output) {
         RecipeBuilder.Furnace((String)IC2.MOD_ID).setInput(IC2Recipes.stackOf(input)).create(id, output);
     }
 
-    private static void shared(String id, Object input, ItemStack output) {
+    public static void shared(String id, Object input, ItemStack output) {
         RecipeBuilder.Furnace((String)IC2.MOD_ID).setInput(IC2Recipes.stackOf(input)).create(id, output);
         RecipeBuilder.BlastFurnace((String)IC2.MOD_ID).setInput(IC2Recipes.stackOf(input)).create(id, output);
     }
@@ -408,12 +430,12 @@ public class IC2Recipes {
         ItemStack lapis = new ItemStack(Items.DYE, 1, 4);
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"RGR", "LCL", "RGR"}).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('L', lapis).addInput('C', (IItemConvertible)IC2Items.circuit).create("circuit_advanced", IC2Items.circuitAdvanced.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"RLR", "GCG", "RLR"}).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('L', lapis).addInput('C', (IItemConvertible)IC2Items.circuit).create("circuit_advanced_alt", IC2Items.circuitAdvanced.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" C ", "TRT", "TRT"}).addInput('T', (IItemConvertible)IC2Items.ingotTin).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('C', (IItemConvertible)IC2Items.cableItems[0]).create("re_battery", new ItemStack((Item)IC2Items.batteryRE, 1, 10001));
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" C ", "TRT", "TRT"}).addInput('T', (IItemConvertible)IC2Items.ingotTin).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('C', (IItemConvertible)IC2Items.cableItems[0]).create("re_battery", new ItemStack((Item)IC2Items.batteryRE, 1, 10000));
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"c", "C", "R"}).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).addInput('C', (IItemConvertible)IC2Items.hydratedCoalDust).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).create("single_use_battery", new ItemStack(IC2Items.singleUseBattery, 8));
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"c", "R", "C"}).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('C', (IItemConvertible)IC2Items.hydratedCoalDust).create("single_use_battery_alt", new ItemStack(IC2Items.singleUseBattery, 8));
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"RRR", "RDR", "RRR"}).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('D', (IItemConvertible)Items.DIAMOND).create("energy_crystal", new ItemStack((Item)IC2Items.batteryCrystal, 1, 10001));
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"RRR", "RDR", "RRR"}).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('D', (IItemConvertible)IC2Items.industrialDiamond).create("energy_crystal_alt", new ItemStack((Item)IC2Items.batteryCrystal, 1, 10001));
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"LCL", "LDL", "LCL"}).addInput('L', lapis).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('D', (IItemConvertible)IC2Items.batteryCrystal).create("lapotron_crystal", new ItemStack((Item)IC2Items.batteryLamaCrystal, 1, 10001));
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"RRR", "RDR", "RRR"}).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('D', (IItemConvertible)Items.DIAMOND).create("energy_crystal", new ItemStack((Item)IC2Items.batteryCrystal, 1, 10000));
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"RRR", "RDR", "RRR"}).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('D', (IItemConvertible)IC2Items.industrialDiamond).create("energy_crystal_alt", new ItemStack((Item)IC2Items.batteryCrystal, 1, 10000));
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"LCL", "LDL", "LCL"}).addInput('L', lapis).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('D', anyCharge(IC2Items.batteryCrystal)).create("lapotron_crystal", new ItemStack((Item)IC2Items.batteryLamaCrystal, 1, 10000));
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"SSS", "SAS", "SSS"}).addInput('S', (IItemConvertible)Blocks.STONE).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).create("reinforced_stone", new ItemStack(IC2Blocks.reinforcedStone, 8));
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"GAG", "GGG", "GAG"}).addInput('G', (IItemConvertible)Blocks.GLASS).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).create("reinforced_glass", new ItemStack(IC2Blocks.reinforcedGlass, 7));
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"GGG", "AGA", "GGG"}).addInput('G', (IItemConvertible)Blocks.GLASS).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).create("reinforced_glass_alt", new ItemStack(IC2Blocks.reinforcedGlass, 7));
@@ -427,8 +449,92 @@ public class IC2Recipes {
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"III", "III"}).addInput('I', (IItemConvertible)Items.INGOT_IRON).create("iron_fence", new ItemStack(IC2Blocks.ironFence, 12));
     }
 
+    private static void registerAdvGenerators() {
+        Block[] logs = new Block[]{Blocks.LOG_OAK, Blocks.LOG_PINE, Blocks.LOG_BIRCH, Blocks.LOG_CHERRY, Blocks.LOG_EUCALYPTUS, Blocks.LOG_OAK_MOSSY, Blocks.LOG_THORN, Blocks.LOG_PALM, Blocks.LOG_SCORCHED, IC2Blocks.rubberWood};
+        for (Block log : logs) {
+            if (log != null) {
+                TileEntityWoodGasser.WoodGasserRecipes.RECIPES.put(log.id(), new ItemStack(Items.COAL, 1, 1));
+            }
+        }
+        TileEntityExtractor.RECIPES.put(IC2Items.woodGasCell.id, new ItemStack(IC2Items.cellBiofuel));
+        TileEntityCompressor.RECIPES.put(IC2Items.rareEarthChuck.id, new ItemStack(IC2Items.deadMagnet));
+        initRareEarthAmounts();
+        ItemStack depletedPesd = new ItemStack(IC2Items.pesd, 1, IC2Items.pesd.getMaxDamage());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"X X", " X ", "X X"}).addInput('X', (IItemConvertible)IC2Items.ingotRefinedIron).create("turbine", IC2Items.turbine.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"AGA", "ARA", "AMA"}).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('G', IC2Blocks.generator).addInput('R', IC2Blocks.recycler).addInput('M', IC2Blocks.advancedMachineBlock).create("slag_generator", IC2Blocks.slagGenerator.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"ILI", "LGL", "IAI"}).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('L', (IItemConvertible)IC2Items.cellLava).addInput('G', IC2Blocks.geothermalGenerator).addInput('A', IC2Blocks.advancedMachineBlock).create("thermal_generator", IC2Blocks.thermalGenerator.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"LSL", "PTP", "LAL"}).addInput('L', (IItemConvertible)IC2Items.advancedAlloy).addInput('P', IC2Blocks.pump).addInput('S', IC2Blocks.solarPanel).addInput('T', (IItemConvertible)IC2Items.turbine).addInput('A', IC2Blocks.advancedMachineBlock).create("turbine_solar", IC2Blocks.turbineSolar.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"IMI", "LRL", "IAI"}).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('M', IC2Blocks.macerator).addInput('L', (IItemConvertible)IC2Items.advancedAlloy).addInput('R', IC2Blocks.recycler).addInput('A', IC2Blocks.advancedMachineBlock).create("slow_grinder", IC2Blocks.slowGrinder.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"XAX", "XBX", "XCX"}).addInput('X', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('A', (IItemConvertible)IC2Items.cellEmpty).addInput('B', IC2Blocks.extractor).addInput('C', IC2Blocks.ironFurnace).create("wood_gasser", IC2Blocks.woodGasser.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"XAX", "DBD", "XCX"}).addInput('X', (IItemConvertible)IC2Items.advancedAlloy).addInput('A', (IItemConvertible)IC2Items.cellEmpty).addInput('B', IC2Blocks.extractor).addInput('C', IC2Blocks.electricFurnace).addInput('D', (IItemConvertible)IC2Items.carbonPlate).create("wood_gasser_elec", IC2Blocks.woodGasserElec.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"AOA", "TWT", "AOA"}).addInput('A', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('O', (IItemConvertible)IC2Items.advancedAlloy).addInput('T', (IItemConvertible)IC2Items.turbine).addInput('W', IC2Blocks.waterMill).create("ocean_generator", IC2Blocks.oceanGenerator.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"AOC", "ATW", "AOC"}).addInput('A', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('O', (IItemConvertible)IC2Items.advancedAlloy).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('T', (IItemConvertible)IC2Items.turbine).addInput('W', IC2Blocks.waterMill).create("wave_generator", IC2Blocks.waveGenerator.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"GEG", "GRG"}).addInput('G', (IItemConvertible)Blocks.GLASS).addInput('E', IC2Blocks.extractor).addInput('R', IC2Blocks.recycler).create("rare_earth_extractor", IC2Blocks.rareEarthExtractor.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"CRC", "RIR", "CRC"}).addInput('R', (IItemConvertible)IC2Items.rareEarthDust).addInput('I', (IItemConvertible)Items.INGOT_IRON).addInput('C', (IItemConvertible)IC2Items.dustCoal).create("rare_earth_chuck", IC2Items.rareEarthChuck.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"SSS", "SIS", "SSS"}).addInput('S', IC2Blocks.reinforcedStone).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).create("iridium_stone", new ItemStack(IC2Blocks.iridiumStone, 8));
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"AGA", "GIG", "AGA"}).addInput('G', IC2Blocks.reinforcedGlass).addInput('A', IC2Blocks.iridiumStone).addInput('I', IC2Blocks.inductionFurnace).create("plasmafier", IC2Blocks.plasmafier.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"MXM", "XPX", "MXM"}).addInput('M', (IItemConvertible)IC2Items.magnet).addInput('X', (IItemConvertible)IC2Items.advancedAlloy).addInput('P', (IItemConvertible)IC2Items.plasmaCell).create("plasma_core", IC2Items.plasmaCore.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"CAC", "IPI", "CAC"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('A', (IItemConvertible)IC2Items.circuitAdvanced).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('P', (IItemConvertible)IC2Items.plasmaCore).create("pesd", IC2Items.pesd.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"RIR", "PPP", "RIR"}).addInput('R', IC2Blocks.iridiumStone).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('P', depletedPesd).create("pesu", IC2Blocks.pesu.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"IPI", "AHD", "IPI"}).addInput('I', IC2Blocks.iridiumStone).addInput('P', (IItemConvertible)IC2Items.cableItems[11]).addInput('A', (IItemConvertible)IC2Items.circuitAdvanced).addInput('H', IC2Blocks.transformerHV).addInput('D', depletedPesd).create("transformer_iv", IC2Blocks.transformerIV.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"CCC", "APA", "CCC"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('A', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('P', (IItemConvertible)IC2Items.plasmaCore).create("cable_plasma", new ItemStack(IC2Items.cableItems[11], IC2Config.plasmaCablePerCraft()));
+        IC2Recipes.registerAdvMachineRecipeGroups();
+    }
+
+    private static void registerAdvMachineRecipeGroups() {
+        RecipeGroup woodGasser = RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"wood_gasser", (RecipeSymbol)new RecipeSymbol(IC2Blocks.woodGasser.getDefaultStack()));
+        int wg = 0;
+        for (Map.Entry<Integer, ItemStack> e : TileEntityWoodGasser.WoodGasserRecipes.RECIPES.entrySet()) {
+            ItemStack input = IC2Recipes.stackForId(e.getKey());
+            if (input == null) continue;
+            woodGasser.register("wood_gasser_charcoal_" + wg++, (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(input), (ItemStack)e.getValue().copy()));
+            woodGasser.register("wood_gasser_gas_" + wg++, (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(input), IC2Items.woodGasCell.getDefaultStack()));
+        }
+        RecipeGroup plasmafier = RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"plasmafier", (RecipeSymbol)new RecipeSymbol(IC2Blocks.plasmafier.getDefaultStack()));
+        plasmafier.register("plasmafier_uu", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(IC2Items.uuMatter.getDefaultStack()), IC2Items.plasmaCell.getDefaultStack()));
+        plasmafier.register("plasmafier_fill", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(IC2Items.cellEmpty.getDefaultStack()), IC2Items.plasmaCell.getDefaultStack()));
+        RecipeGroup rareEarth = RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"rare_earth_extractor", (RecipeSymbol)new RecipeSymbol(IC2Blocks.rareEarthExtractor.getDefaultStack()));
+        rareEarth.register("rare_earth_cobble", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(Blocks.COBBLE_STONE.getDefaultStack()), IC2Items.rareEarthDust.getDefaultStack()));
+        rareEarth.register("rare_earth_gravel", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(Blocks.GRAVEL.getDefaultStack()), IC2Items.rareEarthDust.getDefaultStack()));
+        rareEarth.register("rare_earth_flint", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(Items.FLINT.getDefaultStack()), IC2Items.rareEarthDust.getDefaultStack()));
+        rareEarth.register("rare_earth_clay", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(Items.CLAY.getDefaultStack()), IC2Items.rareEarthDust.getDefaultStack()));
+        rareEarth.register("rare_earth_obsidian", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(Blocks.OBSIDIAN.getDefaultStack()), IC2Items.rareEarthDust.getDefaultStack()));
+        RecipeGroup slowGrinder = RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"slow_grinder", (RecipeSymbol)new RecipeSymbol(IC2Blocks.slowGrinder.getDefaultStack()));
+        slowGrinder.register("slow_grinder_scrap", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(Blocks.COBBLE_STONE.getDefaultStack()), IC2Items.scrap.getDefaultStack()));
+        slowGrinder.register("slow_grinder_dirt", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(Blocks.DIRT.getDefaultStack()), IC2Items.scrap.getDefaultStack()));
+        RecipeGroup electrolyzer = RecipeBuilder.getRecipeGroup((String)IC2.MOD_ID, (String)"electrolyzer", (RecipeSymbol)new RecipeSymbol(IC2Blocks.electrolyzer.getDefaultStack()));
+        electrolyzer.register("electrolyzer_water", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(IC2Items.cellWater.getDefaultStack()), IC2Items.cellElectrolyzedWater.getDefaultStack()));
+        electrolyzer.register("electrolyzer_magnet", (RecipeEntryBase)new ic2.recipe.RecipeEntryIC2Machine(new RecipeSymbol(IC2Items.deadMagnet.getDefaultStack()), IC2Items.magnet.getDefaultStack()));
+    }
+
+    private static void initRareEarthAmounts() {
+        TileEntityRareEarthExtractor.RARE_EARTH_AMOUNTS.clear();
+        for (Block cobble : new Block[]{Blocks.COBBLE_STONE, Blocks.COBBLE_BASALT, Blocks.COBBLE_LIMESTONE, Blocks.COBBLE_GRANITE, Blocks.COBBLE_PERMAFROST}) {
+            TileEntityRareEarthExtractor.RARE_EARTH_AMOUNTS.put(cobble.id(), 3.125f);
+        }
+        TileEntityRareEarthExtractor.RARE_EARTH_AMOUNTS.put(Blocks.GRAVEL.id(), 6.25f);
+        TileEntityRareEarthExtractor.RARE_EARTH_AMOUNTS.put(Items.FLINT.id, 12.5f);
+        TileEntityRareEarthExtractor.RARE_EARTH_AMOUNTS.put(Items.CLAY.id, 20.84f);
+        TileEntityRareEarthExtractor.RARE_EARTH_AMOUNTS.put(Blocks.OBSIDIAN.id(), 100.0f);
+        String[] entries = IC2Config.rareEarthAmounts().split("-");
+        for (String entry : entries) {
+            String[] parts = entry.split(":");
+            if (parts.length < 3) continue;
+            try {
+                NamespaceID id = NamespaceID.fromPool(parts[0], parts[1]);
+                Item item = net.minecraft.core.item.Item.itemsMap.get(id);
+                if (item != null) {
+                    TileEntityRareEarthExtractor.RARE_EARTH_AMOUNTS.put(item.id, Float.parseFloat(parts[2]));
+                }
+            }
+            catch (Exception e) {
+                IC2.LOGGER.warn("Invalid rare earth entry: {}", (Object)entry);
+            }
+        }
+    }
+
     private static void registerMachines() {
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"III", "I I", "III"}).addInput('I', (IItemConvertible)Items.INGOT_IRON).create("machine_block", IC2Blocks.machineBlock.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"III", "I I", "III"}).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).create("machine_block", IC2Blocks.machineBlock.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" I ", "I I", "IFI"}).addInput('I', (IItemConvertible)Items.INGOT_IRON).addInput('F', (IItemConvertible)Blocks.FURNACE_STONE_IDLE).create("iron_furnace", IC2Blocks.ironFurnace.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"M"}).addInput('M', IC2Blocks.machineBlock).create("machine_to_iron", new ItemStack(IC2Items.ingotRefinedIron, 8));
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" C ", "RFR"}).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('F', IC2Blocks.ironFurnace).create("electric_furnace", IC2Blocks.electricFurnace.getDefaultStack());
@@ -447,7 +553,7 @@ public class IC2Recipes {
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"RRR", "CMC"}).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('C', (IItemConvertible)Blocks.CHEST_PLANKS_OAK).addInput('M', IC2Blocks.machineBlock).create("trade_o_mat", IC2Blocks.tradeOMat.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" A ", "CMC", " A "}).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('M', IC2Blocks.machineBlock).create("advanced_machine", IC2Blocks.advancedMachineBlock.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" C ", "AMA", " C "}).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('M', IC2Blocks.machineBlock).create("advanced_machine_alt", IC2Blocks.advancedMachineBlock.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"GCG", "ALA", "GCG"}).addInput('A', IC2Blocks.advancedMachineBlock).addInput('L', (IItemConvertible)IC2Items.batteryLamaCrystal).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).create("mass_fabricator", IC2Blocks.massFabricator.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"GCG", "ALA", "GCG"}).addInput('A', IC2Blocks.advancedMachineBlock).addInput('L', anyCharge(IC2Items.batteryLamaCrystal)).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).create("mass_fabricator", IC2Blocks.massFabricator.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"FFF", "TTT", "FFF"}).addInput('F', (IItemConvertible)Items.FLINT).addInput('T', (IItemConvertible)Blocks.TNT).create("industrial_tnt", new ItemStack(IC2Blocks.industrialTnt, 4));
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"FTF", "FTF", "FTF"}).addInput('F', (IItemConvertible)Items.FLINT).addInput('T', (IItemConvertible)Blocks.TNT).create("industrial_tnt_alt", new ItemStack(IC2Blocks.industrialTnt, 4));
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"S", "T"}).addInput('S', (IItemConvertible)Items.STRING).addInput('T', IC2Blocks.industrialTnt).create("dynamite", new ItemStack(IC2Items.dynamiteItem, 8));
@@ -515,8 +621,8 @@ public class IC2Recipes {
     }
 
     private static void registerGenerators() {
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"B", "M", "F"}).addInput('B', (IItemConvertible)IC2Items.batteryRE).addInput('M', IC2Blocks.machineBlock).addInput('F', (IItemConvertible)Blocks.FURNACE_STONE_IDLE).create("generator", IC2Blocks.generator.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"B", "I", "F"}).addInput('B', (IItemConvertible)IC2Items.batteryRE).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('F', IC2Blocks.ironFurnace).create("generator_alt", IC2Blocks.generator.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"B", "M", "F"}).addInput('B', anyCharge(IC2Items.batteryRE)).addInput('M', IC2Blocks.machineBlock).addInput('F', (IItemConvertible)Blocks.FURNACE_STONE_IDLE).create("generator", IC2Blocks.generator.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"B", "I", "F"}).addInput('B', anyCharge(IC2Items.batteryRE)).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('F', IC2Blocks.ironFurnace).create("generator_alt", IC2Blocks.generator.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"gCg", "gCg", "IGI"}).addInput('G', IC2Blocks.generator).addInput('C', (IItemConvertible)IC2Items.cellEmpty).addInput('g', (IItemConvertible)Blocks.GLASS).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).create("geothermal_generator", IC2Blocks.geothermalGenerator.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"SPS", "PGP", "SPS"}).addInput('S', (IItemConvertible)Items.STICK).addInput('P', (IItemConvertible)Blocks.PLANKS_OAK).addInput('G', IC2Blocks.generator).create("water_mill", IC2Blocks.waterMill.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"CgC", "gCg", "cGc"}).addInput('G', IC2Blocks.generator).addInput('C', (IItemConvertible)IC2Items.dustCoal).addInput('g', (IItemConvertible)Blocks.GLASS).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).create("solar_panel", IC2Blocks.solarPanel.getDefaultStack());
@@ -525,31 +631,32 @@ public class IC2Recipes {
     }
 
     private static void registerEnergy() {
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"PCP", "BBB", "PPP"}).addInput('P', (IItemConvertible)Blocks.PLANKS_OAK).addInput('C', (IItemConvertible)IC2Items.cableItems[0]).addInput('B', (IItemConvertible)IC2Items.batteryRE).create("batbox", IC2Blocks.batBox.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"cCc", "CMC", "cCc"}).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).addInput('C', (IItemConvertible)IC2Items.batteryCrystal).addInput('M', IC2Blocks.machineBlock).create("mfe", IC2Blocks.mfe.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"LCL", "LML", "LAL"}).addInput('L', (IItemConvertible)IC2Items.batteryLamaCrystal).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).addInput('M', IC2Blocks.mfe).addInput('A', IC2Blocks.advancedMachineBlock).create("mfsu", IC2Blocks.mfsu.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"PCP", "BBB", "PPP"}).addInput('P', (IItemConvertible)Blocks.PLANKS_OAK).addInput('C', (IItemConvertible)IC2Items.cableItems[0]).addInput('B', anyCharge(IC2Items.batteryRE)).create("batbox", IC2Blocks.batBox.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"cCc", "CMC", "cCc"}).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).addInput('C', anyCharge(IC2Items.batteryCrystal)).addInput('M', IC2Blocks.machineBlock).create("mfe", IC2Blocks.mfe.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"LCL", "LML", "LAL"}).addInput('L', anyCharge(IC2Items.batteryLamaCrystal)).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).addInput('M', IC2Blocks.mfe).addInput('A', IC2Blocks.advancedMachineBlock).create("mfsu", IC2Blocks.mfsu.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"PCP", "ccc", "PCP"}).addInput('P', (IItemConvertible)Blocks.PLANKS_OAK).addInput('C', (IItemConvertible)IC2Items.cableItems[0]).addInput('c', (IItemConvertible)IC2Items.ingotCopper).create("transformer_lv", IC2Blocks.transformerLV.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" C ", " M ", " C "}).addInput('C', (IItemConvertible)IC2Items.cableItems[0]).addInput('M', IC2Blocks.machineBlock).create("transformer_mv", IC2Blocks.transformerMV.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" c ", "CED", " c "}).addInput('E', IC2Blocks.transformerMV).addInput('D', (IItemConvertible)IC2Items.batteryCrystal).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).addInput('C', (IItemConvertible)IC2Items.circuit).create("transformer_hv", IC2Blocks.transformerHV.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" C ", "CGC", " E "}).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).addInput('G', IC2Blocks.generator).addInput('E', (IItemConvertible)IC2Items.batteryLamaCrystal).create("tesla_coil", IC2Blocks.teslaCoil.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" c ", "CED", " c "}).addInput('E', IC2Blocks.transformerMV).addInput('D', anyCharge(IC2Items.batteryCrystal)).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).addInput('C', (IItemConvertible)IC2Items.circuit).create("transformer_hv", IC2Blocks.transformerHV.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" C ", "CGC", " E "}).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).addInput('G', IC2Blocks.generator).addInput('E', anyCharge(IC2Items.batteryLamaCrystal)).create("tesla_coil", IC2Blocks.teslaCoil.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"GDG", "DMD", "GDG"}).addInput('G', (IItemConvertible)Items.DIAMOND).addInput('D', IC2Blocks.transformerHV).addInput('M', IC2Blocks.advancedMachineBlock).create("teleporter", IC2Blocks.teleporter.getDefaultStack());
     }
 
     private static void registerTools() {
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" I ", "ICI", "IBI"}).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('B', (IItemConvertible)IC2Items.batteryRE).create("mining_drill", IC2Items.miningDrill.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" I ", "ICI", "IBI"}).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('B', anyCharge(IC2Items.batteryRE)).create("mining_drill", IC2Items.miningDrill.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" D ", "DdD"}).addInput('D', (IItemConvertible)Items.DIAMOND).addInput('d', (IItemConvertible)IC2Items.miningDrill).create("diamond_drill", IC2Items.diamondDrill.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" II", "ICI", "BI "}).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('B', (IItemConvertible)IC2Items.batteryRE).create("chainsaw", IC2Items.chainsaw.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" II", "ICI", "BI "}).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('B', anyCharge(IC2Items.batteryRE)).create("chainsaw", IC2Items.chainsaw.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"B B", "BBB", " B "}).addInput('B', (IItemConvertible)IC2Items.ingotBronze).create("wrench", IC2Items.wrench.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" W ", "ICI", " B "}).addInput('W', (IItemConvertible)IC2Items.wrench).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('B', anyCharge(IC2Items.batteryRE)).create("electric_wrench", IC2Items.electricWrench.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"A A", " A ", "I I"}).addInput('A', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('I', (IItemConvertible)Items.INGOT_IRON).create("insulation_cutter", IC2Items.insulationCutter.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" G ", "CBC", "ccc"}).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('B', (IItemConvertible)IC2Items.batteryRE).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).create("eu_reader", IC2Items.euReader.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" G ", "CBC", "ccc"}).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('B', (IItemConvertible)IC2Items.batteryRE).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).create("od_scanner", IC2Items.odScanner.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" G ", "CBC", "ccc"}).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('B', anyCharge(IC2Items.batteryRE)).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).create("eu_reader", IC2Items.euReader.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" G ", "CBC", "ccc"}).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('B', anyCharge(IC2Items.batteryRE)).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).create("od_scanner", IC2Items.odScanner.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" G ", "GCG", "cSc"}).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).addInput('S', (IItemConvertible)IC2Items.odScanner).addInput('c', (IItemConvertible)IC2Items.cableItems[0]).create("ov_scanner", IC2Items.ovScanner.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{" CC", " IC", "I  "}).addInput('C', (IItemConvertible)Blocks.WOOL).addInput('I', (IItemConvertible)Items.INGOT_IRON).create("painter", IC2Items.painter.getDefaultStack());
         String[] colors = new String[]{"black", "red", "green", "brown", "blue", "purple", "cyan", "light_gray", "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white"};
         for (int i = 0; i < 16; ++i) {
             RecipeBuilder.Shapeless((String)IC2.MOD_ID).addInput((IItemConvertible)IC2Items.painter).addInput(new ItemStack(Items.DYE, 1, i)).create("painter_" + colors[i], IC2Items.painters[i].getDefaultStack());
         }
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"Rcc", "AAC", " AA"}).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('c', (IItemConvertible)IC2Items.batteryCrystal).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).create("mining_laser", IC2Items.toolMiningLaser.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"Rcc", "AAC", " AA"}).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).addInput('c', anyCharge(IC2Items.batteryCrystal)).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).create("mining_laser", IC2Items.toolMiningLaser.getDefaultStack());
     }
 
     private static void registerArmor() {
@@ -562,16 +669,20 @@ public class IC2Recipes {
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"A A", "ALA", "AIA"}).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('L', IC2Recipes.lavaBucket()).addInput('I', (IItemConvertible)Items.TOOL_COMPASS).create("composite_vest", IC2Items.compositeVest.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"ICI", "IFI", "R R"}).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('F', (IItemConvertible)IC2Items.fuelCanEmpty).addInput('R', (IItemConvertible)Items.DUST_REDSTONE).create("jetpack", IC2Items.jetpack.getDefaultStack());
         RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"ICI", "IBI", "G G"}).addInput('I', (IItemConvertible)IC2Items.ingotRefinedIron).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).addInput('B', IC2Blocks.batBox).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).create("electric_jetpack", IC2Items.electricJetpack.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"BCB", "BTB", "B B"}).addInput('B', (IItemConvertible)IC2Items.batteryRE).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('T', (IItemConvertible)IC2Items.ingotTin).create("batpack", IC2Items.batpack.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"CcC", "CGC"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', (IItemConvertible)IC2Items.batteryCrystal).addInput('G', (IItemConvertible)Blocks.GLASS).create("nano_helmet", IC2Items.nanoHelmet.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"C C", "CcC", "CCC"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', (IItemConvertible)IC2Items.batteryCrystal).create("nano_chestplate", IC2Items.nanoBodyarmor.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"CcC", "C C", "C C"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', (IItemConvertible)IC2Items.batteryCrystal).create("nano_leggings", IC2Items.nanoLeggings.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"C C", "CcC"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', (IItemConvertible)IC2Items.batteryCrystal).create("nano_boots", IC2Items.nanoBoots.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"GA ", "GA ", "CcC"}).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', (IItemConvertible)IC2Items.batteryCrystal).create("nano_saber", IC2Items.nanoSaberOff.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"ILI", "CGC"}).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('L', (IItemConvertible)IC2Items.batteryLamaCrystal).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).addInput('G', IC2Blocks.reinforcedGlass).create("quantum_helmet", IC2Items.quantumHelmet.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"A A", "ILI", "IAI"}).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('L', (IItemConvertible)IC2Items.batteryLamaCrystal).create("quantum_chestplate", IC2Items.quantumBodyarmor.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"MLM", "I I", "G G"}).addInput('M', IC2Blocks.machineBlock).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('L', (IItemConvertible)IC2Items.batteryLamaCrystal).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).create("quantum_leggings", IC2Items.quantumLeggings.getDefaultStack());
-        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"I I", "RLR"}).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('L', (IItemConvertible)IC2Items.batteryLamaCrystal).addInput('R', (IItemConvertible)IC2Items.rubberBoots).create("quantum_boots", IC2Items.quantumBoots.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"BCB", "BTB", "B B"}).addInput('B', anyCharge(IC2Items.batteryRE)).addInput('C', (IItemConvertible)IC2Items.circuit).addInput('T', (IItemConvertible)IC2Items.ingotTin).create("batpack", IC2Items.batpack.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"CcC", "CGC"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', anyCharge(IC2Items.batteryCrystal)).addInput('G', (IItemConvertible)Blocks.GLASS).create("nano_helmet", IC2Items.nanoHelmet.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"C C", "CcC", "CCC"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', anyCharge(IC2Items.batteryCrystal)).create("nano_chestplate", IC2Items.nanoBodyarmor.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"CcC", "C C", "C C"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', anyCharge(IC2Items.batteryCrystal)).create("nano_leggings", IC2Items.nanoLeggings.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"C C", "CcC"}).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', anyCharge(IC2Items.batteryCrystal)).create("nano_boots", IC2Items.nanoBoots.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"GA ", "GA ", "CcC"}).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('C', (IItemConvertible)IC2Items.carbonPlate).addInput('c', anyCharge(IC2Items.batteryCrystal)).create("nano_saber", IC2Items.nanoSaberOff.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"ILI", "CGC"}).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('L', anyCharge(IC2Items.batteryLamaCrystal)).addInput('C', (IItemConvertible)IC2Items.circuitAdvanced).addInput('G', IC2Blocks.reinforcedGlass).create("quantum_helmet", IC2Items.quantumHelmet.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"A A", "ILI", "IAI"}).addInput('A', (IItemConvertible)IC2Items.advancedAlloy).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('L', anyCharge(IC2Items.batteryLamaCrystal)).create("quantum_chestplate", IC2Items.quantumBodyarmor.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"MLM", "I I", "G G"}).addInput('M', IC2Blocks.machineBlock).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('L', anyCharge(IC2Items.batteryLamaCrystal)).addInput('G', (IItemConvertible)Items.DUST_GLOWSTONE).create("quantum_leggings", IC2Items.quantumLeggings.getDefaultStack());
+        RecipeBuilder.Shaped((String)IC2.MOD_ID).setShape(new String[]{"I I", "RLR"}).addInput('I', (IItemConvertible)IC2Items.iridiumPlate).addInput('L', anyCharge(IC2Items.batteryLamaCrystal)).addInput('R', (IItemConvertible)IC2Items.rubberBoots).create("quantum_boots", IC2Items.quantumBoots.getDefaultStack());
+        RecipeBuilder.Shapeless((String)IC2.MOD_ID).addInput((IItemConvertible)IC2Items.jetpack).addInput((IItemConvertible)IC2Items.nanoBodyarmor).create("jetpack_nano", IC2Items.jetpackNano.getDefaultStack());
+        RecipeBuilder.Shapeless((String)IC2.MOD_ID).addInput((IItemConvertible)IC2Items.electricJetpack).addInput((IItemConvertible)IC2Items.nanoBodyarmor).create("electric_jetpack_nano", IC2Items.electricJetpackNano.getDefaultStack());
+        RecipeBuilder.Shapeless((String)IC2.MOD_ID).addInput((IItemConvertible)IC2Items.jetpack).addInput((IItemConvertible)IC2Items.quantumBodyarmor).create("jetpack_quantum", IC2Items.jetpackQuantum.getDefaultStack());
+        RecipeBuilder.Shapeless((String)IC2.MOD_ID).addInput((IItemConvertible)IC2Items.electricJetpack).addInput((IItemConvertible)IC2Items.quantumBodyarmor).create("electric_jetpack_quantum", IC2Items.electricJetpackQuantum.getDefaultStack());
     }
 
     private static void registerMisc() {
@@ -611,7 +722,7 @@ public class IC2Recipes {
     }
 
     private static void uu(String id, String[] shape, ItemStack out) {
-        
+
         int count = 0;
         for (String row : shape) {
             for (char c : row.toCharArray()) {
@@ -624,7 +735,7 @@ public class IC2Recipes {
         RecipeBuilderShapedHolder.build(shape, out, id);
     }
 
-    
+
     public static final java.util.List<Object[]> UU_RECIPES = new java.util.ArrayList<Object[]>();
 
     private static void registerSteelAlternatives() {
@@ -648,22 +759,30 @@ public class IC2Recipes {
     }
 
     private static void registerTrommelInjections() {
-        try {
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"gravel").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.rawCopper), 1, 2), 4.0);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"gravel").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.rawTin), 1, 2), 4.0);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"gravel").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.uraniumItem), 1), 0.5);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"dirt").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.rawCopper), 1), 0.5);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"dirt").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.rawTin), 1), 0.5);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"rich_dirt").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.rawCopper), 1, 2), 14.0);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"rich_dirt").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.rawTin), 1, 2), 14.0);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"rich_dirt").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.uraniumItem), 1), 2.0);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"sand").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.rawTin), 1), 0.5);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"clay").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.rawCopper), 1), 1.0);
-            RecipeBuilder.ModifyTrommel((String)"minecraft", (String)"soulsand").addEntry(new WeightedRandomLootObject(new ItemStack(IC2Items.uraniumItem), 1), 0.75);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "gravel"}, {"deep", "gravel"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.rawCopper), 1, 2), 4.0);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "gravel"}, {"deep", "gravel"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.rawTin), 1, 2), 4.0);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "gravel"}, {"deep", "gravel"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.uraniumItem), 1), 0.5);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "dirt"}, {"deep", "dirt"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.rawCopper), 1), 0.5);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "dirt"}, {"deep", "dirt"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.rawTin), 1), 0.5);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "rich_dirt"}, {"deep", "rich_dirt"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.rawCopper), 1, 2), 14.0);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "rich_dirt"}, {"deep", "rich_dirt"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.rawTin), 1, 2), 14.0);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "rich_dirt"}, {"deep", "rich_dirt"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.uraniumItem), 1), 2.0);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "sand"}, {"deep", "sand"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.rawTin), 1), 0.5);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "clay"}, {"deep", "clay_blue"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.rawCopper), 1), 1.0);
+        IC2Recipes.trommel(new String[][]{{"minecraft", "soulsand"}, {"deep", "soulsand"}}, new WeightedRandomLootObject(new ItemStack(IC2Items.uraniumItem), 1), 0.75);
+    }
+
+    private static void trommel(String[][] candidates, WeightedRandomLootObject loot, double chance) {
+        for (String[] candidate : candidates) {
+            try {
+                RecipeBuilder.ModifyTrommel(candidate[0], candidate[1]).addEntry(loot, chance);
+                return;
+            }
+            catch (Throwable ignored) {
+                continue;
+            }
         }
-        catch (Exception e) {
-            IC2.LOGGER.error("Failed to inject IC2 items into BTA trommel recipes", (Throwable)e);
-        }
+        IC2.LOGGER.warn("Trommel injection skipped: none of the candidate recipes exist ({})", (Object)candidates[0][1]);
     }
 
     private static ItemStack waterBucket() {

@@ -82,6 +82,8 @@ extends TileEntityElectricMachine {
         RECIPES.put(Items.INGOT_GOLD.id, new ItemStack(IC2Items.dustGold));
         RECIPES.put(Items.INGOT_STEEL.id, new ItemStack(IC2Items.dustSteel));
         RECIPES.put(IC2Items.ingotBronze.id, new ItemStack(IC2Items.dustBronze));
+        RECIPES.put(IC2Items.uraniumItem.id, new ItemStack(IC2Items.dustUranium));
+        RECIPES.put(IC2Items.ingotUran.id, new ItemStack(IC2Items.dustUranium));
         RECIPES.put(Blocks.COBWEB.id(), new ItemStack(Items.STRING));
         RECIPES.put(Blocks.STONE.id(), new ItemStack(Blocks.COBBLE_STONE));
         RECIPES.put(Blocks.BASALT.id(), new ItemStack(Blocks.COBBLE_BASALT));

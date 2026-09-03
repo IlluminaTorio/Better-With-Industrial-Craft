@@ -22,7 +22,7 @@ import org.joml.primitives.AABBdc;
 
 public class BlockModelCable
 extends BlockModelStandard<BlockLogicCable> {
-    public static final String[] CABLE_TEX_NAMES = new String[]{"cable_copper", "cable_copper_uninsulated", "cable_gold", "cable_gold_insulated", "cable_gold_insulated_2x", "cable_hv", "cable_hv_insulated", "cable_hv_insulated_2x", "cable_hv_insulated_4x", "cable_glass_fibre", "cable_tin"};
+    public static final String[] CABLE_TEX_NAMES = new String[]{"cable_copper", "cable_copper_uninsulated", "cable_gold", "cable_gold_insulated", "cable_gold_insulated_2x", "cable_hv", "cable_hv_insulated", "cable_hv_insulated_2x", "cable_hv_insulated_4x", "cable_glass_fibre", "cable_tin", "cable_plasma"};
 
     public BlockModelCable(Block<BlockLogicCable> block) {
         super(block);

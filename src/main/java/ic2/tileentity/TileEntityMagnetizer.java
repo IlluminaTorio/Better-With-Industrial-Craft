@@ -54,7 +54,7 @@ implements IEnergySink {
             this.chargeFence(x, y, z, need);
             this.energy -= need;
         }
-        
+
         int worldHeight = this.worldObj.getHeightBlocks();
         for (y = this.tilePos.y() + 1; y < worldHeight && y <= this.tilePos.y() + 20 && this.energy > 0 && this.worldObj.getBlock(x, y, z) == IC2Blocks.ironFence; ++y) {
             need = 15 - this.worldObj.getBlockData((TilePosc)new TilePos(x, y, z));
@@ -73,8 +73,8 @@ implements IEnergySink {
 
     private void chargeFence(int x, int y, int z, int amount) {
         TilePos pos = new TilePos(x, y, z);
-        
-        
+
+
         this.worldObj.setBlockDataNotify((TilePosc)pos, this.worldObj.getBlockData((TilePosc)pos) + amount);
     }
 

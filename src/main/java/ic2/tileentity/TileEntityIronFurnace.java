@@ -163,5 +163,10 @@ extends TileEntityIC2Machine {
         }
         return LookupFuelFurnace.instance.getFuelYield(itemstack);
     }
+
+    @Override
+    public int[] getQuickGrabSlots() {
+        return new int[]{2};
+    }
 }
 

@@ -3,7 +3,6 @@
 package ic2.tileentity;
 
 import com.mojang.nbt.tags.CompoundTag;
-import ic2.IC2Blocks;
 import ic2.IC2Items;
 import ic2.energy.Direction;
 import ic2.energy.EnergyNet;
@@ -106,7 +105,7 @@ IEnergySource {
 
     @Override
     public boolean demandsEnergy() {
-        
+
         if (ic2.IC2Config.voltageSystemOff()) {
             return this.energy < this.maxStorage;
         }
@@ -115,10 +114,9 @@ IEnergySource {
 
     @Override
     public int injectEnergy(Direction direction, int amount) {
-        
+
         if (!ic2.IC2Config.voltageSystemOff() && amount > this.output) {
-            IC2Blocks.explodeMachineAt(this.worldObj, this.tilePos.x(), this.tilePos.y(), this.tilePos.z());
-            return 0;
+            amount = this.output;
         }
         int space = this.maxStorage - this.energy;
         if (space >= amount) {

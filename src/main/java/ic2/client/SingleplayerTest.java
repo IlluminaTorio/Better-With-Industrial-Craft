@@ -200,6 +200,64 @@ public class SingleplayerTest {
         });
         SingleplayerTest.await(placed, 15);
         SingleplayerTest.sleep(3000L);
+        CountDownLatch advPlaced = new CountDownLatch(1);
+        this.runOnMainThread(mc, () -> {
+            try {
+                this.place(mc, fx + 9, fy, fz, "pesu", IC2Blocks.pesu);
+                this.place(mc, fx + 10, fy, fz, "plasmafier", IC2Blocks.plasmafier);
+                this.place(mc, fx + 11, fy, fz, "transformer_iv", IC2Blocks.transformerIV);
+                this.place(mc, fx + 12, fy, fz, "iridium_stone", IC2Blocks.iridiumStone);
+                this.place(mc, fx + 9, fy, fz + 2, "slag_generator", IC2Blocks.slagGenerator);
+                this.place(mc, fx + 10, fy, fz + 2, "thermal_generator", IC2Blocks.thermalGenerator);
+                this.place(mc, fx + 11, fy, fz + 2, "turbine_solar", IC2Blocks.turbineSolar);
+                this.place(mc, fx + 12, fy, fz + 2, "ocean_generator", IC2Blocks.oceanGenerator);
+                this.place(mc, fx + 9, fy, fz - 2, "wave_generator", IC2Blocks.waveGenerator);
+                this.place(mc, fx + 10, fy, fz - 2, "wood_gasser", IC2Blocks.woodGasser);
+                this.place(mc, fx + 11, fy, fz - 2, "wood_gasser_elec", IC2Blocks.woodGasserElec);
+                this.place(mc, fx + 12, fy, fz - 2, "slow_grinder", IC2Blocks.slowGrinder);
+                this.place(mc, fx + 9, fy, fz - 4, "rare_earth_extractor", IC2Blocks.rareEarthExtractor);
+                this.placeCable(mc, fx + 9, fy + 1, fz, "plasma_cable", 11);
+                this.placeCable(mc, fx + 10, fy + 1, fz, "plasma_cable2", 11);
+                this.placeCable(mc, fx + 11, fy + 1, fz, "copper_cable_top", 0);
+                SingleplayerTest.log("adv generator machines placed");
+            }
+            catch (Throwable e) {
+                SingleplayerTest.log("FAILED placing adv machines: " + String.valueOf(e));
+            }
+            finally {
+                advPlaced.countDown();
+            }
+        });
+        SingleplayerTest.await(advPlaced, 15);
+        SingleplayerTest.sleep(5000L);
+        SingleplayerTest.log("adv machines ticked without crash");
+        this.openGui(mc, "pesu", 3, fx + 9, fy, fz);
+        SingleplayerTest.sleep(2000L);
+        SingleplayerTest.log("screen after pesu GUI: " + this.screenName(mc));
+        this.openGui(mc, "plasmafier", 22, fx + 10, fy, fz);
+        SingleplayerTest.sleep(2000L);
+        SingleplayerTest.log("screen after plasmafier GUI: " + this.screenName(mc));
+        this.openGui(mc, "slow_grinder", 17, fx + 12, fy, fz - 2);
+        SingleplayerTest.sleep(2000L);
+        SingleplayerTest.log("screen after slow grinder GUI: " + this.screenName(mc));
+        this.openGui(mc, "wood_gasser", 18, fx + 10, fy, fz - 2);
+        SingleplayerTest.sleep(2000L);
+        SingleplayerTest.log("screen after wood gasser GUI: " + this.screenName(mc));
+        this.openGui(mc, "wood_gasser_elec", 19, fx + 11, fy, fz - 2);
+        SingleplayerTest.sleep(2000L);
+        SingleplayerTest.log("screen after wood gasser elec GUI: " + this.screenName(mc));
+        this.openGui(mc, "rare_earth_extractor", 21, fx + 9, fy, fz - 4);
+        SingleplayerTest.sleep(2000L);
+        SingleplayerTest.log("screen after rare earth GUI: " + this.screenName(mc));
+        this.openGui(mc, "slag_generator", 14, fx + 9, fy, fz + 2);
+        SingleplayerTest.sleep(2000L);
+        SingleplayerTest.log("screen after slag generator GUI: " + this.screenName(mc));
+        this.openGui(mc, "thermal_generator", 15, fx + 10, fy, fz + 2);
+        SingleplayerTest.sleep(2000L);
+        SingleplayerTest.log("screen after thermal generator GUI: " + this.screenName(mc));
+        this.openGui(mc, "turbine_solar", 16, fx + 11, fy, fz + 2);
+        SingleplayerTest.sleep(2000L);
+        SingleplayerTest.log("screen after turbine solar GUI: " + this.screenName(mc));
         this.openGui(mc, "macerator", 0, fx + 4, fy, fz);
         SingleplayerTest.sleep(3000L);
         SingleplayerTest.log("screen after macerator GUI: " + this.screenName(mc));
@@ -943,7 +1001,7 @@ public class SingleplayerTest {
                 int dx = fx + 11;
                 int dy = fy;
                 int dz = fz + 4;
-                
+
                 this.place(mc, dx, dy - 1, dz, "door_base", IC2Blocks.bronzeBrick);
                 ItemStack doorStack = new ItemStack(IC2Items.bronzeDoorItem, 1);
                 try {
@@ -1066,17 +1124,17 @@ public class SingleplayerTest {
         return n;
     }
 
-    
+
     private void round4Audit(Minecraft mc, int fx, int fy, int fz) {
         this.runOnMainThread(mc, () -> {
             try {
-                
+
                 boolean saberOff = IC2Items.nanoSaberOff != null;
                 boolean saberOn = IC2Items.nanoSaber != null;
                 SingleplayerTest.log("R4 nano saber: on_item=" + saberOn + " off_item=" + saberOff);
                 if (saberOff && saberOn) {
                     ItemStack saber = new ItemStack(IC2Items.nanoSaberOff, 1);
-                    saber.setMetadata(1); 
+                    saber.setMetadata(1);
                     int before = saber.itemID;
                     try {
                         saber = IC2Items.nanoSaberOff.onUse(saber, (World)mc.currentWorld, (Player)mc.thePlayer);
@@ -1085,7 +1143,7 @@ public class SingleplayerTest {
                     }
                     SingleplayerTest.log("R4 saber toggle: " + before + " -> " + saber.itemID + " (ожидается ID включённой)");
                 }
-                
+
                 java.util.Set<String> outputs = new java.util.HashSet<>();
                 for (Object r : Registries.RECIPES.getAllCraftingRecipes()) {
                     Object out = ((net.minecraft.core.data.registry.recipe.RecipeEntryBase)r).getOutput();
@@ -1117,10 +1175,10 @@ public class SingleplayerTest {
                 }
                 boolean compass = compassFromDiamond;
                 SingleplayerTest.log("R4 compass recipe from industrial diamond: " + (compass ? "PRESENT (FAIL — должен быть удалён)" : "absent OK"));
-                
+
                 boolean wolfReg = net.minecraft.core.entity.animal.MobWolf.ARMOR_MATERIALS.containsValue(IC2Items.bronzeWolfArmor);
                 SingleplayerTest.log("R4 wolf armor registered in MobWolf.ARMOR_MATERIALS: " + wolfReg);
-                
+
                 boolean fenceTex = TextureRegistry.getTexture("ic2:block/iron_fence") != null;
                 Block<?> fence = IC2Blocks.ironFence;
                 boolean fenceThin = false;
@@ -1131,14 +1189,14 @@ public class SingleplayerTest {
                     SingleplayerTest.log("R4 fence bounds throwable: " + String.valueOf(t));
                 }
                 SingleplayerTest.log("R4 iron fence: texture=" + fenceTex + " thin_bounds=" + fenceThin);
-                
+
                 try {
                     ic2.tileentity.TileEntitySolarGenerator solar = new ic2.tileentity.TileEntitySolarGenerator();
                     SingleplayerTest.log("R4 solar needsFuel: " + solar.needsFuel() + " (ожидается true)");
                 } catch (Throwable t) {
                     SingleplayerTest.log("R4 solar throwable: " + String.valueOf(t));
                 }
-                
+
                 try {
                     net.minecraft.core.data.registry.recipe.RecipeGroup g = Registries.RECIPES.getGroupFromKey("ic2:canner");
                     int n = g == null ? -1 : g.getAllRecipes().size();
@@ -1146,7 +1204,7 @@ public class SingleplayerTest {
                 } catch (Throwable t) {
                     SingleplayerTest.log("R4 canner recipes check throwable: " + String.valueOf(t));
                 }
-                
+
                 int uu = 0;
                 for (Object r : Registries.RECIPES.getAllCraftingRecipes()) {
                     boolean hasUU = false;
@@ -1164,20 +1222,20 @@ public class SingleplayerTest {
                     if (hasUU) ++uu;
                 }
                 SingleplayerTest.log("R4 UU recipes: " + uu + " (ожидается 28)");
-                
+
                 boolean bronzeDust = TileEntityMacerator.RECIPES.get(IC2Items.ingotBronze.id) != null;
                 SingleplayerTest.log("R4 macerator bronze ingot->dust: " + bronzeDust);
-                
+
                 boolean voff = ic2.IC2Config.voltageSystemOff();
                 SingleplayerTest.log("R4 voltageSystemOff=" + voff + " (machineExplosions=" + ic2.IC2Config.machineExplosions() + ")");
-                
+
                 int furnaceLeak = 0;
                 for (Object r : Registries.RECIPES.getAllFurnaceRecipes()) {
                     net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace fe = (net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace)r;
                     if (fe.toString().contains("macerator_") || fe.toString().contains("extractor_") || fe.toString().contains("compressor_") || fe.toString().contains("canner_")) ++furnaceLeak;
                 }
                 SingleplayerTest.log("R4 furnace leak (машинные рецепты в печи): " + furnaceLeak + " (ожидается 0)");
-                
+
                 SingleplayerTest.log("R4 SI converters installed=" + ic2.si.SIConverters.isCatalystInstalled() + " (без SI просто нет)");
             }
             catch (Throwable e) {
@@ -1209,12 +1267,12 @@ public class SingleplayerTest {
         });
     }
 
-    
+
     private void round5Audit(Minecraft mc, int fx, int fy, int fz) {
         this.runOnMainThread(mc, () -> {
             try {
                 WorldClient w = mc.currentWorld;
-                
+
                 int rx = fx + 12;
                 int rz = fz + 2;
                 this.place(mc, rx, fy, rz, "nuclear_reactor", IC2Blocks.nuclearReactor);
@@ -1243,7 +1301,7 @@ public class SingleplayerTest {
                     SingleplayerTest.log("R5 reactor: heat=" + reactor.heat + " output=" + reactor.output
                                     + " cell_meta=" + (cell == null ? -1 : cell.getMetadata())
                                     + " => " + (works ? "РАБОТАЕТ OK" : "FAIL"));
-                    
+
                     reactor.inventory[0] = null;
                     reactor.inventory[1] = null;
                 }
@@ -1259,7 +1317,7 @@ public class SingleplayerTest {
         this.runOnMainThread(mc, () -> {
             try {
                 WorldClient w = mc.currentWorld;
-                
+
                 int sx = fx + 13;
                 this.place(mc, sx, fy, fz, "solar_panel", IC2Blocks.solarPanel);
                 TileEntity teS = w.getTileEntity((TilePosc)new TilePos(sx, fy, fz));
@@ -1276,7 +1334,7 @@ public class SingleplayerTest {
                     SingleplayerTest.log("R5 solar: ночь=" + (nightOff ? "не работает OK" : "РАБОТАЕТ FAIL")
                                     + ", день=" + (dayOn ? "работает OK" : "не работает FAIL"));
                 }
-                
+
                 int mx = fx + 14;
                 this.place(mc, mx, fy, fz, "mfsu", IC2Blocks.mfsu);
                 this.place(mc, mx + 1, fy, fz, "copper_cable", IC2Blocks.cable);
@@ -1302,7 +1360,7 @@ public class SingleplayerTest {
                 boolean cableAlive = cableId == IC2Blocks.cable.id();
                 SingleplayerTest.log("R5 mfsu+cable: кабель=" + (cableAlive ? "на месте OK" : "ИСЧЕЗ FAIL")
                                 + ", batbox energy=" + batEnergy + " (" + (batEnergy > 0 ? "течёт OK (медь капит 32/т)" : "нет потока FAIL") + ")");
-                
+
                 int gx = fx + 17;
                 this.place(mc, gx, fy, fz, "magnetizer", IC2Blocks.magnetizer);
                 this.place(mc, gx, fy + 1, fz, "iron_fence_1", IC2Blocks.ironFence);
@@ -1310,7 +1368,7 @@ public class SingleplayerTest {
                 TileEntity teG = w.getTileEntity((TilePosc)new TilePos(gx, fy, fz));
                 if (teG instanceof ic2.tileentity.TileEntityMagnetizer mag) {
                     mag.energy = 100;
-                    
+
                     try {
                         Object above1 = w.getBlock(gx, fy + 1, fz);
                         String aboveName = above1 == null ? "null" : String.valueOf(above1);
@@ -1339,7 +1397,7 @@ public class SingleplayerTest {
                 int gx = fx + 17;
                 int data1 = w.getBlockData((TilePosc)new TilePos(gx, fy + 1, fz));
                 SingleplayerTest.log("R5 magnetizer: заряд ограды=" + data1 + " (" + (data1 > 0 ? "заряжается OK" : "FAIL") + ")");
-                
+
                 int ok = 0;
                 String[] bases = new String[]{"re_battery", "energy_crystal", "lapotron_crystal"};
                 String[] states = new String[]{"_full", "_75", "_50", "_25", "_empty"};
@@ -1351,7 +1409,7 @@ public class SingleplayerTest {
                     }
                 }
                 SingleplayerTest.log("R5 battery charge textures: " + ok + "/15 (" + (ok == 15 ? "OK" : "FAIL") + ")");
-                
+
                 int hudOk = 0;
                 String[] armor = new String[]{"bronze_helmet", "nanosuit_helmet", "quantum_boots", "jetpack"};
                 for (String a : armor) {
@@ -1360,7 +1418,7 @@ public class SingleplayerTest {
                     }
                 }
                 SingleplayerTest.log("R5 armor bar icons: " + hudOk + "/4 (" + (hudOk == 4 ? "OK" : "FAIL") + ")");
-                
+
                 try {
                     net.minecraft.core.data.registry.recipe.RecipeNamespace ns =
                                     (net.minecraft.core.data.registry.recipe.RecipeNamespace)Registries.RECIPES.getItem("ic2");
@@ -1377,7 +1435,7 @@ public class SingleplayerTest {
                 catch (Throwable t) {
                     SingleplayerTest.log("R5 TMB groups check failed: " + String.valueOf(t));
                 }
-                
+
                 try {
                     int planks = 0;
                     for (Object r : Registries.RECIPES.getAllCraftingRecipes()) {
@@ -1401,14 +1459,14 @@ public class SingleplayerTest {
     }
 
     private void round6Audit(Minecraft mc, int fx, int fy, int fz) {
-        
-        
+
+
         final int ty = fy + 8;
         final int cx = fx + 24;
         this.runOnMainThread(mc, () -> {
             try {
                 WorldClient w = mc.currentWorld;
-                
+
                 int[] metas = new int[]{0, 2, 5, 9, 10};
                 int[] expect = new int[]{33, 129, 2049, 513, 4};
                 String[] names = new String[]{"медь", "золото", "HV", "стекло", "олово"};
@@ -1429,12 +1487,12 @@ public class SingleplayerTest {
                     ++i;
                 }
                 SingleplayerTest.log("R6 cable types: " + okTypes + "/5 " + (okTypes == 5 ? "OK" : "FAIL"));
-                
+
                 for (int j = 0; j < metas.length; ++j) {
                     w.setBlockWithNotify(cx + j * 2, ty, fz, 0);
                 }
-                
-                
+
+
                 int mx = cx + 1;
                 int mz = fz + 6;
                 this.place(mc, mx, ty, mz, "mfsu_r6", IC2Blocks.mfsu);
@@ -1460,7 +1518,7 @@ public class SingleplayerTest {
                 int mz = fz + 6;
                 TileEntity teB = w.getTileEntity((TilePosc)new TilePos(mx + 2, ty, mz));
                 copperEnergy[0] = teB instanceof TileEntityElectricBlock bat ? bat.energy : -1;
-                
+
                 try {
                     TileEntity teSrc = w.getTileEntity((TilePosc)new TilePos(mx, ty, mz));
                     if (teSrc instanceof IEnergySource srcTE) {
@@ -1476,8 +1534,8 @@ public class SingleplayerTest {
                     SingleplayerTest.log("R6 copper manual emit failed: " + String.valueOf(t));
                 }
                 SingleplayerTest.log("R6 throughput медь: batbox=" + copperEnergy[0] + " EU за 2с, ручной пакет 512 -> +" + copperRate[0] + " EU (кап 32)");
-                
-                
+
+
                 int bx = mx + 6;
                 w.setBlockWithNotify(mx + 2, ty, mz, 0);
                 w.setBlockWithNotify(mx + 1, ty, mz, 0);
@@ -1495,7 +1553,7 @@ public class SingleplayerTest {
             }
         });
         SingleplayerTest.sleep(2000L);
-        
+
         this.runOnMainThread(mc, () -> {
             try {
                 WorldClient w = mc.currentWorld;
@@ -1504,7 +1562,7 @@ public class SingleplayerTest {
                 int bx = mx + 6;
                 boolean overvoltBoom = w.getBlockId(bx + 2, ty, mz) == 0;
                 SingleplayerTest.log("R6 overvoltage: BatBox под 512 EU/t " + (overvoltBoom ? "взорвался OK (ориг. IC2)" : "цел FAIL"));
-                
+
                 int hx = mx + 10;
                 this.place(mc, hx, ty, mz, "mfsu_hv_r6", IC2Blocks.mfsu);
                 w.setBlockTypeDataNotify((TilePosc)new TilePos(hx + 1, ty, mz), IC2Blocks.cable, 5);
@@ -1540,7 +1598,7 @@ public class SingleplayerTest {
                 TileEntity teMfsu = w.getTileEntity((TilePosc)new TilePos(hx, ty, mz));
                 int mfsuE = teMfsu instanceof TileEntityElectricBlock m2 ? m2.energy : -1;
                 int hvEnergy = teB instanceof TileEntityElectricBlock bat ? bat.energy : -1;
-                
+
                 int hvRate = -1;
                 try {
                     if (teMfsu instanceof IEnergySource srcTE) {
@@ -1557,7 +1615,7 @@ public class SingleplayerTest {
                 }
                 boolean pass = copperRate[0] >= 0 && hvRate > copperRate[0] * 2;
                 SingleplayerTest.log("R6 throughput: медь=" + copperRate[0] + " EU/пакет, HV=" + hvRate + " EU/пакет (512 с самозамыканием источника, без капа = 255) => " + (pass ? "медь ограничена, HV быстрее OK" : "РАЗНИЦЫ НЕТ FAIL") + " [data=" + dRead + " teBD=" + bdRead + " блок=" + hvBlock + " ист=" + mfsuE + " накоплено=" + hvEnergy + "]");
-                
+
                 w.setBlockWithNotify(bx + 1, ty, mz, 0);
                 w.setBlockWithNotify(bx, ty, mz, 0);
                 w.setBlockWithNotify(hx + 2, ty, mz, 0);
@@ -1566,14 +1624,14 @@ public class SingleplayerTest {
                 w.setBlockWithNotify(mx + 2, ty, mz, 0);
                 w.setBlockWithNotify(mx + 1, ty, mz, 0);
                 w.setBlockWithNotify(mx, ty, mz, 0);
-                
+
                 boolean noRaw = true;
                 try {
                     IC2Items.class.getField("rawUranium");
                     noRaw = false;
                 }
                 catch (NoSuchFieldException noSuchFieldException) {
-                    
+
                 }
                 SingleplayerTest.log("R6 uranium merge: rawUranium удалён=" + (noRaw ? "OK" : "FAIL") + ", uraniumItem=" + (IC2Items.uraniumItem != null ? "есть OK" : "нет FAIL"));
             }
@@ -1581,12 +1639,12 @@ public class SingleplayerTest {
                 SingleplayerTest.log("R6 throughput check failed: " + String.valueOf(e));
             }
         });
-        
+
         final int rx = fx + 140;
         final int rz = fz + 140;
         final int ry = fy + 4;
         try {
-            
+
             mc.currentWorld.setBlockWithNotify(fx + 60, fy, fz + 60, Blocks.STONE.id());
             mc.thePlayer.moveTo((double)fx + 60.5, (double)(fy + 1), (double)fz + 60.5, 0.0f, 0.0f);
             SingleplayerTest.log("R6 meltdown: телепорт для загрузки чанков (дистанция до реактора ~113 > 80 радиуса урона)");
@@ -1598,7 +1656,7 @@ public class SingleplayerTest {
         this.runOnMainThread(mc, () -> {
             try {
                 WorldClient w = mc.currentWorld;
-                
+
                 w.setBlockWithNotify(rx, ry - 1, rz, Blocks.STONE.id());
                 int[][] markers = new int[][]{{6, 0}, {-6, 0}, {10, 0}, {-10, 0}, {0, 6}, {0, -6}, {0, 14}, {14, 0}};
                 for (int[] m : markers) {
@@ -1639,8 +1697,8 @@ public class SingleplayerTest {
     }
 
     private void round7Audit(Minecraft mc, int fx, int fy, int fz) {
-        
-        
+
+
         final int ty = fy + 8;
         final int cx = fx + 24;
         final int[] types = new int[]{0, 2, 5, 9, 10};
@@ -1805,7 +1863,7 @@ public class SingleplayerTest {
         return -1;
     }
 
-    
+
     private void round8Audit(Minecraft mc) {
         this.runOnMainThread(mc, () -> {
             RecipeRegistry original = Registries.RECIPES;
@@ -1825,11 +1883,11 @@ public class SingleplayerTest {
                                 + this.countRecipesIn(original, "ic2", "extractor")
                                 + this.countRecipesIn(original, "ic2", "compressor")
                                 + this.countRecipesIn(original, "ic2", "canner");
-                
+
                 Registries.RECIPES = new RecipeRegistry();
-                
+
                 ic2.IC2Recipes.initNamespaces();
-                
+
                 int synced = 0;
                 String firstFail = null;
                 for (String json : ic2Jsons) {
@@ -1857,7 +1915,7 @@ public class SingleplayerTest {
                                 + (uuAfter == uuBefore && uuBefore > 0 ? "OK" : "FAIL"));
                 SingleplayerTest.log("R8 machine groups: before=" + machineBefore + " after=" + machineAfter + " "
                                 + (machineAfter == machineBefore && machineBefore > 0 ? "OK" : "FAIL"));
-                
+
                 net.minecraft.core.data.registry.recipe.RecipeNamespace nsNow = Registries.RECIPES.getItem("ic2");
                 boolean shells = nsNow != null
                                 && nsNow.getItem("macerator") != null
@@ -1919,11 +1977,26 @@ public class SingleplayerTest {
         }
     }
 
+    private void placeCable(Minecraft mc, int x, int y, int z, String key, int type) {
+        try {
+            if (IC2Blocks.cable == null) {
+                SingleplayerTest.log("  cable block missing: " + key);
+                return;
+            }
+            mc.currentWorld.setBlockWithNotify(x, y, z, IC2Blocks.cable.id());
+            mc.currentWorld.setBlockMetadataWithNotify(x, y, z, type);
+            SingleplayerTest.log("  placed cable " + key + " type " + type + " -> " + mc.currentWorld.getBlockId(x, y, z) + "/" + mc.currentWorld.getBlockData((TilePosc)new TilePos(x, y, z)));
+        }
+        catch (Throwable e) {
+            SingleplayerTest.log("  FAILED placing cable " + key + ": " + String.valueOf(e));
+        }
+    }
+
     private String screenName(Minecraft mc) {
         return mc.currentScreen != null ? mc.currentScreen.getClass().getSimpleName() : "null";
     }
 
-    
+
     private static void log(String s) {
         IC2.LOGGER.info("[SP-TEST] " + s);
         List<String> list = results;
@@ -1932,7 +2005,7 @@ public class SingleplayerTest {
         }
     }
 
-    
+
     private static void finish() {
         finished = true;
         IC2.LOGGER.info("[SP-TEST] ===== RESULTS =====");
@@ -1959,11 +2032,11 @@ public class SingleplayerTest {
             Thread.sleep(ms);
         }
         catch (InterruptedException interruptedException) {
-            
+
         }
     }
 
-    
+
     private static void cableDebugAudit(Minecraft mc, int fx, int fz, int fy) {
         try {
             World w = mc.currentWorld;

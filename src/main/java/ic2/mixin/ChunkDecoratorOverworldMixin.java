@@ -9,6 +9,7 @@ import ic2.worldgen.WorldFeatureRubberTree;
 import it.unimi.dsi.fastutil.ints.Int2IntArrayMap;
 import java.util.Map;
 import java.util.Random;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.Biome;
@@ -89,7 +90,7 @@ public class ChunkDecoratorOverworldMixin {
                 new WorldFeatureOre(variants, 6).place(this.world, rand, (TilePosc)new TilePos(x, y, z));
             }
         }
-        if (IC2Config.config.getBoolean("WorldGen.uraniumEnabled")) {
+        if (IC2Config.config.getBoolean("WorldGen.uraniumEnabled") && !FabricLoader.getInstance().isModLoaded("deep")) {
             variants = new Int2IntArrayMap();
             for (Block b : new Block[]{IC2Blocks.oreUranium, IC2Blocks.oreUraniumBasalt, IC2Blocks.oreUraniumLimestone, IC2Blocks.oreUraniumGranite, IC2Blocks.oreUraniumPermafrost}) {
                 variants.putAll((Map)((BlockLogicIC2Ore)b.getLogic()).variantMap);

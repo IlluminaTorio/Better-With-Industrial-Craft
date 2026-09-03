@@ -22,8 +22,8 @@ implements IEnergySource {
     public TileEntitySignalumToEU() {
         this.fluidContents = new FluidStack[1];
         this.fluidCapacity = new int[1];
-        
-        
+
+
         this.fluidCapacity[0] = SIEnergy.TANK_CAPACITY;
         this.transferSpeed = SIEnergy.TRANSFER;
         this.acceptedFluids = new ArrayList();
@@ -56,8 +56,8 @@ implements IEnergySource {
         if (this.worldObj.isClientSide) {
             return;
         }
-        
-        
+
+
         if (this.euStored < SIEnergy.EU_BUFFER) {
             FluidStack stack = this.getFluidInSlot(0);
             if (stack != null && stack.amount > 0) {

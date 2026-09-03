@@ -15,7 +15,7 @@ extends net.minecraft.client.render.item.model.ItemModelStandard {
         private final String[] textures;
         private final IconCoordinate[] icons;
 
-        
+
         public ItemModelBattery(@NotNull Item item, String baseKey, String[] suffixes) {
                 super(item, false);
                 this.textures = suffixes;

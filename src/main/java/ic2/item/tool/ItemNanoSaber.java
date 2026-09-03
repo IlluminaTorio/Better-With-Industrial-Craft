@@ -36,7 +36,7 @@ public class ItemNanoSaber extends ElectricItem {
 		if (!this.active) {
 			return true;
 		}
-		
+
 		if (target instanceof Player enemy) {
 			for (int i = 0; i < 4; ++i) {
 				ItemStack armor = enemy.inventory.armorInventory[i];
@@ -61,7 +61,7 @@ public class ItemNanoSaber extends ElectricItem {
 		return true;
 	}
 
-	
+
 	@Override
 	public net.minecraft.core.item.ItemStack onUse(@NotNull ItemStack itemstack, @NotNull World world, @NotNull Player entityplayer) {
 		if (world.isClientSide) {
@@ -77,7 +77,7 @@ public class ItemNanoSaber extends ElectricItem {
 		return itemstack;
 	}
 
-	
+
 	public static void timedLoss(Player player) {
 		if (++ticker % 16 != 0) {
 			return;
@@ -97,7 +97,7 @@ public class ItemNanoSaber extends ElectricItem {
 		}
 	}
 
-	
+
 	public static void drainSaber(ItemStack saber, int damage) {
 		if (saber.getMetadata() + damage >= saber.getMaxDamage() - 1) {
 			saber.itemID = IC2Items.nanoSaberOff.id;

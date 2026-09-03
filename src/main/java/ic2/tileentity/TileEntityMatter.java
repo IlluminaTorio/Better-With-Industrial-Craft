@@ -118,5 +118,10 @@ extends TileEntityElecMachine {
     public String getMachineName() {
         return "Mass Fabricator";
     }
+
+    @Override
+    public int[] getQuickGrabSlots() {
+        return new int[]{1};
+    }
 }
 

@@ -31,6 +31,11 @@ TMBEntrypoint {
     public static IC2MachineRecipeCategory compressorCategory;
     public static IC2MachineRecipeCategory cannerCategory;
     public static IC2MachineRecipeCategory massFabricatorCategory;
+    public static IC2MachineRecipeCategory woodGasserCategory;
+    public static IC2MachineRecipeCategory plasmafierCategory;
+    public static IC2MachineRecipeCategory rareEarthExtractorCategory;
+    public static IC2MachineRecipeCategory slowGrinderCategory;
+    public static IC2MachineRecipeCategory electrolyzerCategory;
 
     public String getName() {
         return IC2.MOD_ID;
@@ -42,6 +47,11 @@ TMBEntrypoint {
         compressorCategory = (IC2MachineRecipeCategory)runtime.getRecipeIndex().registerCategory((IRecipeCategory)new IC2MachineRecipeCategory("Compressor", IC2Blocks.compressor.getDefaultStack()));
         cannerCategory = (IC2MachineRecipeCategory)runtime.getRecipeIndex().registerCategory((IRecipeCategory)new IC2MachineRecipeCategory("Canning Machine", IC2Blocks.canner.getDefaultStack()));
         massFabricatorCategory = (IC2MachineRecipeCategory)runtime.getRecipeIndex().registerCategory((IRecipeCategory)new IC2MachineRecipeCategory("Mass Fabricator", IC2Blocks.massFabricator.getDefaultStack()));
+        woodGasserCategory = (IC2MachineRecipeCategory)runtime.getRecipeIndex().registerCategory((IRecipeCategory)new IC2MachineRecipeCategory("Wood Gasifier", IC2Blocks.woodGasser.getDefaultStack()));
+        plasmafierCategory = (IC2MachineRecipeCategory)runtime.getRecipeIndex().registerCategory((IRecipeCategory)new IC2MachineRecipeCategory("Plasmafier", IC2Blocks.plasmafier.getDefaultStack()));
+        rareEarthExtractorCategory = (IC2MachineRecipeCategory)runtime.getRecipeIndex().registerCategory((IRecipeCategory)new IC2MachineRecipeCategory("Rare Earth Extractor", IC2Blocks.rareEarthExtractor.getDefaultStack()));
+        slowGrinderCategory = (IC2MachineRecipeCategory)runtime.getRecipeIndex().registerCategory((IRecipeCategory)new IC2MachineRecipeCategory("Slow Grinder", IC2Blocks.slowGrinder.getDefaultStack()));
+        electrolyzerCategory = (IC2MachineRecipeCategory)runtime.getRecipeIndex().registerCategory((IRecipeCategory)new IC2MachineRecipeCategory("Electrolyzer", IC2Blocks.electrolyzer.getDefaultStack()));
     }
 
     public void registerRecipeCatalysts(ITMBRuntime runtime) {
@@ -50,6 +60,12 @@ TMBEntrypoint {
         runtime.getRecipeIndex().registerCatalyst((IRecipeCategory)compressorCategory, (ITypedIngredient)TypedIngredient.itemStackIngredient((ItemStack)IC2Blocks.compressor.getDefaultStack()));
         runtime.getRecipeIndex().registerCatalyst((IRecipeCategory)cannerCategory, (ITypedIngredient)TypedIngredient.itemStackIngredient((ItemStack)IC2Blocks.canner.getDefaultStack()));
         runtime.getRecipeIndex().registerCatalyst((IRecipeCategory)massFabricatorCategory, (ITypedIngredient)TypedIngredient.itemStackIngredient((ItemStack)IC2Blocks.massFabricator.getDefaultStack()));
+        runtime.getRecipeIndex().registerCatalyst((IRecipeCategory)woodGasserCategory, (ITypedIngredient)TypedIngredient.itemStackIngredient((ItemStack)IC2Blocks.woodGasser.getDefaultStack()));
+        runtime.getRecipeIndex().registerCatalyst((IRecipeCategory)woodGasserCategory, (ITypedIngredient)TypedIngredient.itemStackIngredient((ItemStack)IC2Blocks.woodGasserElec.getDefaultStack()));
+        runtime.getRecipeIndex().registerCatalyst((IRecipeCategory)plasmafierCategory, (ITypedIngredient)TypedIngredient.itemStackIngredient((ItemStack)IC2Blocks.plasmafier.getDefaultStack()));
+        runtime.getRecipeIndex().registerCatalyst((IRecipeCategory)rareEarthExtractorCategory, (ITypedIngredient)TypedIngredient.itemStackIngredient((ItemStack)IC2Blocks.rareEarthExtractor.getDefaultStack()));
+        runtime.getRecipeIndex().registerCatalyst((IRecipeCategory)slowGrinderCategory, (ITypedIngredient)TypedIngredient.itemStackIngredient((ItemStack)IC2Blocks.slowGrinder.getDefaultStack()));
+        runtime.getRecipeIndex().registerCatalyst((IRecipeCategory)electrolyzerCategory, (ITypedIngredient)TypedIngredient.itemStackIngredient((ItemStack)IC2Blocks.electrolyzer.getDefaultStack()));
     }
 
     public void registerRecipes(ITMBRuntime runtime) {
@@ -58,6 +74,11 @@ TMBEntrypoint {
         runtime.getRecipeIndex().registerRecipes((IRecipeCategory)compressorCategory, IC2TMBPlugin.getMachineRecipes("compressor"), IC2MachineRecipeTranslator::new);
         runtime.getRecipeIndex().registerRecipes((IRecipeCategory)cannerCategory, IC2TMBPlugin.getCannerRecipes(), IC2MachineRecipeTranslator::new);
         runtime.getRecipeIndex().registerRecipes((IRecipeCategory)massFabricatorCategory, IC2TMBPlugin.getMachineRecipes("mass_fabricator"), IC2MachineRecipeTranslator::new);
+        runtime.getRecipeIndex().registerRecipes((IRecipeCategory)woodGasserCategory, IC2TMBPlugin.getMachineRecipes("wood_gasser"), IC2MachineRecipeTranslator::new);
+        runtime.getRecipeIndex().registerRecipes((IRecipeCategory)plasmafierCategory, IC2TMBPlugin.getMachineRecipes("plasmafier"), IC2MachineRecipeTranslator::new);
+        runtime.getRecipeIndex().registerRecipes((IRecipeCategory)rareEarthExtractorCategory, IC2TMBPlugin.getMachineRecipes("rare_earth_extractor"), IC2MachineRecipeTranslator::new);
+        runtime.getRecipeIndex().registerRecipes((IRecipeCategory)slowGrinderCategory, IC2TMBPlugin.getMachineRecipes("slow_grinder"), IC2MachineRecipeTranslator::new);
+        runtime.getRecipeIndex().registerRecipes((IRecipeCategory)electrolyzerCategory, IC2TMBPlugin.getMachineRecipes("electrolyzer"), IC2MachineRecipeTranslator::new);
     }
 
     private static List<RecipeEntryBase<RecipeSymbol, ItemStack, Void>> getMachineRecipes(String group) {
@@ -72,8 +93,8 @@ TMBEntrypoint {
                 return result;
             }
             for (Object entryObj : g.getAllRecipes()) {
-                
-                
+
+
                 if (entryObj instanceof RecipeEntryIC2Machine) {
                     result.add((RecipeEntryIC2Machine)entryObj);
                     continue;
@@ -100,7 +121,7 @@ TMBEntrypoint {
                     result.add(new RecipeEntryFurnace(new RecipeSymbol(item.getDefaultStack()), filled));
                 }
                 catch (Throwable throwable) {
-                    
+
                 }
                 if (result.size() < 32) {
                     continue;

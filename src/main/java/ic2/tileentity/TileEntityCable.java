@@ -77,6 +77,7 @@ implements IEnergyConductor {
             case 8 -> 0.8;
             case 9 -> 0.025;
             case 10 -> 0.001;
+            case 11 -> ic2.IC2Config.plasmaCableLoss();
             default -> 0.01;
         };
     }
@@ -95,6 +96,7 @@ implements IEnergyConductor {
             case 8 -> 9001;
             case 9 -> 9001;
             case 10 -> 0;
+            case 11 -> 4096;
             default -> 0;
         };
     }
@@ -118,6 +120,7 @@ implements IEnergyConductor {
             case 8 -> 2049;
             case 9 -> 513;
             case 10 -> 4;
+            case 11 -> 4097;
             default -> 0;
         };
     }

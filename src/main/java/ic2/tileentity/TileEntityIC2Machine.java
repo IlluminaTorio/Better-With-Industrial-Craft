@@ -128,5 +128,13 @@ implements Container {
             this.inventory[i] = null;
         }
     }
+
+
+
+
+
+    public int[] getQuickGrabSlots() {
+        return new int[0];
+    }
 }
 

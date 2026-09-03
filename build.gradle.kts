@@ -60,6 +60,14 @@ dependencies {
 
         // Only required for development/launch at runtime, won't be part of any builds
         localRuntime(libs.modMenu) // Optional, can be removed
+        // Runtime deps for cross-mod compatibility testing (IC2 + SI + catalyst)
+        localRuntime("sunsetsatellite:catalyst-core:3.0.2") { isTransitive = false }
+        localRuntime("sunsetsatellite:catalyst-energy:3.0.1") { isTransitive = false }
+        localRuntime("sunsetsatellite:catalyst-fluids:3.0.2") { isTransitive = false }
+        localRuntime("sunsetsatellite:catalyst-multiblocks:3.0.1") { isTransitive = false }
+        localRuntime("sunsetsatellite:catalyst-screens:1.0.1") { isTransitive = false }
+        localRuntime(files("../runtime_deps/signalindustries-0.28.0.jar"))
+        localRuntime(files("libs/deep-1.0.1+8.0.jar")) // Cross-mod compat dev testing (DEEP); remove if not needed
         localRuntime(files("libs/tmb-2.2.2.jar")) // TMB for dev runtime testing
         localRuntime(files("libs/btwaila-1.3.1.jar")) // BTWaila for dev runtime testing
         runtimeClasspath(libs.clientJar)

@@ -70,6 +70,7 @@ implements ModInitializer {
         CommonEvents.RECIPES_NAMESPACE_INIT.listen(Key.of((String)MOD_ID), IC2Recipes::initNamespaces);
         CommonEvents.RECIPES_READY.listen(Key.of((String)MOD_ID), IC2Recipes::onRecipesReady);
         IC2Network.init();
+        ic2.peripherals.IC2Peripherals.init();
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
             try {
                 IC2Network.GuiOpener opener = (IC2Network.GuiOpener)Class.forName("ic2.net.ServerGuiOpener").getDeclaredConstructor(new Class[0]).newInstance(new Object[0]);
@@ -119,6 +120,19 @@ implements ModInitializer {
         TileEntityDispatcher.addMapping(TileEntityTradeOMat.class, (NamespaceID)IC2.id("trade_o_mat"));
         TileEntityDispatcher.addMapping(TileEntityTeleporter.class, (NamespaceID)IC2.id("teleporter"));
         TileEntityDispatcher.addMapping(TileEntityTesla.class, (NamespaceID)IC2.id("tesla_coil"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntitySlagGenerator.class, (NamespaceID)IC2.id("slag_generator"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityThermalGenerator.class, (NamespaceID)IC2.id("thermal_generator"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityTurbineSolar.class, (NamespaceID)IC2.id("turbine_solar"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityOceanCurrentGenerator.class, (NamespaceID)IC2.id("ocean_generator"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityWaveGenerator.class, (NamespaceID)IC2.id("wave_generator"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityWoodGasser.class, (NamespaceID)IC2.id("wood_gasser"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityWoodGasserElec.class, (NamespaceID)IC2.id("wood_gasser_elec"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntitySlowGrinder.class, (NamespaceID)IC2.id("slow_grinder"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityRareEarthExtractor.class, (NamespaceID)IC2.id("rare_earth_extractor"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityPlasmafier.class, (NamespaceID)IC2.id("plasmafier"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityPESU.class, (NamespaceID)IC2.id("pesu"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityTransformerIV.class, (NamespaceID)IC2.id("transformer_iv"));
+        TileEntityDispatcher.addMapping(ic2.tileentity.TileEntityIridiumStone.class, (NamespaceID)IC2.id("iridium_stone"));
     }
 
     public static NamespaceID id(String id) {
@@ -143,9 +157,64 @@ implements ModInitializer {
     public void beforeGameStart() {
     }
 
+
+
+
+
+
+
+
+    private static void verifyIdWindows() {
+        try {
+            int bMin = Integer.MAX_VALUE;
+            int bMax = 0;
+            int iMin = Integer.MAX_VALUE;
+            int iMax = 0;
+            String[] blockKeys = ic2.IC2Config.blockKeys();
+            String[] itemKeys = ic2.IC2Config.itemKeys();
+            for (String k : blockKeys) {
+                int id = ic2.IC2Config.block(k);
+                if (id < bMin) bMin = id;
+                if (id > bMax) bMax = id;
+            }
+            for (String k : itemKeys) {
+                int id = ic2.IC2Config.item(k);
+                if (id < iMin) iMin = id;
+                if (id > iMax) iMax = id;
+            }
+            java.util.List<String> foreign = new java.util.ArrayList<String>();
+            for (int id = bMin; id <= bMax && id < net.minecraft.core.block.Blocks.blocksList.length; ++id) {
+                net.minecraft.core.block.Block<?> b = net.minecraft.core.block.Blocks.getBlock(id);
+                if (b != null && !"ic2".equals(b.namespaceId().namespace())) {
+                    foreign.add(b.namespaceId() + " @ " + id);
+                }
+            }
+            for (int id = iMin; id <= iMax && id < net.minecraft.core.item.Item.itemsList.length; ++id) {
+                net.minecraft.core.item.Item it = net.minecraft.core.item.Item.getItem(id);
+                if (it != null && !"ic2".equals(it.namespaceID.namespace())) {
+                    foreign.add(it.namespaceID + " @ " + id);
+                }
+            }
+            if (!foreign.isEmpty()) {
+                LOGGER.error("[IC2] {} foreign block(s)/item(s) detected inside IC2's configured ID windows ({}..{}, {}..{}): {}",
+                    foreign.size(), bMin, bMax, iMin, iMax, String.join(", ", foreign.subList(0, Math.min(8, foreign.size()))));
+                LOGGER.error("[IC2] This usually means overlapping mod configs. Delete config/ic2.cfg (and the other mod's config) so both mods can re-map to free IDs. Machines of the other mod may misbehave otherwise.");
+            } else {
+                LOGGER.info("[IC2] ID windows clean: blocks {}..{}, items {}..{}.", bMin, bMax, iMin, iMax);
+            }
+        }
+        catch (Throwable t) {
+            LOGGER.warn("[IC2] ID window self-check failed: {}", (Object)t.toString());
+        }
+    }
+
     public void afterGameStart() {
         IC2Recipes.verifyRecipesSerializable();
+        IC2.verifyIdWindows();
         IC2Recipes.verifyDedicatedClientSync();
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER) {
+            ic2.server.ServerMachineTest.armIfNeeded();
+        }
         LOGGER.info("IndustrialCraft 2 loaded. Remember: safety first!");
     }
 }

@@ -395,5 +395,10 @@ extends TileEntityElecMachine {
     public String getMachineName() {
         return "Miner";
     }
+
+    @Override
+    public int[] getQuickGrabSlots() {
+        return new int[]{3};
+    }
 }
 

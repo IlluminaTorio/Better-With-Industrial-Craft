@@ -20,11 +20,11 @@ public class BlockLogicIronFence extends BlockLogicFence {
 
         public BlockLogicIronFence(Block<?> block) {
                 super(block);
-                
+
                 this.material = Materials.METAL;
         }
 
-        
+
         private boolean isPole(WorldSource world, int x, int y, int z) {
                 return world.getBlock(x - 1, y, z) != this.block
                                                 && world.getBlock(x + 1, y, z) != this.block
@@ -50,8 +50,8 @@ public class BlockLogicIronFence extends BlockLogicFence {
                 ItemStack shoes = player.inventory.armorInventory[0];
                 if (shoes != null) {
                         int id = shoes.getItem().id;
-                        
-                        
+
+
                         if (id == Items.ARMOR_BOOTS_IRON.id
                                                         || id == Items.ARMOR_BOOTS_GOLD.id
                                                         || id == Items.ARMOR_BOOTS_DIAMOND.id
@@ -71,8 +71,8 @@ public class BlockLogicIronFence extends BlockLogicFence {
                                 }
                         }
                 } else {
-                        
-                        
+
+
                         int data = world.getBlockData(tilePos);
                         if (data > 0) {
                                 if (world.isClientSide) {

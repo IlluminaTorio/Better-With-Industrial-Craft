@@ -122,7 +122,7 @@ tile.ic2.personal.trade_o_mat.name=Trade-O-Mat
 tile.ic2.personal.trade_o_mat.desc=An automatic trading machine: offer items, receive payment.
 
 tile.ic2.machine.teleporter.name=Teleporter
-tile.ic2.machine.teleporter.desc=Teleports players across the world using paired frequency transmitters.
+tile.ic2.machine.teleporter.desc=Paired teleporter. Left-click with a frequency transmitter to store this teleporter's frequency, right-click another teleporter with it to link. Teleports players and mobs standing on it to the linked teleporter, burning EU based on distance and cargo. Feeds from an internal buffer (cables) or adjacent storage blocks.
 
 tile.ic2.machine.tesla_coil.name=Tesla Coil
 tile.ic2.machine.tesla_coil.desc=Zaps hostile mobs with stored electricity.
@@ -132,6 +132,15 @@ tile.ic2.reinforced.stone.desc=An extremely blast-resistant construction materia
 
 tile.ic2.reinforced.glass.name=Reinforced Glass
 tile.ic2.reinforced.glass.desc=Blast-resistant glass for safe reactor containment.
+
+tile.ic2.mesh.steel.name=Steel Mesh
+tile.ic2.mesh.steel.desc=A sturdy blast-resistant steel grating. Items fall through the gaps. Perfect industrial flooring.
+
+tile.ic2.mesh.steel.crude.name=Crude Steel Mesh
+tile.ic2.mesh.steel.crude.desc=A rough grating of crude steel. Items fall through the gaps.
+
+tile.ic2.glass.quartz.name=Quartz Glass
+tile.ic2.glass.quartz.desc=Crystal-clear glass made from quartz. Clean laboratory look.
 
 tile.ic2.door.reinforced.bottom.name=Reinforced Door
 tile.ic2.door.reinforced.bottom.desc=A heavy-duty blast-resistant door.
@@ -205,6 +214,15 @@ item.ic2.dust.bronze.small.name=Small Pile of Bronze Dust
 item.ic2.dust.bronze.small.desc=A partial pile of bronze dust. Combine 9 into a full pile.
 item.ic2.dust.steel.small.name=Small Pile of Steel Dust
 item.ic2.dust.steel.small.desc=A partial pile of steel dust. Combine 9 into a full pile.
+
+item.ic2.dust.silver.name=Silver Dust
+item.ic2.dust.silver.desc=Silver ground into dust. Smelt into silver ingots or mix alloys.
+
+item.ic2.dust.lead.name=Lead Dust
+item.ic2.dust.lead.desc=Lead ground into dust. Smelt into lead ingots. Heavy stuff.
+
+item.ic2.dust.uranium.name=Uranium Dust
+item.ic2.dust.uranium.desc=Ground uranium ore. Smelt into refined uranium. Handle with care.
 
 item.ic2.ingot.refined_iron.name=Refined Iron Ingot
 item.ic2.ingot.refined_iron.desc=A metal bar of refined iron. The base of all industrial machinery.
@@ -314,7 +332,7 @@ item.ic2.scanner.ov.name=OV Scanner
 item.ic2.scanner.ov.desc=An advanced ore scanner with extended range.
 
 item.ic2.frequency_transmitter.name=Frequency Transmitter
-item.ic2.frequency_transmitter.desc=Pairs teleporters by storing their coordinates.
+item.ic2.frequency_transmitter.desc=Left-click a teleporter to store its frequency, then right-click another teleporter to link it as target.
 
 item.ic2.fuel_can.empty.name=Fuel Can (Empty)
 item.ic2.fuel_can.empty.desc=A tin can for liquid fuel. Fill it in a canning machine.
@@ -525,6 +543,8 @@ item.ic2.cable_glass_fibre.desc=Ultra-low loss cable: 0.025 EU per block, up to 
 
 item.ic2.cable_tin.name=Ultra-Low-Current Cable
 item.ic2.cable_tin.desc=Tin cable with 0.001 EU loss per block. Carries only up to 3 EU/t.
+item.ic2.cable_plasma.name=Plasma Cable
+item.ic2.cable_plasma.desc=Superconducting plasma conduit: 0.1 EU loss per block, up to 4096 EU/t.
 
 item.ic2.tool.painter.black.name=Black Painter
 item.ic2.tool.painter.black.desc=Paints cables and blocks black.
@@ -665,3 +685,61 @@ tile.ic2.machine.converter_eu_to_energy.name=EU to Catalyst Energy Converter
 tile.ic2.machine.converter_eu_to_energy.desc=Converts IC2 EU into universal Catalyst energy (1 EU = 10 E). Powers Catalyst machines directly. Only draws power when the Catalyst network needs it.
 tile.ic2.machine.converter_energy_to_eu.name=Catalyst Energy to EU Converter
 tile.ic2.machine.converter_energy_to_eu.desc=Converts universal Catalyst energy into IC2 EU (10 E = 1 EU). Only draws energy when the EU side needs it.
+
+tile.ic2.generator.slag.name=Slag Generator
+tile.ic2.generator.slag.desc=Burns scrap and junk into energy, occasionally producing fresh scrap. The recycler's best friend.
+tile.ic2.generator.thermal.name=Thermal Generator
+tile.ic2.generator.thermal.desc=Advanced geothermal unit. Burns lava at high efficiency and trickles power from ambient heat. Bury it for passive gains.
+tile.ic2.generator.turbine_solar.name=Turbine Solar
+tile.ic2.generator.turbine_solar.desc=Sun-boiled water drives a turbine. Feed it water and it steadily converts heat into EU.
+tile.ic2.generator.ocean.name=Ocean Current Generator
+tile.ic2.generator.ocean.desc=Harvests deep ocean currents. Submerge it in open still water for best results.
+tile.ic2.generator.wave.name=Wave Generator
+tile.ic2.generator.wave.desc=Reads wave fetch facing its front. Point it down a long stretch of still water; storms supercharge it.
+tile.ic2.machine.wood_gasser.name=Wood Gasifier
+tile.ic2.machine.wood_gasser.desc=Burns fuel to smelt wood into charcoal while distilling wood gas into cells.
+tile.ic2.machine.wood_gasser_elec.name=Electric Wood Gasifier
+tile.ic2.machine.wood_gasser_elec.desc=Electrically heated gasifier. Smelts wood to charcoal and fills cells with wood gas.
+tile.ic2.machine.slow_grinder.name=Slow Grinder
+tile.ic2.machine.slow_grinder.desc=A patient recycler with a huge buffer. Toggle speed: faster grinding wastes more and yields less scrap.
+tile.ic2.machine.rare_earth_extractor.name=Rare Earth Extractor
+tile.ic2.machine.rare_earth_extractor.desc=Condenses trace rare earths out of common rubble. Feed it cobblestone, gravel, clay or obsidian.
+tile.ic2.machine.plasmafier.name=Plasmafier
+tile.ic2.machine.plasmafier.desc=Concentrates UU-matter into raw plasma, then bottling it into plasma cells.
+tile.ic2.energy.pesu.name=Plasma Energy Storage Unit
+tile.ic2.energy.pesu.desc=Endgame EU capacitor charged by plasma technology. Stores colossal amounts of energy.
+tile.ic2.energy.transformer_iv.name=IV Transformer
+tile.ic2.energy.transformer_iv.desc=High-throughput 512-2048 EV transformer with four times the conversion rate of an HV transformer.
+tile.ic2.machine.iridium_stone.name=Iridium Stone
+tile.ic2.machine.iridium_stone.desc=An extremely durable personal block. Only its owner can break it.
+item.ic2.turbine.name=Turbine
+item.ic2.turbine.desc=A compact water turbine rotor used in advanced generators.
+item.ic2.wood_gas_cell.name=Wood Gas Cell
+item.ic2.wood_gas_cell.desc=A cell of flammable wood gas. Extract it into a biofuel cell.
+item.ic2.rare_earth_dust.name=Rare Earth Dust
+item.ic2.rare_earth_dust.desc=A pinch of precious rare earth elements.
+item.ic2.rare_earth_chuck.name=Rare Earth Chuck
+item.ic2.rare_earth_chuck.desc=Compressed rare earth dust. Compress it into a magnet.
+item.ic2.magnet.dead.name=Dead Magnet
+item.ic2.magnet.dead.desc=An inert magnet. Recharge it in an electrolyzer next to an MFE.
+item.ic2.magnet.name=Magnet
+item.ic2.magnet.desc=A charged high-grade magnet. Core component of plasma technology.
+item.ic2.plasma_cell.name=Plasma Cell
+item.ic2.plasma_cell.desc=A cell of searing plasma, produced by the plasmafier.
+item.ic2.plasma_core.name=Plasma Core
+item.ic2.plasma_core.desc=A magnetically confined plasma core. The heart of plasma cables.
+item.ic2.pesd.name=Plasma Energy Storage Device
+item.ic2.pesd.desc=Cutting-edge portable battery holding 50 million EU. Charges only from a PESU.
+gui.ic2.ambient_heat=Amb. heat:
+gui.ic2.eu_tick=EU/tick:
+gui.ic2.heat=Heat:
+
+gui.ic2.energy_level=Energy level
+item.ic2.armor.jetpack.nano.name=Nano Jetpack
+item.ic2.armor.jetpack.nano.desc=A nanosuit chestplate with an energy jetpack built in. Flies like a jetpack, protects like a nanosuit. Combine with an electric jetpack for hover mode.
+item.ic2.armor.jetpack.electric.nano.name=Electric Nano Jetpack
+item.ic2.armor.jetpack.electric.nano.desc=A nanosuit chestplate with an electric jetpack built in. Supports hover mode (press H). The durability bar shows stored EU.
+item.ic2.armor.jetpack.quantum.name=Quantum Jetpack
+item.ic2.armor.jetpack.quantum.desc=A quantum chestplate with an energy jetpack built in. Flies like a jetpack, protects like a quantum suit, immune to fire. Combine with an electric jetpack for hover mode.
+item.ic2.armor.jetpack.electric.quantum.name=Electric Quantum Jetpack
+item.ic2.armor.jetpack.electric.quantum.desc=A quantum chestplate with an electric jetpack built in. Hover mode (press H) and full fire immunity. The durability bar shows stored EU.

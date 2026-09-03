@@ -95,7 +95,7 @@ public final class IC2Language {
         }
     }
 
-    
+
     private static String readPackId(File zipFile) {
         try (ZipFile zip = new ZipFile(zipFile);){
             ZipEntry entry = zip.getEntry("lang_info.json");

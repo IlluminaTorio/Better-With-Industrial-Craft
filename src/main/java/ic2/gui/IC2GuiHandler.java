@@ -14,8 +14,16 @@ import ic2.gui.screen.ScreenMatter;
 import ic2.gui.screen.ScreenMiner;
 import ic2.gui.screen.ScreenNuclearReactor;
 import ic2.gui.screen.ScreenPersonalSafe;
+import ic2.gui.screen.ScreenPlasmafier;
 import ic2.gui.screen.ScreenPump;
+import ic2.gui.screen.ScreenRareEarthExtractor;
+import ic2.gui.screen.ScreenSlagGenerator;
+import ic2.gui.screen.ScreenSlowGrinder;
+import ic2.gui.screen.ScreenThermalGenerator;
 import ic2.gui.screen.ScreenTradeOMat;
+import ic2.gui.screen.ScreenTurbineSolar;
+import ic2.gui.screen.ScreenWoodGasser;
+import ic2.gui.screen.ScreenWoodGasserElec;
 import ic2.tileentity.TileEntityBaseGenerator;
 import ic2.tileentity.TileEntityCanner;
 import ic2.tileentity.TileEntityElectricBlock;
@@ -127,6 +135,78 @@ public class IC2GuiHandler {
                 if (!(te instanceof TileEntityPersonalChest)) break;
                 TileEntityPersonalChest chest = (TileEntityPersonalChest)te;
                 mc.displayScreen((Screen)new ScreenPersonalSafe(player.inventory, chest));
+                break;
+            }
+            case 13: {
+                if (te instanceof ic2.tileentity.TileEntityTerraformer) {
+                    ic2.tileentity.TileEntityTerraformer machine = (ic2.tileentity.TileEntityTerraformer)te;
+                    mc.displayScreen((Screen)new ic2.gui.screen.ScreenTerraformer(player.inventory, machine));
+                    break;
+                }
+                break;
+            }
+            case 14: {
+                if (te instanceof ic2.tileentity.TileEntitySlagGenerator) {
+                    ic2.tileentity.TileEntitySlagGenerator machine = (ic2.tileentity.TileEntitySlagGenerator)te;
+                    mc.displayScreen((Screen)new ScreenSlagGenerator(player.inventory, machine));
+                    break;
+                }
+                break;
+            }
+            case 15: {
+                if (te instanceof ic2.tileentity.TileEntityThermalGenerator) {
+                    ic2.tileentity.TileEntityThermalGenerator machine = (ic2.tileentity.TileEntityThermalGenerator)te;
+                    mc.displayScreen((Screen)new ScreenThermalGenerator(player.inventory, machine));
+                    break;
+                }
+                break;
+            }
+            case 16: {
+                if (te instanceof ic2.tileentity.TileEntityTurbineSolar) {
+                    ic2.tileentity.TileEntityTurbineSolar machine = (ic2.tileentity.TileEntityTurbineSolar)te;
+                    mc.displayScreen((Screen)new ScreenTurbineSolar(player.inventory, machine));
+                    break;
+                }
+                break;
+            }
+            case 17: {
+                if (te instanceof ic2.tileentity.TileEntitySlowGrinder) {
+                    ic2.tileentity.TileEntitySlowGrinder machine = (ic2.tileentity.TileEntitySlowGrinder)te;
+                    mc.displayScreen((Screen)new ScreenSlowGrinder(player.inventory, machine));
+                    break;
+                }
+                break;
+            }
+            case 18: {
+                if (te instanceof ic2.tileentity.TileEntityWoodGasser) {
+                    ic2.tileentity.TileEntityWoodGasser machine = (ic2.tileentity.TileEntityWoodGasser)te;
+                    mc.displayScreen((Screen)new ScreenWoodGasser(player.inventory, machine));
+                    break;
+                }
+                break;
+            }
+            case 19: {
+                if (te instanceof ic2.tileentity.TileEntityWoodGasserElec) {
+                    ic2.tileentity.TileEntityWoodGasserElec machine = (ic2.tileentity.TileEntityWoodGasserElec)te;
+                    mc.displayScreen((Screen)new ScreenWoodGasserElec(player.inventory, machine));
+                    break;
+                }
+                break;
+            }
+            case 21: {
+                if (te instanceof ic2.tileentity.TileEntityRareEarthExtractor) {
+                    ic2.tileentity.TileEntityRareEarthExtractor machine = (ic2.tileentity.TileEntityRareEarthExtractor)te;
+                    mc.displayScreen((Screen)new ScreenRareEarthExtractor(player.inventory, machine));
+                    break;
+                }
+                break;
+            }
+            case 22: {
+                if (te instanceof ic2.tileentity.TileEntityPlasmafier) {
+                    ic2.tileentity.TileEntityPlasmafier machine = (ic2.tileentity.TileEntityPlasmafier)te;
+                    mc.displayScreen((Screen)new ScreenPlasmafier(player.inventory, machine));
+                    break;
+                }
                 break;
             }
             default: {

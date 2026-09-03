@@ -87,10 +87,10 @@ extends BlockLogic {
             return null;
         }
         switch (dropCause) {
-            case PICK_BLOCK: 
-            case EXPLOSION: 
-            case PROPER_TOOL: 
-            case SILK_TOUCH: 
+            case PICK_BLOCK:
+            case EXPLOSION:
+            case PROPER_TOOL:
+            case SILK_TOUCH:
             case PISTON_CRUSH: {
                 ItemStack[] itemStackArray2 = new ItemStack[1];
                 itemStackArray = itemStackArray2;

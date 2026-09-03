@@ -9,6 +9,7 @@
     "LanguageAccessor",
     "PlayerMixin",
     "SlotResultMixin",
+    "ItemDescriptionMixin",
     "WorldMixin"
   ],
   "server": [

@@ -49,7 +49,7 @@ implements IEnergySink {
                 return true;
             }
             if (stack.getItem() == Items.DUST_REDSTONE) {
-                this.energy += this.maxEnergy;
+                this.energy = this.maxEnergy;
                 --this.inventory[this.fuelSlot].stackSize;
                 if (this.inventory[this.fuelSlot].stackSize <= 0) {
                     this.inventory[this.fuelSlot] = null;
@@ -57,10 +57,16 @@ implements IEnergySink {
                 return true;
             }
             if (stack.getItem() == IC2Items.singleUseBattery) {
-                this.energy += 1000;
-                --this.inventory[this.fuelSlot].stackSize;
-                if (this.inventory[this.fuelSlot].stackSize <= 0) {
-                    this.inventory[this.fuelSlot] = null;
+                int room = this.maxEnergy - this.energy;
+                if (room > 1000) {
+                    room = 1000;
+                }
+                if (room > 0) {
+                    this.energy += room;
+                    --this.inventory[this.fuelSlot].stackSize;
+                    if (this.inventory[this.fuelSlot].stackSize <= 0) {
+                        this.inventory[this.fuelSlot] = null;
+                    }
                 }
                 return true;
             }
@@ -70,7 +76,7 @@ implements IEnergySink {
 
     @Override
     public boolean demandsEnergy() {
-        
+
         if (ic2.IC2Config.voltageSystemOff()) {
             return this.energy < this.maxEnergy;
         }
@@ -79,10 +85,13 @@ implements IEnergySink {
 
     @Override
     public int injectEnergy(Direction direction, int amount) {
-        
+
         if (!ic2.IC2Config.voltageSystemOff() && amount > this.maxInput) {
-            IC2Blocks.explodeMachineAt(this.worldObj, this.tilePos.x(), this.tilePos.y(), this.tilePos.z());
-            return 0;
+            if (this.explodesOnOverload()) {
+                IC2Blocks.explodeMachineAt(this.worldObj, this.tilePos.x(), this.tilePos.y(), this.tilePos.z());
+                return 0;
+            }
+            amount = this.maxInput;
         }
         int space = this.maxEnergy - this.energy;
         if (space >= amount) {
@@ -93,9 +102,18 @@ implements IEnergySink {
         return amount - space;
     }
 
+    public boolean explodesOnOverload() {
+        return false;
+    }
+
     @Override
     public boolean acceptsEnergyFrom(TileEntity emitter, Direction direction) {
         return true;
+    }
+
+    @Override
+    public int[] getQuickGrabSlots() {
+        return this.getContainerSize() >= 3 ? new int[]{this.getContainerSize() - 1} : new int[0];
     }
 }
 

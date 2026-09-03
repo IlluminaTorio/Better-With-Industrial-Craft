@@ -13,6 +13,7 @@ import net.minecraft.core.player.inventory.menu.MenuAbstract;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotFurnace;
 import org.jetbrains.annotations.NotNull;
+import ic2.gui.slot.SlotIC2Battery;
 
 public class MenuMiner
 extends MenuAbstract {
@@ -22,7 +23,7 @@ extends MenuAbstract {
 
     public MenuMiner(ContainerInventory inventory, TileEntityMiner tileEntity) {
         this.tileEntity = tileEntity;
-        this.addSlot(new Slot((Container)tileEntity, 0, 81, 59));
+        this.addSlot(new SlotIC2Battery((Container)tileEntity, 0, 81, 59));
         this.addSlot(new Slot((Container)tileEntity, 1, 117, 22));
         this.addSlot(new Slot((Container)tileEntity, 2, 81, 22));
         this.addSlot((Slot)new SlotFurnace(inventory.player, (Container)tileEntity, 3, 45, 22));
@@ -65,24 +66,30 @@ extends MenuAbstract {
         return this.tileEntity.stillValid(player);
     }
 
-    public IntList getMoveSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
+        public IntList getMoveSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
         if (slot.index >= 0 && slot.index < 4) {
             return this.getSlots(0, 4, false);
+        } else if (slot.index >= 4 && slot.index < 31) {
+            return this.getSlots(4, 27, false);
+        } else {
+            return slot.index >= 31 && slot.index < 40 ? this.getSlots(31, 9, false) : null;
         }
-        if (slot.index >= 4 && slot.index < 40) {
-            return this.getSlots(4, 36, false);
-        }
-        return null;
     }
 
-    public IntList getTargetSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
+
+        public IntList getTargetSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
         if (slot.index >= 4 && slot.index < 40) {
-            return this.getSlots(0, 4, false);
+            if (action != InventoryAction.MOVE_ALL) {
+                return this.getSlots(0, 4, false);
+            } else {
+                return slot.index < 31 ? this.getSlots(31, 9, false) : this.getSlots(4, 27, false);
+            }
+        } else if (slot.index < 0 || slot.index >= 4) {
+            return null;
+        } else {
+            return slot.index == 3 ? this.getSlots(4, 36, true) : this.getSlots(4, 36, false);
         }
-        if (slot.index >= 0 && slot.index < 4) {
-            return this.getSlots(4, 36, true);
-        }
-        return null;
     }
+
 }
 

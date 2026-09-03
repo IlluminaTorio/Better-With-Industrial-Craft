@@ -19,6 +19,7 @@ import ic2.item.ItemTFBPPlaceable;
 import ic2.item.armor.IC2Armor;
 import ic2.item.armor.ItemArmorChargeable;
 import ic2.item.armor.ItemArmorNano;
+import ic2.item.armor.ItemArmorJetpackSuit;
 import ic2.item.armor.ItemArmorQuantum;
 import ic2.item.tool.BronzeTools;
 import ic2.item.tool.ItemChainsaw;
@@ -46,6 +47,9 @@ public class IC2Items {
     public static Item dustTin;
     public static Item dustBronze;
     public static Item dustSteel;
+    public static Item dustSilver;
+    public static Item dustLead;
+    public static Item dustUranium;
     public static Item dustIronSmall;
     public static Item dustGoldSmall;
     public static Item dustCopperSmall;
@@ -115,6 +119,10 @@ public class IC2Items {
     public static Item rubberBoots;
     public static ItemArmorChargeable jetpack;
     public static ItemArmorChargeable electricJetpack;
+    public static ItemArmorChargeable jetpackNano;
+    public static ItemArmorChargeable electricJetpackNano;
+    public static ItemArmorChargeable jetpackQuantum;
+    public static ItemArmorChargeable electricJetpackQuantum;
     public static ItemArmorChargeable batpack;
     public static Item bronzeWolfArmor;
     public static Item compositeVest;
@@ -155,6 +163,15 @@ public class IC2Items {
     public static Item tfbpChilling;
     public static Item tfbpDesertification;
     public static Item tfbpFlatification;
+    public static Item turbine;
+    public static Item woodGasCell;
+    public static Item rareEarthDust;
+    public static Item rareEarthChuck;
+    public static Item deadMagnet;
+    public static Item magnet;
+    public static Item plasmaCell;
+    public static Item plasmaCore;
+    public static ItemBattery pesd;
     public static ItemCablePlaceable[] cableItems;
     private static final String[] CABLE_NAMES;
     private static final String[] CABLE_TEX;
@@ -169,6 +186,9 @@ public class IC2Items {
         dustTin = new ItemIC2("ic2.dust.tin", IC2.key("tin_dust"), IC2Config.item("dust_tin"));
         dustBronze = new ItemIC2("ic2.dust.bronze", IC2.key("bronze_dust"), IC2Config.item("dust_bronze"));
         dustSteel = new ItemIC2("ic2.dust.steel", IC2.key("steel_dust"), IC2Config.item("dust_steel"));
+        dustSilver = new ItemIC2("ic2.dust.silver", IC2.key("silver_dust"), IC2Config.item("dust_silver"));
+        dustLead = new ItemIC2("ic2.dust.lead", IC2.key("lead_dust"), IC2Config.item("dust_lead"));
+        dustUranium = new ItemIC2("ic2.dust.uranium", IC2.key("uranium_dust"), IC2Config.item("dust_uranium"));
         dustIronSmall = new ItemIC2("ic2.dust.iron.small", IC2.key("small_iron_dust"), IC2Config.item("dust_iron_small"));
         dustGoldSmall = new ItemIC2("ic2.dust.gold.small", IC2.key("small_gold_dust"), IC2Config.item("dust_gold_small"));
         dustCopperSmall = new ItemIC2("ic2.dust.copper.small", IC2.key("small_copper_dust"), IC2Config.item("dust_copper_small"));
@@ -243,7 +263,7 @@ public class IC2Items {
         bronzeLeggings = new IC2Armor.Bronze("ic2.armor.bronze.leggings", IC2.key("bronze_leggings"), IC2Config.item("bronze_leggings"), HumanArmorShape.LEGS);
         bronzeBoots = new IC2Armor.Bronze("ic2.armor.bronze.boots", IC2.key("bronze_boots"), IC2Config.item("bronze_boots"), HumanArmorShape.BOOTS);
         bronzeWolfArmor = new ItemArmor("ic2.armor.bronze.wolf", IC2.key("armor_wolf_bronze"), IC2Config.item("armor_wolf_bronze"), IC2Armor.BRONZE, (IArmorShape)WolfArmorShape.BODY);
-        
+
         try {
             net.minecraft.core.entity.animal.MobWolf.ARMOR_MATERIALS.put(IC2Armor.BRONZE, (net.minecraft.core.item.IArmorItem)bronzeWolfArmor);
             IC2.LOGGER.info("Bronze wolf armor registered for wolves");
@@ -258,6 +278,10 @@ public class IC2Items {
         quantumBodyarmor = new ItemArmorQuantum("ic2.armor.quantum.bodyarmor", IC2.key("quantum_bodyarmor"), IC2Config.item("quantum_bodyarmor"), HumanArmorShape.CHEST);
         quantumLeggings = new ItemArmorQuantum("ic2.armor.quantum.leggings", IC2.key("quantum_leggings"), IC2Config.item("quantum_leggings"), HumanArmorShape.LEGS);
         quantumBoots = new ItemArmorQuantum("ic2.armor.quantum.boots", IC2.key("quantum_boots"), IC2Config.item("quantum_boots"), HumanArmorShape.BOOTS);
+        jetpackNano = new ItemArmorJetpackSuit("ic2.armor.jetpack.nano", IC2.key("jetpack_nano"), IC2Config.item("jetpack_nano"), false, false, 100000);
+        electricJetpackNano = new ItemArmorJetpackSuit("ic2.armor.jetpack.electric.nano", IC2.key("electric_jetpack_nano"), IC2Config.item("electric_jetpack_nano"), false, true, 100000);
+        jetpackQuantum = new ItemArmorJetpackSuit("ic2.armor.jetpack.quantum", IC2.key("jetpack_quantum"), IC2Config.item("jetpack_quantum"), true, false, 1000000);
+        electricJetpackQuantum = new ItemArmorJetpackSuit("ic2.armor.jetpack.electric.quantum", IC2.key("electric_jetpack_quantum"), IC2Config.item("electric_jetpack_quantum"), true, true, 1000000);
         bronzePickaxe = new BronzeTools.Pickaxe("ic2.tool.bronze.pickaxe", IC2.key("bronze_pickaxe"), IC2Config.item("bronze_pickaxe"));
         bronzeAxe = new BronzeTools.Axe("ic2.tool.bronze.axe", IC2.key("bronze_axe"), IC2Config.item("bronze_axe"));
         bronzeSword = new BronzeTools.Sword("ic2.tool.bronze.sword", IC2.key("bronze_sword"), IC2Config.item("bronze_sword"));
@@ -288,16 +312,25 @@ public class IC2Items {
         tfbpChilling = new ItemTFBPPlaceable("ic2.tfbp.chilling", IC2.key("tfbp_chilling"), IC2Config.item("tfbp_chilling"));
         tfbpDesertification = new ItemTFBPPlaceable("ic2.tfbp.desertification", IC2.key("tfbp_desertification"), IC2Config.item("tfbp_desertification"));
         tfbpFlatification = new ItemTFBPPlaceable("ic2.tfbp.flatification", IC2.key("tfbp_flatification"), IC2Config.item("tfbp_flatification"));
-        for (i = 0; i < 11; ++i) {
+        turbine = new ItemIC2("ic2.turbine", IC2.key("turbine"), IC2Config.item("turbine"));
+        woodGasCell = new ItemIC2("ic2.wood_gas_cell", IC2.key("wood_gas_cell"), IC2Config.item("wood_gas_cell"));
+        rareEarthDust = new ItemIC2("ic2.rare_earth_dust", IC2.key("rare_earth_dust"), IC2Config.item("rare_earth_dust"));
+        rareEarthChuck = new ItemIC2("ic2.rare_earth_chuck", IC2.key("rare_earth_chuck"), IC2Config.item("rare_earth_chuck"));
+        deadMagnet = new ItemIC2("ic2.magnet.dead", IC2.key("dead_magnet"), IC2Config.item("dead_magnet"));
+        magnet = new ItemIC2("ic2.magnet", IC2.key("magnet"), IC2Config.item("magnet"));
+        plasmaCell = new ItemIC2("ic2.plasma_cell", IC2.key("plasma_cell"), IC2Config.item("plasma_cell"));
+        plasmaCore = new ItemIC2("ic2.plasma_core", IC2.key("plasma_core"), IC2Config.item("plasma_core"));
+        pesd = new ic2.item.ItemBatteryHeavy("ic2.pesd", IC2.key("pesd"), IC2Config.item("pesd"), 5000, 25000, true, 4, 9999);
+        for (i = 0; i < 12; ++i) {
             IC2Items.cableItems[i] = new ItemCablePlaceable("ic2." + CABLE_KEYS[i], IC2.key(CABLE_TEX[i]), IC2Config.item(CABLE_KEYS[i]), i);
         }
     }
 
     static {
         painters = new Item[16];
-        cableItems = new ItemCablePlaceable[11];
-        CABLE_NAMES = new String[]{"Copper Cable", "Uninsulated Copper Cable", "Gold Cable", "Insulated Gold Cable", "2xIns. Gold Cable", "HV Cable", "Insulated HV Cable", "2xIns. HV Cable", "4xIns. HV Cable", "Glass Fibre Cable", "Ultra-Low-Current Cable"};
-        CABLE_TEX = new String[]{"cable_copper", "cable_copper_uninsulated", "cable_gold", "cable_gold_insulated", "cable_gold_insulated_2x", "cable_hv", "cable_hv_insulated", "cable_hv_insulated_2x", "cable_hv_insulated_4x", "cable_glass_fibre", "cable_tin"};
+        cableItems = new ItemCablePlaceable[12];
+        CABLE_NAMES = new String[]{"Copper Cable", "Uninsulated Copper Cable", "Gold Cable", "Insulated Gold Cable", "2xIns. Gold Cable", "HV Cable", "Insulated HV Cable", "2xIns. HV Cable", "4xIns. HV Cable", "Glass Fibre Cable", "Ultra-Low-Current Cable", "Plasma Cable"};
+        CABLE_TEX = new String[]{"cable_copper", "cable_copper_uninsulated", "cable_gold", "cable_gold_insulated", "cable_gold_insulated_2x", "cable_hv", "cable_hv_insulated", "cable_hv_insulated_2x", "cable_hv_insulated_4x", "cable_glass_fibre", "cable_tin", "cable_plasma"};
         CABLE_KEYS = CABLE_TEX;
     }
 }

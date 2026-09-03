@@ -124,6 +124,7 @@ extends BlockLogic {
             case 8 -> 12.0f;
             case 9 -> 4.0f;
             case 10 -> 5.0f;
+            case 11 -> 12.0f;
             default -> 6.0f;
         };
         return p / 16.0f;
@@ -131,7 +132,10 @@ extends BlockLogic {
 
     public @NotNull ItemStack @Nullable [] getBreakResult(@NotNull World world, @NotNull EnumDropCause dropCause, @NotNull TilePosc tilePos, int data, @Nullable TileEntity tileEntity) {
         if (dropCause == EnumDropCause.PICK_BLOCK) {
-            return new ItemStack[]{new ItemStack(this.block, 1, data & 0xF)};
+            int type = data & 0xF;
+            return type >= 0 && type < IC2Items.cableItems.length && IC2Items.cableItems[type] != null
+                ? new ItemStack[]{new ItemStack(IC2Items.cableItems[type], 1, 0)}
+                : new ItemStack[]{new ItemStack(this.block, 1, type)};
         }
         if (dropCause == EnumDropCause.PROPER_TOOL || dropCause == EnumDropCause.EXPLOSION || dropCause == EnumDropCause.SILK_TOUCH) {
             return new ItemStack[]{new ItemStack((Item)IC2Items.cableItems[data & 0xF])};

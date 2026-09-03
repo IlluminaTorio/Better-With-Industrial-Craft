@@ -18,7 +18,7 @@ public class IC2ReactorTooltip extends toufoumaster.btwaila.tooltips.TileTooltip
 			maxHeat += 1000 * (tile.getReactorSize() - 3);
 		}
 		catch (Throwable t) {
-			
+
 		}
 		ProgressBarOptions heat = new ProgressBarOptions(0, "Heat: ", true, true);
 		c.drawProgressBarWithText(tile.heat, maxHeat, heat, 0);

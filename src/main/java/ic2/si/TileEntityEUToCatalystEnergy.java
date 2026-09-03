@@ -1,7 +1,6 @@
 package ic2.si;
 
 import com.mojang.nbt.tags.CompoundTag;
-import ic2.IC2Blocks;
 import ic2.energy.Direction;
 import ic2.energy.EnergyNet;
 import ic2.energy.IEnergySink;
@@ -16,13 +15,13 @@ implements IEnergySink {
         private boolean addedToEnergyNet = false;
         public int euBuffer = 0;
 
-        
+
         public static final int EU_BUFFER = 512;
 
-        
+
         public static final long UNIT_CAPACITY = 10000L;
 
-        
+
         public static final long UNIT_PROVIDE = 1000L;
 
         public TileEntityEUToCatalystEnergy() {
@@ -33,15 +32,14 @@ implements IEnergySink {
 
         @Override
         public boolean demandsEnergy() {
-                
+
                 return this.euBuffer < EU_BUFFER && this.getCapacityRemaining() > 0L;
         }
 
         @Override
         public int injectEnergy(Direction direction, int amount) {
                 if (amount > SIEnergy.MAX_EU_INPUT && !ic2.IC2Config.voltageSystemOff()) {
-                        IC2Blocks.explodeMachineAt(this.worldObj, this.tilePos.x(), this.tilePos.y(), this.tilePos.z());
-                        return 0;
+                        amount = SIEnergy.MAX_EU_INPUT;
                 }
                 int space = EU_BUFFER - this.euBuffer;
                 int accepted = Math.min(space, amount);
@@ -60,7 +58,7 @@ implements IEnergySink {
                         this.addedToEnergyNet = true;
                 }
                 if (!this.worldObj.isClientSide && this.euBuffer > 0) {
-                        
+
                         long room = this.getCapacityRemaining() / SICatalystEnergy.EU_PER_UNIT;
                         int convert = (int)Math.min(this.euBuffer, room);
                         if (convert > 0) {
@@ -73,7 +71,7 @@ implements IEnergySink {
 
         @Override
         public long internalChangeEnergy(long difference) {
-                
+
                 if (this.energy + difference < 0L) {
                         difference = -this.energy;
                 }

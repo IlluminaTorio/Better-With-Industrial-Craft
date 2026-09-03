@@ -10,22 +10,22 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 public final class SIEnergy {
     private static Fluid energyFluid;
 
-    
+
     public static final int EU_PER_MB = 64;
 
-    
+
     public static final int TANK_CAPACITY = 64;
 
-    
+
     public static final int EU_BUFFER = 256;
 
-    
+
     public static final int TRANSFER = 256;
 
-    
+
     public static final int MAX_EU_OUTPUT = 256;
 
-    
+
     public static final int MAX_EU_INPUT = 512;
 
     private SIEnergy() {

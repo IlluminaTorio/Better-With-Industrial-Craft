@@ -5,6 +5,7 @@ package ic2.util;
 import ic2.IC2;
 import ic2.IC2Items;
 import ic2.item.armor.ItemArmorChargeable;
+import ic2.item.armor.ItemArmorJetpackSuit;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.HumanArmorShape;
@@ -37,7 +38,7 @@ public final class IC2PlayerTicker {
             IC2PlayerTicker.tickJetpack(player, client);
             IC2PlayerTicker.tickQuantumSuit(player, client);
             IC2PlayerTicker.tickRubberBoots(player);
-            
+
             if (!client) {
                 ic2.item.tool.ItemNanoSaber.timedLoss(player);
             }
@@ -59,8 +60,9 @@ public final class IC2PlayerTicker {
             return;
         }
         ItemArmorChargeable armor = (ItemArmorChargeable)item;
-        boolean bl = electric = chest.getItem() == IC2Items.electricJetpack;
-        if (chest.getItem() != IC2Items.jetpack && !electric) {
+        boolean suit = item instanceof ItemArmorJetpackSuit;
+        boolean bl = electric = chest.getItem() == IC2Items.electricJetpack || suit && ((ItemArmorJetpackSuit)item).electric;
+        if (chest.getItem() != IC2Items.jetpack && !(suit && !((ItemArmorJetpackSuit)item).electric) && !electric) {
             return;
         }
         if (toggleTimer > 0) {
@@ -157,7 +159,7 @@ public final class IC2PlayerTicker {
         ItemStack legs = player.inventory.armorItemInSlot((IArmorShape)HumanArmorShape.LEGS);
         ItemStack boots = player.inventory.armorItemInSlot((IArmorShape)HumanArmorShape.BOOTS);
         boolean hasHelmet = helmet != null && helmet.getItem() == IC2Items.quantumHelmet;
-        boolean hasChest = chest != null && chest.getItem() == IC2Items.quantumBodyarmor;
+        boolean hasChest = chest != null && (chest.getItem() == IC2Items.quantumBodyarmor || chest.getItem() == IC2Items.jetpackQuantum || chest.getItem() == IC2Items.electricJetpackQuantum);
         boolean hasLegs = legs != null && legs.getItem() == IC2Items.quantumLeggings;
         boolean bl = hasBoots = boots != null && boots.getItem() == IC2Items.quantumBoots;
         if (hasHelmet && player.isInWaterOrRain() && player.airSupply < 300 && IC2PlayerTicker.hasCharge(helmet)) {

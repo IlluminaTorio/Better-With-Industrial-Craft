@@ -24,6 +24,7 @@ import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelCrossedSquares;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelStandard;
+import net.minecraft.client.render.block.model.BlockModelTransparent;
 import net.minecraft.client.render.block.model.generic.BlockModelGenericDoor;
 import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -92,9 +93,12 @@ public class IC2Models {
         dispatcher.addDispatch(IC2Blocks.teslaCoil, this.allSides(IC2Blocks.teslaCoil, "machine_casing"));
         dispatcher.addDispatch(IC2Blocks.reinforcedStone, this.allSides(IC2Blocks.reinforcedStone, "reinforced_stone"));
         dispatcher.addDispatch(IC2Blocks.reinforcedGlass, (BlockModel)this.allSides(IC2Blocks.reinforcedGlass, "reinforced_glass").onRenderLayer(1));
+        dispatcher.addDispatch(IC2Blocks.meshSteel, (BlockModel)new BlockModelTransparent<>(IC2Blocks.meshSteel, true).onRenderLayer(1).setAllTextures(IC2.MOD_ID + ":block/mesh_steel"));
+        dispatcher.addDispatch(IC2Blocks.meshSteelCrude, (BlockModel)new BlockModelTransparent<>(IC2Blocks.meshSteelCrude, true).onRenderLayer(1).setAllTextures(IC2.MOD_ID + ":block/mesh_steel_crude"));
+        dispatcher.addDispatch(IC2Blocks.quartzGlass, (BlockModel)new BlockModelTransparent<>(IC2Blocks.quartzGlass, false).onRenderLayer(1).setAllTextures(IC2.MOD_ID + ":block/glass_quartz"));
         dispatcher.addDispatch(IC2Blocks.reinforcedDoorBottom, (BlockModel)new BlockModelGenericDoor(IC2Blocks.reinforcedDoorBottom, IC2.MOD_ID + ":block/door/reinforced", true));
         dispatcher.addDispatch(IC2Blocks.reinforcedDoorTop, (BlockModel)new BlockModelGenericDoor(IC2Blocks.reinforcedDoorTop, IC2.MOD_ID + ":block/door/reinforced", false));
-        
+
         dispatcher.addDispatch(IC2Blocks.ironFence, new net.minecraft.client.render.block.model.BlockModelFence<>(
                         (net.minecraft.core.block.Block<ic2.block.BlockLogicIronFence>)(Object)IC2Blocks.ironFence)
                         .setAllTextures(IC2.MOD_ID + ":block/iron_fence"));
@@ -113,6 +117,19 @@ public class IC2Models {
         dispatcher.addDispatch(IC2Blocks.nuke, IC2Models.tntLike(IC2Blocks.nuke, "nuke"));
         dispatcher.addDispatch(IC2Blocks.dynamite, IC2Models.tntLike(IC2Blocks.dynamite, "dynamite"));
         dispatcher.addDispatch(IC2Blocks.dynamiteRemote, IC2Models.tntLike(IC2Blocks.dynamiteRemote, "dynamite_remote"));
+        dispatcher.addDispatch(IC2Blocks.slagGenerator, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.slagGenerator, "machine_top", "machine_casing", "machine_side", "slag_front", "slag_front_active"));
+        dispatcher.addDispatch(IC2Blocks.thermalGenerator, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.thermalGenerator, "machine_top", "machine_casing", "machine_casing", "thermal_front", "thermal_front_active"));
+        dispatcher.addDispatch(IC2Blocks.turbineSolar, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.turbineSolar, "turbine_solar_top", "machine_casing", "machine_side", null, null, "turbine_solar_top_active", null, false));
+        dispatcher.addDispatch(IC2Blocks.oceanGenerator, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.oceanGenerator, "machine_casing", "machine_casing", "machine_casing", "ocean_front", null, null, "water_gen_side", true));
+        dispatcher.addDispatch(IC2Blocks.waveGenerator, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.waveGenerator, "machine_casing", "machine_casing", "machine_casing", "wave_front", null, null, "water_gen_side", false));
+        dispatcher.addDispatch(IC2Blocks.woodGasser, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.woodGasser, "wood_gasser_top", "machine_casing", "machine_side", "wood_gasser_front", "wood_gasser_front_active"));
+        dispatcher.addDispatch(IC2Blocks.woodGasserElec, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.woodGasserElec, "wood_gasser_top", "machine_casing", "machine_side", "wood_gasser_elec_front", "wood_gasser_elec_front_active"));
+        dispatcher.addDispatch(IC2Blocks.slowGrinder, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.slowGrinder, "slow_grinder_top", "machine_casing", "machine_side", "slow_grinder_front", null, "slow_grinder_top_active", null, false));
+        dispatcher.addDispatch(IC2Blocks.rareEarthExtractor, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.rareEarthExtractor, "wood_gasser_top", "machine_casing", "rare_earth_side", "rare_earth_front", "rare_earth_front_active", null, "rare_earth_side_active", false));
+        dispatcher.addDispatch(IC2Blocks.plasmafier, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.plasmafier, "plasmafier_top", "plasmafier_bottom", "plasmafier_side", "plasmafier_front", "plasmafier_front_active"));
+        dispatcher.addDispatch(IC2Blocks.pesu, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.pesu, "machine_top", "pesu_side", "pesu_side", "pesu_front", null));
+        dispatcher.addDispatch(IC2Blocks.transformerIV, (BlockModel)new ic2.block.BlockModelIC2MachineEx(IC2Blocks.transformerIV, "machine_top", "machine_casing", "machine_casing", "transformer_iv_front", null));
+        dispatcher.addDispatch(IC2Blocks.iridiumStone, this.allSides(IC2Blocks.iridiumStone, "iridium_stone"));
         if (SIConverters.isCatalystInstalled()) {
             dispatcher.addDispatch(IC2Blocks.converterEuToCatalyst, this.allSides(IC2Blocks.converterEuToCatalyst, "converter_eu_to_catalyst"));
             dispatcher.addDispatch(IC2Blocks.converterCatalystToEu, this.allSides(IC2Blocks.converterCatalystToEu, "converter_catalyst_to_eu"));
@@ -174,12 +191,13 @@ public class IC2Models {
         catch (IllegalAccessException e) {
             LOGGER.error("Failed to register IC2 item models", (Throwable)e);
         }
-        
+
         try {
             String[] chargeSuffixes = new String[]{"_full", "_75", "_50", "_25", "_empty"};
             dispatcher.addDispatch(new ItemModelBattery(IC2Items.batteryRE, IC2.MOD_ID + ":item/re_battery", chargeSuffixes));
             dispatcher.addDispatch(new ItemModelBattery(IC2Items.batteryCrystal, IC2.MOD_ID + ":item/energy_crystal", chargeSuffixes));
             dispatcher.addDispatch(new ItemModelBattery(IC2Items.batteryLamaCrystal, IC2.MOD_ID + ":item/lapotron_crystal", chargeSuffixes));
+            dispatcher.addDispatch(new ItemModelBattery(IC2Items.pesd, IC2.MOD_ID + ":item/pesd", chargeSuffixes));
         }
         catch (Throwable e) {
             LOGGER.error("Failed to register battery charge models", (Throwable)e);

@@ -3,7 +3,6 @@
 package ic2.tileentity;
 
 import com.mojang.nbt.tags.CompoundTag;
-import ic2.IC2Blocks;
 import ic2.block.BlockLogicIC2Machine;
 import ic2.energy.Direction;
 import ic2.energy.EnergyNet;
@@ -161,11 +160,10 @@ IEnergySource {
 
     @Override
     public int injectEnergy(Direction directionFrom, int amount) {
-        
+
         if (!ic2.IC2Config.voltageSystemOff()
                 && (this.redstone && amount > this.lowOutput || !this.redstone && amount > this.highOutput)) {
-            IC2Blocks.explodeMachineAt(this.worldObj, this.tilePos.x(), this.tilePos.y(), this.tilePos.z());
-            return 0;
+            amount = this.redstone ? this.lowOutput : this.highOutput;
         }
         int need = amount;
         if (this.energy + amount > this.maxStorage) {

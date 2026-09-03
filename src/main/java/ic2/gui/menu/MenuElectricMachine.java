@@ -13,6 +13,8 @@ import net.minecraft.core.player.inventory.menu.MenuAbstract;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotFurnace;
 import org.jetbrains.annotations.NotNull;
+import ic2.gui.slot.SlotIC2Battery;
+import ic2.gui.slot.SlotIC2Input;
 
 public class MenuElectricMachine
 extends MenuAbstract {
@@ -22,8 +24,8 @@ extends MenuAbstract {
 
     public MenuElectricMachine(ContainerInventory inventory, TileEntityElectricMachine tileEntity) {
         this.tileEntity = tileEntity;
-        this.addSlot(new Slot((Container)tileEntity, 0, 56, 17));
-        this.addSlot(new Slot((Container)tileEntity, 1, 56, 53));
+        this.addSlot(new SlotIC2Input((Container)tileEntity, 0, 56, 17));
+        this.addSlot(new SlotIC2Battery((Container)tileEntity, 1, 56, 53));
         this.addSlot((Slot)new SlotFurnace(inventory.player, (Container)tileEntity, 2, 116, 35));
         this.addPlayerSlots(inventory);
     }
@@ -68,38 +70,30 @@ extends MenuAbstract {
         return this.tileEntity.stillValid(player);
     }
 
-    public IntList getMoveSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
+        public IntList getMoveSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
         if (slot.index >= 0 && slot.index < 3) {
             return this.getSlots(0, 3, false);
+        } else if (slot.index >= 3 && slot.index < 30) {
+            return this.getSlots(3, 27, false);
+        } else {
+            return slot.index >= 30 && slot.index < 39 ? this.getSlots(30, 9, false) : null;
         }
-        if (action == InventoryAction.MOVE_ALL) {
-            if (slot.index >= 3 && slot.index < 3) {
-                return this.getSlots(3, 27, false);
-            }
-            if (slot.index >= 3 && slot.index < 39) {
-                return this.getSlots(3, 9, false);
-            }
-        }
-        if (slot.index >= 3 && slot.index < 39) {
-            return this.getSlots(3, 36, false);
-        }
-        return null;
     }
 
-    public IntList getTargetSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
+
+        public IntList getTargetSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
         if (slot.index >= 3 && slot.index < 39) {
-            if (slot.index >= 3 && slot.index < 3) {
-                return this.getSlots(3, 9, false);
+            if (action != InventoryAction.MOVE_ALL) {
+                return this.getSlots(0, 3, false);
+            } else {
+                return slot.index < 30 ? this.getSlots(30, 9, false) : this.getSlots(3, 27, false);
             }
-            return this.getSlots(3, 36, false);
-        }
-        if (slot.index >= 0 && slot.index < 3) {
-            if (slot.index == 2) {
-                return this.getSlots(3, 36, true);
-            }
+        } else if (slot.index < 0 || slot.index >= 3) {
             return null;
+        } else {
+            return slot.index == 2 ? this.getSlots(3, 36, true) : this.getSlots(3, 36, false);
         }
-        return null;
     }
+
 }
 

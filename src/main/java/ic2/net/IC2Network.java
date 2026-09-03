@@ -19,6 +19,11 @@ public class IC2Network {
 
     public static void init() {
         NetworkHandler.registerNetworkMessage(OpenGuiMessage::new);
+        NetworkHandler.registerNetworkMessage(MachineEventMessage::new);
+    }
+
+    public static void sendToServer(NetworkMessage message) {
+        NetworkHandler.sendToServer(message);
     }
 
     public static void openMachineGui(Player player, TileEntity te, int guiId) {

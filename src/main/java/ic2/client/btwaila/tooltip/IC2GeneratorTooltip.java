@@ -3,7 +3,9 @@ package ic2.client.btwaila.tooltip;
 import ic2.tileentity.TileEntityBaseGenerator;
 import ic2.tileentity.TileEntityGenerator;
 import ic2.tileentity.TileEntityGeoGenerator;
+import ic2.tileentity.TileEntitySlagGenerator;
 import ic2.tileentity.TileEntitySolarGenerator;
+import ic2.tileentity.TileEntityThermalGenerator;
 import ic2.tileentity.TileEntityWaterGenerator;
 import ic2.tileentity.TileEntityWindGenerator;
 import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
@@ -18,6 +20,8 @@ public class IC2GeneratorTooltip extends toufoumaster.btwaila.tooltips.TileToolt
                 addClass(TileEntityWaterGenerator.class);
                 addClass(TileEntitySolarGenerator.class);
                 addClass(TileEntityWindGenerator.class);
+                addClass(TileEntitySlagGenerator.class);
+                addClass(TileEntityThermalGenerator.class);
         }
 
         @Override

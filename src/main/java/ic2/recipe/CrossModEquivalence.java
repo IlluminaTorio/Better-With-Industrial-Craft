@@ -23,7 +23,7 @@ public final class CrossModEquivalence {
         private CrossModEquivalence() {
         }
 
-        
+
         private static final List<Item[]> EQUIVALENTS = new ArrayList<Item[]>();
 
         private static boolean initialized = false;
@@ -60,7 +60,7 @@ public final class CrossModEquivalence {
                 }
         }
 
-        
+
         private static Item equivalentOf(Item item) {
                 for (Item[] pair : EQUIVALENTS) {
                         if (pair[0] == item) {
@@ -73,7 +73,7 @@ public final class CrossModEquivalence {
                 return null;
         }
 
-        
+
         private static RecipeSymbol merge(ItemStack original) {
                 Item other = CrossModEquivalence.equivalentOf(original.getItem());
                 if (other == null) {
@@ -169,7 +169,7 @@ public final class CrossModEquivalence {
                                         if (stack == null || CrossModEquivalence.equivalentOf(stack.getItem()) == null) {
                                                 continue;
                                         }
-                                        
+
                                         RecipeSymbol merged = CrossModEquivalence.merge(stack);
                                         if (merged == null) {
                                                 continue;
@@ -179,7 +179,7 @@ public final class CrossModEquivalence {
                                         if (entry instanceof RecipeEntryFurnace) {
                                                 duplicate = new RecipeEntryFurnace(merged, output.copy());
                                         } else {
-                                                
+
                                                 List<ItemStack> variants = new ArrayList<ItemStack>();
                                                 variants.add(stack.copy());
                                                 Item other = CrossModEquivalence.equivalentOf(stack.getItem());
@@ -191,7 +191,7 @@ public final class CrossModEquivalence {
                                 }
                         }
                         catch (Throwable t) {
-                                
+
                         }
                 }
                 for (Object[] add : toAdd) {

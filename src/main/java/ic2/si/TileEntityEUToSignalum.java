@@ -3,7 +3,6 @@
 package ic2.si;
 
 import com.mojang.nbt.tags.CompoundTag;
-import ic2.IC2Blocks;
 import ic2.energy.Direction;
 import ic2.energy.EnergyNet;
 import ic2.energy.IEnergySink;
@@ -23,8 +22,8 @@ implements IEnergySink {
     public TileEntityEUToSignalum() {
         this.fluidContents = new FluidStack[1];
         this.fluidCapacity = new int[1];
-        
-        
+
+
         this.fluidCapacity[0] = SIEnergy.TANK_CAPACITY;
         this.transferSpeed = SIEnergy.TRANSFER;
         this.acceptedFluids = new ArrayList();
@@ -40,17 +39,16 @@ implements IEnergySink {
 
     @Override
     public boolean demandsEnergy() {
-        
-        
+
+
         return this.euBuffer < SIEnergy.EU_BUFFER && this.getRemainingCapacity(0) > 0;
     }
 
     @Override
     public int injectEnergy(Direction direction, int amount) {
-        
+
         if (amount > SIEnergy.MAX_EU_INPUT && !ic2.IC2Config.voltageSystemOff()) {
-            IC2Blocks.explodeMachineAt(this.worldObj, this.tilePos.x(), this.tilePos.y(), this.tilePos.z());
-            return 0;
+            amount = SIEnergy.MAX_EU_INPUT;
         }
         int space = SIEnergy.EU_BUFFER * 2 - this.euBuffer;
         int accepted = Math.min(space, amount);
@@ -72,7 +70,7 @@ implements IEnergySink {
         }
         if (this.euBuffer >= SIEnergy.EU_PER_MB && !this.worldObj.isClientSide
                         && (mB = Math.min(space = this.getRemainingCapacity(0), this.euBuffer / SIEnergy.EU_PER_MB)) > 0) {
-            
+
             this.insertFluid(0, SIEnergy.energyStack(mB));
             this.euBuffer -= mB * SIEnergy.EU_PER_MB;
         }

@@ -44,28 +44,32 @@ extends MenuAbstract {
         return this.tileEntity.stillValid(player);
     }
 
-    public IntList getMoveSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
-        int machineSlots;
-        int n = machineSlots = this.owner ? 4 : 2;
+        public IntList getMoveSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
+        int machineSlots = this.owner ? 4 : 2;
         if (slot.index >= 0 && slot.index < machineSlots) {
             return this.getSlots(0, machineSlots, false);
+        } else if (slot.index >= machineSlots && slot.index < machineSlots + 27) {
+            return this.getSlots(machineSlots, 27, false);
+        } else {
+            return slot.index >= machineSlots + 27 && slot.index < machineSlots + 36 ? this.getSlots(machineSlots + 27, 9, false) : null;
         }
-        if (slot.index >= machineSlots && slot.index < machineSlots + 36) {
-            return this.getSlots(machineSlots, 36, false);
-        }
-        return null;
     }
 
-    public IntList getTargetSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
-        int machineSlots;
-        int n = machineSlots = this.owner ? 4 : 2;
+
+        public IntList getTargetSlots(@NotNull InventoryAction action, @NotNull Slot slot, int target, Player player) {
+        int machineSlots = this.owner ? 4 : 2;
         if (slot.index >= machineSlots && slot.index < machineSlots + 36) {
-            return this.getSlots(0, machineSlots, false);
+            if (action != InventoryAction.MOVE_ALL) {
+                return this.getSlots(0, machineSlots, false);
+            } else {
+                return slot.index < machineSlots + 27 ? this.getSlots(machineSlots + 27, 9, false) : this.getSlots(machineSlots, 27, false);
+            }
+        } else if (slot.index < 0 || slot.index >= machineSlots) {
+            return null;
+        } else {
+            return slot.index == 3 ? this.getSlots(machineSlots, 36, true) : this.getSlots(machineSlots, 36, false);
         }
-        if (slot.index >= 0 && slot.index < machineSlots) {
-            return this.getSlots(machineSlots, 36, true);
-        }
-        return null;
     }
+
 }
 

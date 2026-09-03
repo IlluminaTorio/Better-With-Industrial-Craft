@@ -28,15 +28,15 @@ extends BlockLogic {
     public @NotNull ItemStack @Nullable [] getBreakResult(@NotNull World world, @NotNull EnumDropCause dropCause, int data, @Nullable TileEntity tileEntity) {
         ItemStack[] itemStackArray;
         switch (dropCause) {
-            case SILK_TOUCH: 
+            case SILK_TOUCH:
             case PICK_BLOCK: {
                 ItemStack[] itemStackArray2 = new ItemStack[1];
                 itemStackArray = itemStackArray2;
                 itemStackArray2[0] = new ItemStack(this.block);
                 break;
             }
-            case EXPLOSION: 
-            case PROPER_TOOL: 
+            case EXPLOSION:
+            case PROPER_TOOL:
             case PISTON_CRUSH: {
                 ItemStack raw;
                 ItemStack itemStack = raw = this.rawDrop != null ? this.rawDrop.get() : null;

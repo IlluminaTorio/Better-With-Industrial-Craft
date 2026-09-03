@@ -74,7 +74,21 @@ extends TileEntityIC2Machine {
     }
 
     public boolean canDrain() {
-        return this.inventory[0] != null && this.inventory[0].getItem() == IC2Items.cellWater && (this.inventory[1] == null || this.inventory[1].getItem() == IC2Items.cellElectrolyzedWater && this.inventory[1].stackSize < this.inventory[1].getMaxStackSize());
+        if (this.inventory[0] == null) {
+            return false;
+        }
+        boolean magnet = this.inventory[0].getItem() == IC2Items.deadMagnet;
+        boolean waterCell = this.inventory[0].getItem() == IC2Items.cellWater;
+        if (!magnet && !waterCell) {
+            return false;
+        }
+        if (this.inventory[1] == null) {
+            return true;
+        }
+        if (magnet) {
+            return this.inventory[1].getItem() == IC2Items.magnet && this.inventory[1].stackSize < this.inventory[1].getMaxStackSize();
+        }
+        return this.inventory[1].getItem() == IC2Items.cellElectrolyzedWater && this.inventory[1].stackSize < this.inventory[1].getMaxStackSize();
     }
 
     public boolean canPower() {
@@ -86,12 +100,13 @@ extends TileEntityIC2Machine {
         this.energy += TileEntityElectrolyzer.processRate();
         if (this.energy >= 15000) {
             this.energy -= 15000;
+            boolean magnet = this.inventory[0].getItem() == IC2Items.deadMagnet;
             --this.inventory[0].stackSize;
             if (this.inventory[0].stackSize <= 0) {
                 this.inventory[0] = null;
             }
             if (this.inventory[1] == null) {
-                this.inventory[1] = new ItemStack(IC2Items.cellElectrolyzedWater);
+                this.inventory[1] = magnet ? new ItemStack(IC2Items.magnet) : new ItemStack(IC2Items.cellElectrolyzedWater);
             } else {
                 ++this.inventory[1].stackSize;
             }

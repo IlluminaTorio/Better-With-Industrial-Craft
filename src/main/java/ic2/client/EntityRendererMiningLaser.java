@@ -27,7 +27,7 @@ public class EntityRendererMiningLaser extends EntityRenderer<EntityMiningLaser>
 		GLRenderer.modelM4f().translate((float) x, (float) y, (float) z);
 		GLRenderer.modelM4f().rotate(entity.yRot, 0.0f, 1.0f, 0.0f);
 		GLRenderer.modelM4f().rotate(entity.xRot, 1.0f, 0.0f, 0.0f);
-		
+
 		float f6 = 0.0f;
 		float f7 = 0.15625f;
 		float f8 = 5.0f / 32.0f;
@@ -37,20 +37,20 @@ public class EntityRendererMiningLaser extends EntityRenderer<EntityMiningLaser>
 		GLRenderer.modelM4f().scale(f10, f10, f10);
 		GLRenderer.modelM4f().translate(-4.0f, 0.0f, 0.0f);
 		tessellator.startDrawing(net.minecraft.client.render.renderer.DrawMode.QUADS);
-		
+
 		tessellator.addVertexWithUV(-7.0, -2.0, -2.0, f6, f8);
 		tessellator.addVertexWithUV(-7.0, -2.0, 2.0, f7, f8);
 		tessellator.addVertexWithUV(-7.0, 2.0, 2.0, f7, f9);
 		tessellator.addVertexWithUV(-7.0, 2.0, -2.0, f6, f9);
 		tessellator.draw();
 		tessellator.startDrawing(net.minecraft.client.render.renderer.DrawMode.QUADS);
-		
+
 		tessellator.addVertexWithUV(-7.0, 2.0, -2.0, f6, f8);
 		tessellator.addVertexWithUV(-7.0, 2.0, 2.0, f7, f8);
 		tessellator.addVertexWithUV(-7.0, -2.0, 2.0, f7, f9);
 		tessellator.addVertexWithUV(-7.0, -2.0, -2.0, f6, f9);
 		tessellator.draw();
-		
+
 		for (int j = 0; j < 4; ++j) {
 			GLRenderer.pushFrame();
 			GLRenderer.modelM4f().rotate(90.0f, 1.0f, 0.0f, 0.0f);

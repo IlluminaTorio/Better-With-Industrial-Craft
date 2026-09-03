@@ -15,13 +15,13 @@ implements IEnergySource {
         private boolean addedToEnergyNet = false;
         public int euStored = 0;
 
-        
+
         public static final int EU_BUFFER = 512;
 
-        
+
         public static final long UNIT_RECEIVE = 1000L;
 
-        
+
         public static final long UNIT_CAPACITY = 10000L;
 
         public TileEntityCatalystEnergyToEU() {
@@ -37,7 +37,7 @@ implements IEnergySource {
 
         @Override
         public long receiveEnergy(@NotNull Direction dir, long energy) {
-                
+
                 if (this.euStored >= EU_BUFFER) {
                         return 0L;
                 }
@@ -63,7 +63,7 @@ implements IEnergySource {
                 if (this.worldObj.isClientSide) {
                         return;
                 }
-                
+
                 if (this.energy >= SICatalystEnergy.EU_PER_UNIT && this.euStored < EU_BUFFER) {
                         int want = EU_BUFFER - this.euStored;
                         int units = (int)Math.min(this.energy, (long)(want * SICatalystEnergy.EU_PER_UNIT));
@@ -73,7 +73,7 @@ implements IEnergySource {
                                 this.euStored += eu;
                         }
                 }
-                
+
                 if (this.euStored > 0) {
                         int output = Math.min(this.euStored, SICatalystEnergy.MAX_EU_OUTPUT);
                         this.euStored -= output;

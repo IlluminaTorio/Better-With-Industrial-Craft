@@ -64,8 +64,8 @@ implements IEnergySource {
         if (this.fuel <= 0) {
             return false;
         }
-        
-        
+
+
         if (this.wasConverting) {
             return this.storage < this.maxStorage;
         }

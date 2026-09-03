@@ -25,12 +25,12 @@ implements IChargeableItem {
     }
 
     public int getEnergyFrom(ItemStack battery, int request, int tier) {
-        if (tier < this.tier || battery.getMetadata() > battery.getMaxDamage()) {
+        if (battery.getMetadata() > battery.getMaxDamage()) {
             return 0;
         }
         int energy = (battery.getMaxDamage() + 1 - battery.getMetadata()) * this.ratio;
-        if (request > energy) {
-            request = energy;
+        if (request < energy) {
+            energy = request;
         }
         if (this.transfer != 0 && this.transfer < energy) {
             energy = this.transfer;

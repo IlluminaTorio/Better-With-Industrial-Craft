@@ -38,7 +38,7 @@ public class WaterMillFluidAdapter extends TileEntity implements IFluidInventory
 		return "minecraft:water".equals(stack.fluid.id.toString());
 	}
 
-	
+
 	@Override
 	public boolean canInsertFluid(int slot, FluidStack stack) {
 		return slot == 0 && isWater(stack) && this.mill.getFluidCapacityMillibuckets() > 0;
@@ -101,7 +101,7 @@ public class WaterMillFluidAdapter extends TileEntity implements IFluidInventory
 		return 1000;
 	}
 
-	
+
 	@Override
 	public int getActiveFluidSlotForSide(Direction direction) {
 		return 0;

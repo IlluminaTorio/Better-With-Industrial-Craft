@@ -44,7 +44,7 @@ extends TileEntityBaseGenerator {
     }
 
     public void updateSunVisibility() {
-        
+
         if (!this.worldObj.isDaytime()) {
             this.sunIsVisible = false;
             return;

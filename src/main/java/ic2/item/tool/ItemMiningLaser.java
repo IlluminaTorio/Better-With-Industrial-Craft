@@ -20,7 +20,7 @@ public class ItemMiningLaser
 extends ItemElectricTool {
     public static int setting = 0;
     private static final String[] MODES = new String[]{"Mining", "Low-Focus", "Long-Range", "Scatter", "Explosive"};
-    private static final int[] CONSUME = new int[]{125, 10, 1000, 2000, 1000};
+    private static final int[] CONSUME = new int[]{62, 5, 500, 1000, 500};
     public static final int RATIO = 10;
 
     public ItemMiningLaser(String name, String namespaceId, int id) {

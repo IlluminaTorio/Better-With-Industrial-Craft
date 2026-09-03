@@ -134,6 +134,69 @@ implements IC2Network.GuiOpener {
                 }
                 yield null;
             }
+            case 13 -> {
+                if (te instanceof ic2.tileentity.TileEntityTerraformer) {
+                    ic2.tileentity.TileEntityTerraformer t = (ic2.tileentity.TileEntityTerraformer)te;
+                    yield new ic2.gui.menu.MenuTerraformer(player.inventory, t);
+                }
+                yield null;
+            }
+            case 14 -> {
+                if (te instanceof ic2.tileentity.TileEntitySlagGenerator) {
+                    ic2.tileentity.TileEntitySlagGenerator m = (ic2.tileentity.TileEntitySlagGenerator)te;
+                    yield new ic2.gui.menu.MenuSlagGenerator(player.inventory, m);
+                }
+                yield null;
+            }
+            case 15 -> {
+                if (te instanceof ic2.tileentity.TileEntityThermalGenerator) {
+                    ic2.tileentity.TileEntityThermalGenerator m = (ic2.tileentity.TileEntityThermalGenerator)te;
+                    yield new ic2.gui.menu.MenuThermalGenerator(player.inventory, m);
+                }
+                yield null;
+            }
+            case 16 -> {
+                if (te instanceof ic2.tileentity.TileEntityTurbineSolar) {
+                    ic2.tileentity.TileEntityTurbineSolar m = (ic2.tileentity.TileEntityTurbineSolar)te;
+                    yield new ic2.gui.menu.MenuTurbineSolar(player.inventory, m);
+                }
+                yield null;
+            }
+            case 17 -> {
+                if (te instanceof ic2.tileentity.TileEntitySlowGrinder) {
+                    ic2.tileentity.TileEntitySlowGrinder m = (ic2.tileentity.TileEntitySlowGrinder)te;
+                    yield new ic2.gui.menu.MenuSlowGrinder(player.inventory, m);
+                }
+                yield null;
+            }
+            case 18 -> {
+                if (te instanceof ic2.tileentity.TileEntityWoodGasser) {
+                    ic2.tileentity.TileEntityWoodGasser m = (ic2.tileentity.TileEntityWoodGasser)te;
+                    yield new ic2.gui.menu.MenuWoodGasser(player.inventory, m);
+                }
+                yield null;
+            }
+            case 19 -> {
+                if (te instanceof ic2.tileentity.TileEntityWoodGasserElec) {
+                    ic2.tileentity.TileEntityWoodGasserElec m = (ic2.tileentity.TileEntityWoodGasserElec)te;
+                    yield new ic2.gui.menu.MenuWoodGasserElec(player.inventory, m);
+                }
+                yield null;
+            }
+            case 21 -> {
+                if (te instanceof ic2.tileentity.TileEntityRareEarthExtractor) {
+                    ic2.tileentity.TileEntityRareEarthExtractor m = (ic2.tileentity.TileEntityRareEarthExtractor)te;
+                    yield new ic2.gui.menu.MenuRareEarthExtractor(player.inventory, m);
+                }
+                yield null;
+            }
+            case 22 -> {
+                if (te instanceof ic2.tileentity.TileEntityPlasmafier) {
+                    ic2.tileentity.TileEntityPlasmafier m = (ic2.tileentity.TileEntityPlasmafier)te;
+                    yield new ic2.gui.menu.MenuPlasmafier(player.inventory, m);
+                }
+                yield null;
+            }
             default -> null;
         };
     }

@@ -54,12 +54,12 @@ extends TileEntityBaseGenerator {
         return false;
     }
 
-    
+
     public int getFluidCapacityMillibuckets() {
         return Math.max(0, (this.maxWater - this.fuel) * 2);
     }
 
-    
+
     public int acceptWaterMillibuckets(int amount) {
         if (amount <= 0) {
             return 0;

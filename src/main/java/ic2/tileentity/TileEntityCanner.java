@@ -224,5 +224,10 @@ extends TileEntityElecMachine {
     public String getGuiTitleKey() {
         return "tile.ic2.machine.canner.name";
     }
+
+    @Override
+    public int[] getQuickGrabSlots() {
+        return new int[]{2};
+    }
 }
 

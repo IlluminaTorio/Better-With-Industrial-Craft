@@ -3,12 +3,16 @@
 package ic2.item.armor;
 
 import ic2.energy.IChargeableItem;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.HumanArmorShape;
 import net.minecraft.core.enums.IArmorShape;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
+import net.minecraft.core.world.World;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemArmorChargeable
 extends ItemArmor<HumanArmorShape>
@@ -65,6 +69,26 @@ implements IChargeableItem {
         return "ic2:batpack".equals(this.namespaceID.toString());
     }
 
+    @Override
+    public void inventoryTick(@NotNull ItemStack armor, @NotNull World world, @NotNull Entity entity, int slotId, boolean isHeld) {
+        if (world.isClientSide || entity == null) {
+            return;
+        }
+        if (!this.canChargeTools() || slotId < 100) {
+            return;
+        }
+        if (entity instanceof Player) {
+            Player player = (Player)entity;
+            ItemStack held = player.getCurrentEquippedItem();
+            if (held == null || held.getItem() == this) {
+                return;
+            }
+            if (held.getItem() instanceof ElectricItemProxy) {
+                this.chargeTool(armor, held);
+            }
+        }
+    }
+
     public void chargeTool(ItemStack armor, ItemStack tool) {
         int giveTool;
         if (!this.canChargeTools() || tool == null) {
@@ -74,7 +98,6 @@ implements IChargeableItem {
         if (!(item instanceof IChargeableItem)) {
             return;
         }
-        IChargeableItem toolItem = (IChargeableItem)item;
         Item item2 = tool.getItem();
         if (!(item2 instanceof ElectricItemProxy)) {
             return;
@@ -84,16 +107,17 @@ implements IChargeableItem {
         if (toolNeed <= 0) {
             return;
         }
-        int armorFree = armor.getMetadata() * this.ratio;
-        if (armorFree <= 0) {
+        int armorCharge = (armor.getMaxDamage() + 1 - armor.getMetadata()) * this.ratio;
+        if (armorCharge <= 0) {
             return;
         }
-        int give = Math.min(toolNeed, armorFree);
-        if ((giveTool = (give -= give % this.ratio) - give % proxy.ratio()) <= 0) {
+        int give = Math.min(toolNeed, armorCharge);
+        give -= give % this.ratio;
+        if ((giveTool = give - give % proxy.ratio()) <= 0) {
             return;
         }
         tool.setMetadata(tool.getMetadata() - giveTool / proxy.ratio());
-        armor.setMetadata(armor.getMetadata() - giveTool / this.ratio);
+        armor.setMetadata(armor.getMetadata() + giveTool / this.ratio);
     }
 
     public static interface ElectricItemProxy
