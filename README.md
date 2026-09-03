@@ -34,4 +34,4 @@ The mod works on dedicated servers. Every player needs the same mod set as the s
 
 ## License
 
-IndustrialCraft² v1.00 by Alblaka is released under CC0 1.0 Universal; this port is published under the same license (see `LICENSE`)
+IndustrialCraft² v1.00 by Alblaka is released under CC0 1.0 Universal; this port is published under the same license (see `LICENSE`).
