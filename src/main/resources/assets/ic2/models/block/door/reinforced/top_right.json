@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/door/top_right",
+  "textures": {
+    "top": "ic2:block/reinforced_door_upper"
+  }
+}
